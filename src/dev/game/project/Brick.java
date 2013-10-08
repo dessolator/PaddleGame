@@ -8,7 +8,7 @@ public class Brick extends GameObject {
 		this.dimX = dimX;
 		this.dimY = dimY;
 	}
-	@Override
+	@Override 
 	public void update() {
 		DrawObject.drawRect(coordX, coordY, dimX, dimY);
 		
