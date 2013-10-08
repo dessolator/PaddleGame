@@ -15,9 +15,9 @@ public class PaddleGame {
 	ArrayList<GameObject> gameBlocks = new ArrayList<GameObject>();//List of all blocks used by the game
 	
 	PlayerPaddle myPaddle= new PlayerPaddle(Display.getWidth()/2,50,100,20);//create player paddle
-	Ball myBall = new Ball(Display.getWidth()/2,100,10);//create the ball
-	Boundary left=new Boundary(0,Display.getHeight()/2,1,Display.getHeight());//add left boundary
-	Boundary right=new Boundary(Display.getWidth(),Display.getHeight()/2,1,Display.getHeight());//add right boundary
+	static Ball myBall = new Ball(Display.getWidth()/2,100,10);//create the ball
+	static Boundary left=new Boundary(0,Display.getHeight()/2,1,Display.getHeight());//add left boundary
+	static Boundary right=new Boundary(Display.getWidth(),Display.getHeight()/2,1,Display.getHeight());//add right boundary
 	Boundary bottom =new Boundary(Display.getWidth()/2,0,Display.getWidth(),1);//add bottom boundary
 	Boundary top=new Boundary(Display.getWidth()/2,Display.getHeight(),Display.getWidth(),1);//add top boundary
 	
@@ -75,7 +75,7 @@ public class PaddleGame {
 				GameObject o=gameBlocks.get(i);//store current element in var to avoid parsing array
 				o.update();//draw the bricks and paddle
 				
-				if(GamePhysics.hit(myBall, gameBlocks.get(i))) {//if a collision did occur
+				if(GamePhysics.hit(myBall, o)) {//if a collision did occur
 					if(o==left || o==right){//with either of the sides
 						myBall.speedX*=-1;//bounce the ball off
 					}else
@@ -125,6 +125,18 @@ public class PaddleGame {
 			return;
 		}
 		
+	}
+	public static GameObject getBall() {
+		
+		return myBall;
+	}
+	public static GameObject getRight() {
+		
+		return right;
+	}
+	public static GameObject getLeft() {
+		
+		return left;
 	}
 	
 }
