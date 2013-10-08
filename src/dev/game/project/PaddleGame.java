@@ -24,6 +24,10 @@ public class PaddleGame {
 	
 	/*
 	 * TODO scale bricks to resolution,
+<<<<<<< HEAD
+=======
+	 * add a switch case,
+>>>>>>> PaddleGame/master
 	 * scale element sizes to resolution,
 	 * fix ball squish bug (the paddle can push the ball through the boundary),
 	 * bugchecking.
