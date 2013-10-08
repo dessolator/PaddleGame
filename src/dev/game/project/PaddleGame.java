@@ -32,8 +32,8 @@ public class PaddleGame {
 	 */
 	public  void startGame() {
 		int num = 16;//variable used for brick generation
-		float coordx1 = 50;//first brick coordinate
-		float coordy1 = 500;//first brick coordinate
+		float coordx = 50;//first brick coordinate
+		float coordy = 500;//first brick coordinate
 		
 		glClear(GL_COLOR_BUFFER_BIT);//GL init
 		glColor3f(0.25f, 0.75f, 0.5f);
@@ -52,7 +52,7 @@ public class PaddleGame {
 		 */
 		for (int j = 0; j<4; j++) {
 			for (int i = 0; i < num; i++) {
-				gameBlocks.add(new Brick(coordx1,coordy1,40,20));
+				gameBlocks.add(new Brick(coordx,coordy,40,20));
 				coordx1+=40;
 				coordx1+=3;
 			}
