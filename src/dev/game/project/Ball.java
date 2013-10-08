@@ -20,7 +20,9 @@ public class Ball extends GameObject {
 		move();//each frame, move the ball
 		DrawObject.drawCirclef(coordX,coordY, radius);//and draw it
 	}
-
+	/**
+	 * Function used to move the ball in a preset direction.
+	 */
 	private void move() {
 		coordX+=speedX;//increase the x position
 		coordY+=speedY;//increase the y position

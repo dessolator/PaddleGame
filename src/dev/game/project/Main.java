@@ -14,7 +14,10 @@ public class Main {
 		clearDisplay();
 	}
 
-	
+	/**
+	 * GL initialization function.Sets display mode, creates a display,
+	 * clears the projection, sets up the perspective,blacks out the background and disables depth test. 
+	 */
 	private static void initDisplay() {
 		try {
 			
@@ -33,7 +36,9 @@ public class Main {
 			
 		}		
 	}
-
+	/**
+	 * Function used for post-game cleanup. Simply destroys the display
+	 */
 	private static void clearDisplay() {
 		
 		Display.destroy();

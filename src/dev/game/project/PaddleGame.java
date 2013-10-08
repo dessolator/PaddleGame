@@ -24,11 +24,13 @@ public class PaddleGame {
 	
 	/*
 	 * TODO scale bricks to resolution,
-	 * left boundary problem with high resolution,
-	 * add a switch case,
 	 * scale element sizes to resolution,
 	 * fix ball squish bug (the paddle can push the ball through the boundary),
 	 * bugchecking.
+	 */
+	/**
+	 * The main game loop takes care of pretty much everything,
+	 * from user input to collisions.
 	 */
 	public  void startGame() {
 		int num = 16;//variable used for brick generation
@@ -43,7 +45,8 @@ public class PaddleGame {
 		 * Add Boundaries to blocks to check for collisions
 		 */
 		gameBlocks.add(right);
-		gameBlocks.add(top);		
+		gameBlocks.add(top);
+		gameBlocks.add(left);
 		gameBlocks.add(bottom);
 		gameBlocks.add(myPaddle);
 		
@@ -53,15 +56,12 @@ public class PaddleGame {
 		for (int j = 0; j<4; j++) {
 			for (int i = 0; i < num; i++) {
 				gameBlocks.add(new Brick(coordx,coordy,40,20));
-				coordx1+=40;
-				coordx1+=3;
+				coordx+=40;
+				coordx+=3;
 			}
-			coordy1-=22;
-			coordx1-=16*43;
+			coordy-=22;
+			coordx-=16*43;
 		}
-		/*
-		 * jebeno ruzno.... treba mu jedan switch case... ali ja vise nemam zivota
-		 */
 		while(!Display.isCloseRequested()) {
 			glClear(GL_COLOR_BUFFER_BIT);//for each frame clear the screen
 			
@@ -72,45 +72,49 @@ public class PaddleGame {
 			 * Collision detection loop
 			 */
 			for (int i=0; i<gameBlocks.size();i++) {
-				gameBlocks.get(i).update();//draw the bricks and paddle
+				GameObject o=gameBlocks.get(i);//store current element in var to avoid parsing array
+				o.update();//draw the bricks and paddle
+				
 				if(GamePhysics.hit(myBall, gameBlocks.get(i))) {//if a collision did occur
-					if(gameBlocks.get(i)==left || gameBlocks.get(i)==right){//with either of the sides
+					if(o==left || o==right){//with either of the sides
 						myBall.speedX*=-1;//bounce the ball off
-					}else{
-						if(gameBlocks.get(i)==bottom){//if the collision occured with the bottom boundary reset the ball
-							//decrement player lives
-							myBall.coordX=myPaddle.coordX;
-							myBall.coordY=myPaddle.coordY+myPaddle.dimY/2+myBall.radius;
-							myBall.speedX=0;
-							myBall.speedY=0.1f;
-						}else
-							if(gameBlocks.get(i)==top){//if the collision was with the top boundary
-								myBall.speedY*=-1;// bounce the ball back down
-							}else{
-					if(gameBlocks.get(i)==myPaddle){//if the collision was with the player paddle
-					myBall.speedY*=-1;//bounce the ball back
-					myBall.speedX+=(myBall.coordX-gameBlocks.get(i).coordX)*0.01;//taking the angle into account
-					if(myBall.speedX>Ball.MAX_SPEED){//make sure ball speed doesn't exceed max
-						myBall.speedX=Ball.MAX_SPEED;
-					}
-					if(myBall.speedX<-Ball.MAX_SPEED){
-						myBall.speedX=-Ball.MAX_SPEED;
-					}
+					}else
+					if(o==bottom){//if the collision occurred with the bottom boundary reset the ball
+						//decrement player lives
+						myBall.coordX=myPaddle.coordX;
+						myBall.coordY=myPaddle.coordY+myPaddle.dimY/2+myBall.radius;
+						myBall.speedX=0;
+						myBall.speedY=0.1f;
+					}else
+					if(o==top){//if the collision was with the top boundary
+						myBall.speedY*=-1;// bounce the ball back down
+					}else
+					if(o==myPaddle){//if the collision was with the player paddle
+						myBall.speedY*=-1;//bounce the ball back
+						myBall.speedX+=(myBall.coordX-gameBlocks.get(i).coordX)*0.01;//taking the angle into account
+						if(myBall.speedX>Ball.MAX_SPEED){//make sure ball speed doesn't exceed max
+							myBall.speedX=Ball.MAX_SPEED;
+						}
+						if(myBall.speedX<-Ball.MAX_SPEED){
+							myBall.speedX=-Ball.MAX_SPEED;
+						}
 					
-					}
+					}else
 					
-					if(gameBlocks.get(i).isBrick()){//if collision happened with a brick
+					if(o.isBrick()){//if collision happened with a brick
 						myBall.speedY*=-1;//if the ball hits something, bounce it back
 						gameBlocks.remove(i);//destroy the brick
 					}
-					}}
+					
 				}
 			}
 			Display.update();//refresh the display
 		}
 		
 	}
-
+	/**
+	 * Function used to evaluate user input and move the paddle accordingly
+	 */
 	private  void processInput() {
 		if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){//if left was pressed
 			myPaddle.move(-1);//move left
