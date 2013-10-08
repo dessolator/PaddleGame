@@ -1,0 +1,45 @@
+package dev.game.project;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
+import static org.lwjgl.opengl.GL11.*;
+
+public class Main {
+
+	
+	public static void main(String[] args) {
+		initDisplay();
+		PaddleGame paddleGame=new PaddleGame();
+		paddleGame.startGame();//@revision migrated all game code out of main to make it reusable for future ideas
+		clearDisplay();
+	}
+
+	
+	private static void initDisplay() {
+		try {
+			
+			Display.setDisplayMode(new DisplayMode(800,600));
+			Display.create();
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
+			glOrtho(0,Display.getWidth(),0,Display.getHeight(),-1,1);
+			glMatrixMode(GL_MODELVIEW);
+			glClearColor(0,0,0,1);
+			glDisable(GL_DEPTH_TEST);
+			
+		} catch (LWJGLException e) {
+			
+			e.printStackTrace();
+			
+		}		
+	}
+
+	private static void clearDisplay() {
+		
+		Display.destroy();
+		
+	}
+
+	
+
+}

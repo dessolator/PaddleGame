@@ -1,0 +1,22 @@
+Znaci meni je bilo malo dosadno veceras, a i necu moci da prisustvujem sastanku u petak tako da....
+
+Ispravio sav GL render (koordinate su bile prevrnute na par mesta)
+Logicki ispravio GL render (coordX i coordY sada pokazuju na centar objekta a ne na donji levi ugao)
+Popravio logiku kolizija (ispostavlja se da se awt.Rectangle crta od gornjeg levog ugla...) trebace nam verovatno nova i kompleksnija funkcija za koliziju
+Ubacio player paddle
+Osposobio player paddle
+Ubacio ogranicenja za player paddle
+Ubacio ivice
+Odradio reset u slucaju pogodka donje ivice
+Odradio ugaono odbijanje
+Smanjio broj iteracija za crtanje lopte sa 360 na 8 (izgleda jednako a brze je)
+Uveo par regulatornih konstanti (tipa MAX_SPEED itd.)
+Modularizovao Main (moze da se koristi za sledecu igru, samo treba promeniti jednu liniju koda)
+Zapoceo javadoc projekta
+Promenio imena par promenjivih radi jasnoce (dim1 u dimX itd.)
+General code maintenance
+Restrukturirao par klasa, dodelio dimenzije loptici zbog kolizije, dimenzije su funkcionalne ali ih ne bih preporucivao koristiti
+
+
+Jos cu malo da cacnem kod, ubacim koji komentar, sredim sto sta itd. kacim pre nego sto zaspim/odem iz kuce
+Ako ne zaboravim napravicu github nalog
