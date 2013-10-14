@@ -14,16 +14,16 @@ public class PaddleGame {
 	
 	ArrayList<GameObject> gameBlocks = new ArrayList<GameObject>();//List of all blocks used by the game
 	
-	PlayerPaddle myPaddle= new PlayerPaddle(Display.getWidth()/2,50,100,20);//create player paddle
-	static Ball myBall = new Ball(Display.getWidth()/2,100,10);//create the ball
-	static Boundary left=new Boundary(0,Display.getHeight()/2,1,Display.getHeight());//add left boundary
-	static Boundary right=new Boundary(Display.getWidth(),Display.getHeight()/2,1,Display.getHeight());//add right boundary
-	Boundary bottom =new Boundary(Display.getWidth()/2,0,Display.getWidth(),1);//add bottom boundary
-	Boundary top=new Boundary(Display.getWidth()/2,Display.getHeight(),Display.getWidth(),1);//add top boundary
+	private PlayerPaddle myPaddle= new PlayerPaddle(Display.getWidth()/2,50,100,20);//create player paddle
+	private Ball myBall = new Ball(Display.getWidth()/2,100,10);//create the ball
+	private Boundary left=new Boundary(0,Display.getHeight()/2,1,Display.getHeight());//add left boundary
+	private Boundary right=new Boundary(Display.getWidth(),Display.getHeight()/2,1,Display.getHeight());//add right boundary
+	private Boundary bottom =new Boundary(Display.getWidth()/2,0,Display.getWidth(),1);//add bottom boundary
+	private Boundary top=new Boundary(Display.getWidth()/2,Display.getHeight(),Display.getWidth(),1);//add top boundary
 	
 	
 	/*
-	 * TODO scale bricks to resolution,
+	 * TODO
 	 * scale element sizes to resolution,
 	 * fix ball squish bug (the paddle can push the ball through the boundary),
 	 * bugchecking.
@@ -90,7 +90,8 @@ public class PaddleGame {
 						myBall.speedY*=-1;// bounce the ball back down
 					}else
 					if(o==myPaddle){//if the collision was with the player paddle
-						myBall.speedY*=-1;//bounce the ball back
+					//	myBall.speedY*=-1;
+						myBall.speedY*=((o.coordY-myBall.coordY<0)?-1:1);//bounce the ball back
 						myBall.speedX+=(myBall.coordX-gameBlocks.get(i).coordX)*0.01;//taking the angle into account
 						if(myBall.speedX>Ball.MAX_SPEED){//make sure ball speed doesn't exceed max
 							myBall.speedX=Ball.MAX_SPEED;
@@ -126,15 +127,15 @@ public class PaddleGame {
 		}
 		
 	}
-	public static GameObject getBall() {
+	public  GameObject getBall() {
 		
 		return myBall;
 	}
-	public static GameObject getRight() {
+	public  GameObject getRight() {
 		
 		return right;
 	}
-	public static GameObject getLeft() {
+	public  GameObject getLeft() {
 		
 		return left;
 	}

@@ -19,8 +19,7 @@ public class Main {
 	 * clears the projection, sets up the perspective,blacks out the background and disables depth test. 
 	 */
 	private static void initDisplay() {
-		try {
-			
+		try {			
 			Display.setDisplayMode(new DisplayMode(800,600));
 			Display.create();
 			glMatrixMode(GL_PROJECTION);
@@ -29,7 +28,6 @@ public class Main {
 			glMatrixMode(GL_MODELVIEW);
 			glClearColor(0,0,0,1);
 			glDisable(GL_DEPTH_TEST);
-			
 		} catch (LWJGLException e) {
 			
 			e.printStackTrace();
