@@ -83,6 +83,7 @@ public class PaddleGame {
 			o.update();//draw the bricks and paddle
 			
 			if(GamePhysics.hit(myBall, o)) {//if a collision did occur
+				o.collided(myBall);
 				if(o==left || o==right){//with either of the sides
 					myBall.speedX*=-1;//bounce the ball off
 				}else

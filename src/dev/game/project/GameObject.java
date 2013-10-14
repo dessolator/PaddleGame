@@ -13,6 +13,5 @@ public abstract class GameObject {
 	public boolean isBrick(){//function used to determine whether an object is destructable 
 		return false;
 	}
-	
 
 }
