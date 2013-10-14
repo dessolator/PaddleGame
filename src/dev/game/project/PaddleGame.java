@@ -24,8 +24,8 @@ public class PaddleGame {
 	
 	/*
 	 * TODO
+	 * move collision logic to appropriate classes in the interest of maintaining OO paradigm
 	 * scale element sizes to resolution,
-	 * fix ball squish bug (the paddle can push the ball through the boundary),
 	 * bugchecking.
 	 */
 	/**
@@ -71,45 +71,50 @@ public class PaddleGame {
 			/*
 			 * Collision detection loop
 			 */
-			for (int i=0; i<gameBlocks.size();i++) {
-				GameObject o=gameBlocks.get(i);//store current element in var to avoid parsing array
-				o.update();//draw the bricks and paddle
-				
-				if(GamePhysics.hit(myBall, o)) {//if a collision did occur
-					if(o==left || o==right){//with either of the sides
-						myBall.speedX*=-1;//bounce the ball off
-					}else
-					if(o==bottom){//if the collision occurred with the bottom boundary reset the ball
-						//decrement player lives
-						myBall.coordX=myPaddle.coordX;
-						myBall.coordY=myPaddle.coordY+myPaddle.dimY/2+myBall.radius;
-						myBall.speedX=0;
-						myBall.speedY=0.1f;
-					}else
-					if(o==top){//if the collision was with the top boundary
-						myBall.speedY*=-1;// bounce the ball back down
-					}else
-					if(o==myPaddle){//if the collision was with the player paddle
-					//	myBall.speedY*=-1;
-						myBall.speedY*=((o.coordY-myBall.coordY<0)?-1:1);//bounce the ball back
-						myBall.speedX+=(myBall.coordX-gameBlocks.get(i).coordX)*0.01;//taking the angle into account
-						if(myBall.speedX>Ball.MAX_SPEED){//make sure ball speed doesn't exceed max
-							myBall.speedX=Ball.MAX_SPEED;
-						}
-						if(myBall.speedX<-Ball.MAX_SPEED){
-							myBall.speedX=-Ball.MAX_SPEED;
-						}
-					
-					}else
-					
-					if(o.isBrick()){//if collision happened with a brick
-						myBall.speedY*=-1;//if the ball hits something, bounce it back
-						gameBlocks.remove(i);//destroy the brick
-					}
-					
-				}
-			}
+			collisionPhysics();
+			
 			Display.update();//refresh the display
+		}
+		
+	}
+	private void collisionPhysics() {
+		for (int i=0; i<gameBlocks.size();i++) {
+			GameObject o=gameBlocks.get(i);//store current element in var to avoid parsing array
+			o.update();//draw the bricks and paddle
+			
+			if(GamePhysics.hit(myBall, o)) {//if a collision did occur
+				if(o==left || o==right){//with either of the sides
+					myBall.speedX*=-1;//bounce the ball off
+				}else
+				if(o==bottom){//if the collision occurred with the bottom boundary reset the ball
+					//decrement player lives
+					myBall.coordX=myPaddle.coordX;
+					myBall.coordY=myPaddle.coordY+myPaddle.dimY/2+myBall.radius;
+					myBall.speedX=0;
+					myBall.speedY=0.1f;
+				}else
+				if(o==top){//if the collision was with the top boundary
+					myBall.speedY*=-1;// bounce the ball back down
+				}else
+				if(o==myPaddle){//if the collision was with the player paddle
+				//	myBall.speedY*=-1;
+					myBall.speedY*=((o.coordY-myBall.coordY<0)?-1:1);//bounce the ball back
+					myBall.speedX+=(myBall.coordX-gameBlocks.get(i).coordX)*0.01;//taking the angle into account
+					if(myBall.speedX>Ball.MAX_SPEED){//make sure ball speed doesn't exceed max
+						myBall.speedX=Ball.MAX_SPEED;
+					}
+					if(myBall.speedX<-Ball.MAX_SPEED){
+						myBall.speedX=-Ball.MAX_SPEED;
+					}
+				
+				}else
+				
+				if(o.isBrick()){//if collision happened with a brick
+					myBall.speedY*=-1;//if the ball hits something, bounce it back
+					gameBlocks.remove(i);//destroy the brick
+				}
+				
+			}
 		}
 		
 	}
