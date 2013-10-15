@@ -1,6 +1,6 @@
 package dev.game.project;
 
-public class Brick extends GameObject {
+public class Brick extends Collidable {
 	
 	public Brick(float cordX, float cordY, float dimX, float dimY) {
 		this.coordX = cordX;
@@ -14,8 +14,12 @@ public class Brick extends GameObject {
 		
 
 	}
-	public boolean isBrick(){//function returns true only for bricks but is present everywhere (easier and cheaper than class check)
-		return true;
+
+	@Override
+	public void collided(Ball o) {
+		o.speedY*=-1;//if the ball hits something, bounce it back
+		destroyed=true;
+		
 	}
 
 

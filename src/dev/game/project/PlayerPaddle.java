@@ -2,7 +2,9 @@ package dev.game.project;
 
 import org.lwjgl.opengl.Display;
 
-public class PlayerPaddle extends GameObject{
+public class PlayerPaddle extends Collidable implements Movable{
+	
+	
 	public void update(){
 		DrawObject.drawRect(coordX, coordY, dimX, dimY);
 	}
@@ -20,6 +22,19 @@ public class PlayerPaddle extends GameObject{
 		if(coordX-dimX/2<0){
 			coordX=dimX/2;
 		}
+	}
+	@Override
+	public void collided(Ball o) {
+		o.speedY*=((coordY-o.coordY<0)?-1:1);//bounce the ball back
+		o.speedX+=(o.coordX-coordX)*0.01;//taking the angle into account
+		if(o.speedX>Ball.MAX_SPEED){//make sure ball speed doesn't exceed max
+			o.speedX=Ball.MAX_SPEED;
+		}
+		if(o.speedX<-Ball.MAX_SPEED){
+			o.speedX=-Ball.MAX_SPEED;
+		}
+		// TODO Auto-generated method stub
+		
 	}
 
 }

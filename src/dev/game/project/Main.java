@@ -28,6 +28,10 @@ public class Main {
 			glMatrixMode(GL_MODELVIEW);
 			glClearColor(0,0,0,1);
 			glDisable(GL_DEPTH_TEST);
+			glClear(GL_COLOR_BUFFER_BIT);//GL init
+			glColor3f(0.25f, 0.75f, 0.5f);
+			glLoadIdentity();
+			//TODO Display.setFullscreen(true);
 		} catch (LWJGLException e) {
 			
 			e.printStackTrace();

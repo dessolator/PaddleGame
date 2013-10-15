@@ -10,8 +10,6 @@ public abstract class GameObject {
 	 * Function used to determine if an object is a brick
 	 * @return Returns True if the the object is not boolean
 	 */
-	public boolean isBrick(){//function used to determine whether an object is destructable 
-		return false;
-	}
+
 
 }

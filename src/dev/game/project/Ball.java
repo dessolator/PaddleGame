@@ -1,6 +1,6 @@
 package dev.game.project;
 
-public class Ball extends Movable {
+public class Ball extends GameObject implements Movable {
 	public static final float MAX_SPEED = 0.1f;//constant used to keep track of the maximum ball speed
 	float radius;//radius of the ball
 	float speedX=0.0f;//horizontal ball speed
