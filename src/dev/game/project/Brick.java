@@ -17,22 +17,20 @@ public class Brick extends Collidable {
 
 	@Override
 	public void collided(Ball o) {
-		//if hit head on
-		o.flipped=true;
-		System.out.println(Math.abs(((coordY-o.coordY>0)?(coordY-o.coordY):(o.coordY-coordY)))+3+":"+ (dimY/2+o.radius)+"="+(Math.abs(((coordY-o.coordY>0)?(coordY-o.coordY):(o.coordY-coordY)))+3-(dimY/2+o.radius)));
-		if(Math.abs(((coordY-o.coordY>0)?(coordY-o.coordY):(o.coordY-coordY)))+3>=(dimY/2+o.radius)){
-			System.out.println("flipping Y");
-			o.speedY*=-1;//if the ball hits something, bounce it back
-			
+		if(!o.flipped){
+			o.flipped=true;
+			if(((o.coordX>=(coordX-(dimX/2+o.radius)))&&(o.coordX<=(coordX+(dimX/2+o.radius))))&&
+			(((o.coordY<=(coordY-dimY/2))&&(o.coordY>=(coordY-(dimY/2+o.radius)))) ||
+			((o.coordY<=(coordY+(dimY/2+o.radius)))&&(o.coordY>=(coordY+dimY/2)))))
+			{
+				o.speedY*=-1;//if the ball hits something, bounce it back
+				
+			}
+			else{
+				o.speedX*=-1;
+			}
+			destroyed=true;
 		}
-		else{
-			System.out.println("flipping X");
-			o.speedX*=-1;
-		}
-		
-		//if hit from the side
-		//if hit diagonally
-		destroyed=true;
 		
 	}
 

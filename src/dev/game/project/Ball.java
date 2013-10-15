@@ -1,11 +1,11 @@
 package dev.game.project;
 
 public class Ball extends GameObject implements Movable {
-	public static final float MAX_SPEED = 0.1f;//constant used to keep track of the maximum ball speed
+	public static final float MAX_SPEED = 8f;//constant used to keep track of the maximum ball speed
 	float radius;//radius of the ball
 	float speedX=0.0f;//horizontal ball speed
-	float speedY=0.1f;//vertical ball speed
-	boolean flipped;
+	float speedY=8f;//vertical ball speed
+	boolean flipped=false;
 	
 	public Ball( float cordX, float cordY, float radius) {
 		this.coordX = cordX;

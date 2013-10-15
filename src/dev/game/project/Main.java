@@ -9,8 +9,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		initDisplay();
-		PaddleGame paddleGame=new PaddleGame();
-		paddleGame.startGame();//@revision migrated all game code out of main to make it reusable for future ideas
+		PaddleGame.startGame(true);
 		clearDisplay();
 	}
 
@@ -31,6 +30,8 @@ public class Main {
 			glClear(GL_COLOR_BUFFER_BIT);//GL init
 			glColor3f(0.25f, 0.75f, 0.5f);
 			glLoadIdentity();
+			Display.setVSyncEnabled(true);
+			
 			//TODO Display.setFullscreen(true);
 		} catch (LWJGLException e) {
 			

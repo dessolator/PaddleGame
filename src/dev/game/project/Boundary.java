@@ -7,10 +7,10 @@ public class Boundary extends Collidable{
 	}
 	
 	
-	public Boundary(float cordX, float cordY, float dimX, float dimY,Sides side) {
+	public Boundary(float coordX, float coordY, float dimX, float dimY,Sides side) {
 		this.side=side;
-		this.coordX = cordX;
-		this.coordY = cordY;
+		this.coordX = coordX;
+		this.coordY = coordY;
 		this.dimX = dimX;
 		this.dimY = dimY;
 	}
@@ -31,9 +31,9 @@ public class Boundary extends Collidable{
 			break;
 		case BOTTOM:
 			o.coordX=PaddleGame.myPaddle.coordX;
-			o.coordY=PaddleGame.myPaddle.coordY+PaddleGame.myPaddle.dimY/2+o.radius;
+			o.coordY=PaddleGame.myPaddle.coordY+PaddleGame.myPaddle.dimY/2+o.radius+3;
 			o.speedX=0;
-			o.speedY=0.1f;
+			o.speedY=8f;
 			break;
 		default:
 			//BROKEN

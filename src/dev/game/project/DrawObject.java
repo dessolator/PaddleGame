@@ -18,6 +18,12 @@ public class DrawObject {
 		 * values adjusted so that coordinates are now,
 		 * at the center of the rectangle
 		 */
+		if(PaddleGame.voodooMode){
+		float r=(float)Math.random();
+		float g=(float)Math.random();
+		float b=(float)Math.random();
+		glColor3f(r,g,b);
+		}
 		glBegin(GL_QUADS);
 		{
 			glVertex2f(-dimX/2, -dimY/2);

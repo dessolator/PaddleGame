@@ -7,7 +7,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 public class PaddleGame {
-	
+	static boolean voodooMode=false;
 	static int num = 16;//variable used for brick generation
 	static float coordx = 50;//first brick coordinate
 	static float coordy = 500;//first brick coordinate
@@ -16,8 +16,8 @@ public class PaddleGame {
 	private static int frames;
 	public static PlayerPaddle myPaddle= new PlayerPaddle(Display.getWidth()/2,50,100,20);//create player paddle
 	private static Ball myBall = new Ball(Display.getWidth()/2,100,10);//create the ball
-	private static Boundary left=new Boundary(0,Display.getHeight()/2,1,Display.getHeight(),Sides.LEFT);//add left boundary
-	private static Boundary right=new Boundary(Display.getWidth(),Display.getHeight()/2,1,Display.getHeight(),Sides.RIGHT);//add right boundary
+	private static Boundary left=new Boundary(-0.5f,Display.getHeight()/2,1,Display.getHeight(),Sides.LEFT);//add left boundary
+	private static Boundary right=new Boundary(Display.getWidth()-0.5f,Display.getHeight()/2,1,Display.getHeight(),Sides.RIGHT);//add right boundary
 	private static Boundary bottom =new Boundary(Display.getWidth()/2,0,Display.getWidth(),1,Sides.BOTTOM);//add bottom boundary
 	private static Boundary top=new Boundary(Display.getWidth()/2,Display.getHeight(),Display.getWidth(),1,Sides.TOP);//add top boundary
 	static{
@@ -46,7 +46,6 @@ public class PaddleGame {
 	
 	/*
 	 * TODO
-	 * move collision logic to appropriate classes in the interest of maintaining OO paradigm
 	 * scale element sizes to resolution,
 	 * bugchecking.
 	 */
@@ -54,21 +53,20 @@ public class PaddleGame {
 	 * The main game loop takes care of pretty much everything,
 	 * from user input to collisions.
 	 */
-	public  void startGame() {
-
-
-		
+	public static void startGame(boolean voodoo) {
+		voodooMode=voodoo;
 		while(!Display.isCloseRequested()) {
 			glClear(GL_COLOR_BUFFER_BIT);//for each frame clear the screen
-		//	displayFPS();
+			displayFPS();
 			processInput();//read player input
 			myBall.update();//draw the ball
 			collisionPhysics();
+			Display.sync(60);
 			Display.update();//refresh the display
 		}
 		
 	}
-	private void displayFPS() {
+	private static void displayFPS() {
 		long currentTime=System.nanoTime();
 		if(currentTime-frameStart>=1000000000){
 			System.out.println(frames);
@@ -79,7 +77,7 @@ public class PaddleGame {
 		frames++;
 		
 	}
-	private void collisionPhysics() {
+	private static void collisionPhysics() {
 		for (int i=0; i<gameBlocks.size();i++) {
 			Collidable o=gameBlocks.get(i);//store current element in var to avoid parsing array
 			if(o.destroyed){
@@ -99,7 +97,7 @@ public class PaddleGame {
 	/**
 	 * Function used to evaluate user input and move the paddle accordingly
 	 */
-	private  void processInput() {
+	private static void processInput() {
 		if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){//if left was pressed
 			myPaddle.move(-1);//move left
 			return;
