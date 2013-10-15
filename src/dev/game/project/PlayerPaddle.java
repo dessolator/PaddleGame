@@ -25,6 +25,8 @@ public class PlayerPaddle extends Collidable implements Movable{
 	}
 	@Override
 	public void collided(Ball o) {
+		
+		o.flipped=true;
 		o.speedY*=((coordY-o.coordY<0)?-1:1);//bounce the ball back
 		o.speedX+=(o.coordX-coordX)*0.01;//taking the angle into account
 		if(o.speedX>Ball.MAX_SPEED){//make sure ball speed doesn't exceed max

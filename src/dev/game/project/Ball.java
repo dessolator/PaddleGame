@@ -5,6 +5,7 @@ public class Ball extends GameObject implements Movable {
 	float radius;//radius of the ball
 	float speedX=0.0f;//horizontal ball speed
 	float speedY=0.1f;//vertical ball speed
+	boolean flipped;
 	
 	public Ball( float cordX, float cordY, float radius) {
 		this.coordX = cordX;
@@ -17,6 +18,7 @@ public class Ball extends GameObject implements Movable {
 	
 	@Override
 	public void update() {
+		flipped=false;
 		move(0);//each frame, move the ball
 		DrawObject.drawCirclef(coordX,coordY, radius);//and draw it
 	}

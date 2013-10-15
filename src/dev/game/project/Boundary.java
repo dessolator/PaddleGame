@@ -18,6 +18,7 @@ public class Boundary extends Collidable{
 
 	@Override
 	public void collided(Ball o) {
+		o.flipped=true;
 		switch(side){
 		case LEFT:
 			o.speedX*=-1;//bounce the ball off

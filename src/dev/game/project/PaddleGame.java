@@ -60,7 +60,7 @@ public class PaddleGame {
 		
 		while(!Display.isCloseRequested()) {
 			glClear(GL_COLOR_BUFFER_BIT);//for each frame clear the screen
-			displayFPS();
+		//	displayFPS();
 			processInput();//read player input
 			myBall.update();//draw the ball
 			collisionPhysics();
