@@ -17,7 +17,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		initEngine();//start the engine
-		PaddleGame.startGame(true);//start the game with voodooMode on
+		PaddleGame.startGame(false);//start the game with voodooMode on
 		killEngine();//kill the engine
 	}
 	

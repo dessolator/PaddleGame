@@ -37,7 +37,7 @@ public class PaddleGame {
 		 */
 		for (int j = 0; j<4; j++) {//change row to add bricks to
 			for (int i = 0; i < num; i++) {//add bricks to row
-				gameBlocks.add(new Brick(coordx,coordy,Display.getWidth()/20,Display.getHeight()/30));
+				gameBlocks.add(new Brick(coordx,coordy,Display.getWidth()/20,Display.getHeight()/30,(j+1)));
 				coordx+=(int)Display.getWidth()/(18.6f);
 			}
 			coordy-=(int)Display.getHeight()/(27.27f);//reset brick coordinates
