@@ -4,13 +4,15 @@ import static org.lwjgl.opengl.GL11.glColor3f;
 
 public class Brick extends Collidable {
 	private int hitPoints;
+	private boolean droppsBonus;
 	
-	public Brick(float cordX, float cordY, float dimX, float dimY,int hitPoints) {
+	public Brick(float cordX, float cordY, float dimX, float dimY,int hitPoints,boolean droppsBonus) {
 		this.coordX = cordX;
 		this.coordY = cordY;
 		this.dimX = dimX;
 		this.dimY = dimY;
 		this.hitPoints=hitPoints;
+		this.droppsBonus=droppsBonus;
 	}
 	@Override 
 	public void update() {
@@ -32,6 +34,9 @@ public class Brick extends Collidable {
 			}
 			if(--hitPoints==0){
 				destroyed=true;
+				if(droppsBonus){
+					Bonus.drop();
+				}
 			}
 		}
 		

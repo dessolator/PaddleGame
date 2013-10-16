@@ -8,14 +8,7 @@ import org.lwjgl.opengl.Display;
 
 public class PaddleGame {
 	static boolean voodooMode=false;//@credit Jovan Davidovic\
-	/*
-	 * Temporary brick generation variables
-	 */
-	//======================================================
-	static int num = 17;//variable used for brick generation
-	static float coordx = Display.getWidth()/16;//first brick coordinate
-	static float coordy = (Display.getHeight()*(5.5f))/6;//first brick coordinate
-	//======================================================
+	
 	
 	static ArrayList<Collidable> gameBlocks = new ArrayList<Collidable>();//List of all blocks used by the game
 
@@ -32,17 +25,8 @@ public class PaddleGame {
 		gameBlocks.add(new Boundary(-0.5f,Display.getHeight()/2,1,Display.getHeight(),Sides.LEFT));
 		gameBlocks.add(new Boundary(Display.getWidth()/2,0-0.5f,Display.getWidth(),1,Sides.BOTTOM));
 		gameBlocks.add(myPaddle);
-		/*
-		 * Temporary brick generating loop
-		 */
-		for (int j = 0; j<4; j++) {//change row to add bricks to
-			for (int i = 0; i < num; i++) {//add bricks to row
-				gameBlocks.add(new Brick(coordx,coordy,Display.getWidth()/20,Display.getHeight()/30,(j+1)));
-				coordx+=(int)Display.getWidth()/(18.6f);
-			}
-			coordy-=(int)Display.getHeight()/(27.27f);//reset brick coordinates
-			coordx-=num*(int)Display.getWidth()/(18.6f);
-		}
+		gameBlocks.addAll(Level.startLevel(1));
+
 		
 	}
 	
