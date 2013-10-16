@@ -3,7 +3,6 @@ package dev.game.project;
 public class Boundary extends Collidable{
 	Sides side;
 	public void update(){
-		DrawObject.drawRect(coordX, coordY, dimX, dimY);
 	}
 	
 	
@@ -30,8 +29,8 @@ public class Boundary extends Collidable{
 			o.speedY*=-1;// bounce the ball back down
 			break;
 		case BOTTOM:
-			o.coordX=PaddleGame.myPaddle.coordX;
-			o.coordY=PaddleGame.myPaddle.coordY+PaddleGame.myPaddle.dimY/2+o.radius+3;
+			o.coordX=PaddleGame.getPaddle().coordX;
+			o.coordY=PaddleGame.getPaddle().coordY+PaddleGame.getPaddle().dimY/2+o.radius+3;
 			o.speedX=0;
 			o.speedY=8f;
 			break;
@@ -41,5 +40,11 @@ public class Boundary extends Collidable{
 				
 		}
 		
+	}
+
+
+	@Override
+	public void render() {
+		DrawObject.drawRect(coordX, coordY, dimX, dimY);		
 	}
 }

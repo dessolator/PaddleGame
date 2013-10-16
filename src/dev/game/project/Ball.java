@@ -20,7 +20,6 @@ public class Ball extends GameObject implements Movable {
 	public void update() {
 		flipped=false;
 		move(0);//each frame, move the ball
-		DrawObject.drawCirclef(coordX,coordY, radius);//and draw it
 	}
 	/**
 	 * Function used to move the ball in a preset direction.
@@ -28,6 +27,13 @@ public class Ball extends GameObject implements Movable {
 	public void move(int i) {
 		coordX+=speedX;//increase the x position
 		coordY+=speedY;//increase the y position
+	}
+
+
+	@Override
+	public void render() {
+		DrawObject.drawCirclef(coordX,coordY, radius);//and draw it
+		
 	}
 
 }

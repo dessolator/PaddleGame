@@ -6,7 +6,7 @@ public class PlayerPaddle extends Collidable implements Movable{
 	
 	
 	public void update(){
-		DrawObject.drawRect(coordX, coordY, dimX, dimY);
+		
 	}
 	public PlayerPaddle(float cordX, float cordY, float dimX, float dimY) {
 		this.coordX = cordX;
@@ -25,7 +25,6 @@ public class PlayerPaddle extends Collidable implements Movable{
 	}
 	@Override
 	public void collided(Ball o) {
-		
 		o.flipped=true;
 		o.speedY*=((coordY-o.coordY<0)?-1:1);//bounce the ball back
 		o.speedX+=(o.coordX-coordX)*0.8;//taking the angle into account
@@ -36,6 +35,11 @@ public class PlayerPaddle extends Collidable implements Movable{
 			o.speedX=-Ball.MAX_SPEED;
 		}
 		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void render() {
+		DrawObject.drawRect(coordX, coordY, dimX, dimY);
 		
 	}
 

@@ -10,9 +10,6 @@ public class Brick extends Collidable {
 	}
 	@Override 
 	public void update() {
-		DrawObject.drawRect(coordX, coordY, dimX, dimY);
-		
-
 	}
 
 	@Override
@@ -32,6 +29,10 @@ public class Brick extends Collidable {
 			destroyed=true;
 		}
 		
+	}
+	@Override
+	public void render() {
+		DrawObject.drawRect(coordX, coordY, dimX, dimY);		
 	}
 
 
