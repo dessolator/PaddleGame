@@ -9,7 +9,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		initDisplay();
-		PaddleGame.startGame(true);
+		PaddleGame.startGame(false);
 		clearDisplay();
 	}
 
@@ -19,7 +19,16 @@ public class Main {
 	 */
 	private static void initDisplay() {
 		try {			
-			Display.setDisplayMode(new DisplayMode(800,600));
+			DisplayMode[] modes = Display.getAvailableDisplayModes();
+			 
+			for (int i=0;i<modes.length;i++) {
+			    DisplayMode current = modes[i];
+			    if(modes[i].isFullscreenCapable())
+			    System.out.println(i+":"+current.getWidth() + "x" + current.getHeight() + "x" +
+			                        current.getBitsPerPixel() + " " + current.getFrequency() + "Hz");
+			}
+			Display.setDisplayMode(modes[75]);
+			Display.setFullscreen(true);
 			Display.create();
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
@@ -30,9 +39,7 @@ public class Main {
 			glClear(GL_COLOR_BUFFER_BIT);//GL init
 			glColor3f(0.25f, 0.75f, 0.5f);
 			glLoadIdentity();
-			Display.setVSyncEnabled(true);
-			
-			//TODO Display.setFullscreen(true);
+			Display.setVSyncEnabled(true); 
 		} catch (LWJGLException e) {
 			
 			e.printStackTrace();
