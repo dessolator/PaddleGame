@@ -25,7 +25,7 @@ public class PaddleGame {
 		gameBlocks.add(new Boundary(-0.5f,Display.getHeight()/2,1,Display.getHeight(),Sides.LEFT));
 		gameBlocks.add(new Boundary(Display.getWidth()/2,0-0.5f,Display.getWidth(),1,Sides.BOTTOM));
 		gameBlocks.add(myPaddle);
-		gameBlocks.addAll(Level.startLevel(1));
+		gameBlocks.addAll(Level.startLevel(1));//start level one
 
 		
 	}

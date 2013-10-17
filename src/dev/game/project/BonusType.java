@@ -1,0 +1,7 @@
+package dev.game.project;
+
+public enum BonusType {
+	BALL_DAMAGE,PADDLE_SPEED,PADDLE_WIDEN,MULTI_BALL,
+	BALL_SPEED,PADDLE_NARROW,PADDLE_INVERT;
+
+}

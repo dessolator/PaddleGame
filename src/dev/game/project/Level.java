@@ -8,8 +8,11 @@ public class Level {
 	static int num = 17;//variable used for brick generation
 	static float coordx = Display.getWidth()/16;//first brick coordinate
 	static float coordy = (Display.getHeight()*(5.5f))/6;//first brick coordinate
-	public void save(){}
+	
+	//public void save(){}
+	
 	//public static void load(String saveLocation){}
+	
 	public static ArrayList<Collidable> startLevel(int levelNumber){
 		ArrayList<Collidable> ret=new ArrayList<Collidable>();
 		for (int j = 0; j<4; j++) {//change row to add bricks to
