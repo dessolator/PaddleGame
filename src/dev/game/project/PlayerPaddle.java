@@ -26,15 +26,15 @@ public class PlayerPaddle extends Collidable implements Movable{
 		}
 	}
 	@Override
-	public void collided(Ball o) {
-		o.flipped=true;
-		o.speedY*=((coordY-o.coordY<0)?-1:1);//bounce the ball back
-		o.speedX+=(o.coordX-coordX)*0.8;//taking the angle into account
-		if(o.speedX>Ball.MAX_SPEED){//make sure ball speed doesn't exceed max
-			o.speedX=Ball.MAX_SPEED;
+	public void collided(GameObject o) {
+		((Ball)o).flipped=true;
+		((Ball)o).speedY*=((coordY-o.coordY<0)?-1:1);//bounce the ball back
+		((Ball)o).speedX+=(o.coordX-coordX)*0.8;//taking the angle into account
+		if(((Ball)o).speedX>Ball.MAX_SPEED){//make sure ball speed doesn't exceed max
+			((Ball)o).speedX=Ball.MAX_SPEED;
 		}
-		if(o.speedX<-Ball.MAX_SPEED){
-			o.speedX=-Ball.MAX_SPEED;
+		if(((Ball)o).speedX<-Ball.MAX_SPEED){
+			((Ball)o).speedX=-Ball.MAX_SPEED;
 		}
 		// TODO Auto-generated method stub
 		
@@ -45,6 +45,22 @@ public class PlayerPaddle extends Collidable implements Movable{
 			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan
 		}
 		DrawObject.drawRect(coordX, coordY, dimX, dimY);
+		
+	}
+	public void widen() {
+		// TODO Auto-generated method stub
+		
+	}
+	public void invert() {
+		// TODO Auto-generated method stub
+		
+	}
+	public void speedUp() {
+		// TODO Auto-generated method stub
+		
+	}
+	public void narrow() {
+		// TODO Auto-generated method stub
 		
 	}
 

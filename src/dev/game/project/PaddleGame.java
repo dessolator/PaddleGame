@@ -2,7 +2,6 @@ package dev.game.project;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
-import java.util.ArrayList;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
@@ -10,22 +9,15 @@ public class PaddleGame {
 	static boolean voodooMode=false;//@credit Jovan Davidovic\
 	
 	
-	static ArrayList<Collidable> gameBlocks = new ArrayList<Collidable>();//List of all blocks used by the game
-
-	private static PlayerPaddle myPaddle= new PlayerPaddle(Display.getWidth()/2,Display.getHeight()/12,Display.getWidth()/8,Display.getHeight()/30);//create player paddle
-	private static Ball myBall = new Ball(Display.getWidth()/2,Display.getHeight()/6,Display.getHeight()/60);//create the ball
+	private static Level myLevel;
 	
 	private static boolean terminate=false;//variable used to check if the user hit ESCAPE
 	static{
 		/*
 		 * Add Boundaries to blocks to check for collisions
 		 */
-		gameBlocks.add(new Boundary(Display.getWidth()+0.5f,Display.getHeight()/2,1,Display.getHeight(),Sides.RIGHT));
-		gameBlocks.add(new Boundary(Display.getWidth()/2,Display.getHeight()+0.5f,Display.getWidth(),1,Sides.TOP));
-		gameBlocks.add(new Boundary(-0.5f,Display.getHeight()/2,1,Display.getHeight(),Sides.LEFT));
-		gameBlocks.add(new Boundary(Display.getWidth()/2,0-0.5f,Display.getWidth(),1,Sides.BOTTOM));
-		gameBlocks.add(myPaddle);
-		gameBlocks.addAll(Level.startLevel(1));//start level one
+		
+		myLevel=new Level(1);
 
 		
 	}
@@ -41,8 +33,8 @@ public class PaddleGame {
 			glClear(GL_COLOR_BUFFER_BIT);//for each frame clear the screen
 			displayFPS();//print framerate for debug purposes
 			processInput();//read player input
-			myBall.update();//update ball state
-			myBall.render();//draw the ball
+			myLevel.update();
+			myLevel.render();
 			collisionPhysics();//do the collision physics and brick drawing
 			Display.sync(60);//force the framerate to 60 FPS or thereabouts
 			Display.update();//refresh the display
@@ -70,16 +62,16 @@ public class PaddleGame {
 	 * Function used to check for collisions and draw blocks.
 	 */
 	private static void collisionPhysics() {
-		for (int i=0; i<gameBlocks.size();i++) {//for each gameBlock
+		for (int i=0; i<myLevel.getBlocks().size();i++) {//for each gameBlock
 			
-			Collidable o=gameBlocks.get(i);//store current element in variable to avoid parsing array
+			Collidable o=myLevel.getBlocks().get(i);//store current element in variable to avoid parsing array
 			o.update();//update the state of all gameBlocks (currently does nothing
 			o.render();//draw the bricks and paddle		
 			
-			if(GamePhysics.hit(myBall, o)) {//if a collision did occur
-				o.collided(myBall);//trigger collision function
+			if(GamePhysics.hit(myLevel.getBall(), o)) {//if a collision did occur
+				o.collided(myLevel.getBall());//trigger collision function
 				if(o.destroyed){//check if the object was destroyed
-					gameBlocks.remove(i);//if so remove it
+					myLevel.getBlocks().remove(i);//if so remove it
 					i--;//and correct iterator
 				}
 				
@@ -93,11 +85,11 @@ public class PaddleGame {
 	 */
 	private static void processInput() {
 		if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){//if left was pressed
-			myPaddle.move(-1);//move left
+			Level.movePaddle(-1);//move left
 			return;
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_D)||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){//else if right was pressed
-			myPaddle.move(1);//move right
+			Level.movePaddle(1);//move right
 			return;
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
@@ -110,8 +102,9 @@ public class PaddleGame {
 	 * Getter for the paddle object.
 	 * @return Player paddle.
 	 */
-	public static Collidable getPaddle() {
-		return myPaddle;
+
+	public static Level getLevel() {
+		return myLevel;
 	}
 	
 }

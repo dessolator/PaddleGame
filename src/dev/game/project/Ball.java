@@ -41,4 +41,16 @@ public class Ball extends GameObject implements Movable {
 		
 	}
 
+
+	public void speedUp() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void increaseDamage() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

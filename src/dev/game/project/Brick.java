@@ -19,23 +19,23 @@ public class Brick extends Collidable {
 	}
 
 	@Override
-	public void collided(Ball o) {
-		if(!o.flipped){
-			o.flipped=true;
-			if(((o.coordX>=(coordX-(dimX/2+o.radius)))&&(o.coordX<=(coordX+(dimX/2+o.radius))))&&
-			(((o.coordY<=(coordY-dimY/2))&&(o.coordY>=(coordY-(dimY/2+o.radius)))) ||
-			((o.coordY<=(coordY+(dimY/2+o.radius)))&&(o.coordY>=(coordY+dimY/2)))))
+	public void collided(GameObject o) {
+		if(!((Ball)o).flipped){
+			((Ball)o).flipped=true;
+			if(((o.coordX>=(coordX-(dimX/2+o.dimX/2)))&&(o.coordX<=(coordX+(dimX/2+o.dimX/2))))&&
+			(((o.coordY<=(coordY-dimY/2))&&(o.coordY>=(coordY-(dimY/2+o.dimX/2)))) ||
+			((o.coordY<=(coordY+(dimY/2+o.dimX/2)))&&(o.coordY>=(coordY+dimY/2)))))
 			{
-				o.speedY*=-1;//if the ball hits something, bounce it back
+				((Ball)o).speedY*=-1;//if the ball hits something, bounce it back
 				
 			}
 			else{
-				o.speedX*=-1;
+				((Ball)o).speedX*=-1;
 			}
 			if(--hitPoints==0){
 				destroyed=true;
 				if(droppsBonus){
-					Bonus.drop();
+					Bonus.drop(this);
 				}
 			}
 		}
