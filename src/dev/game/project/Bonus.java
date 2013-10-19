@@ -16,7 +16,7 @@ public class Bonus extends Collidable implements Movable{
 
 	public static void drop(Brick b) {
 		if(bonusesDropped<MAX_BONUSES_PER_LEVEL){
-			PaddleGame.getLevel().addBonus(new Bonus(BonusType.BALL_DAMAGE,b.coordX,b.coordY));
+			PaddleGame.getLevel().addBonus(new Bonus(BonusType.PADDLE_WIDEN,b.coordX,b.coordY));
 			bonusesDropped++;
 		}
 		

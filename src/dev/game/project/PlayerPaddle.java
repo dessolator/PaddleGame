@@ -2,15 +2,34 @@ package dev.game.project;
 
 import static org.lwjgl.opengl.GL11.glColor3f;
 
+import java.util.ArrayList;
+
 import org.lwjgl.opengl.Display;
 
 public class PlayerPaddle extends Collidable implements Movable{
-	
+	ArrayList<Timer> timers;
+	private boolean widened;
 	
 	public void update(){
+		for (int i=0; i<timers.size();i++) {
+			if(timers.get(i).isPassed()){
+				switch(timers.get(i).bt){
+				case PADDLE_WIDEN:
+					if(widened){
+						dimX/=1.5f;
+						widened=false;
+					}
+					break;
+				}
+				timers.remove(i);
+				i--;
+				
+			}
+		}
 		
 	}
 	public PlayerPaddle(float cordX, float cordY, float dimX, float dimY) {
+		this.timers=new ArrayList<Timer>();
 		this.coordX = cordX;
 		this.coordY = cordY;
 		this.dimX = dimX;
@@ -36,7 +55,7 @@ public class PlayerPaddle extends Collidable implements Movable{
 		if(((Ball)o).speedX<-Ball.MAX_SPEED){
 			((Ball)o).speedX=-Ball.MAX_SPEED;
 		}
-		// TODO Auto-generated method stub
+
 		
 	}
 	@Override
@@ -48,8 +67,22 @@ public class PlayerPaddle extends Collidable implements Movable{
 		
 	}
 	public void widen() {
-		// TODO Auto-generated method stub
-		
+		if(!widened){
+			widened=true;
+			this.dimX*=1.5f;
+			}
+		removeTypedTimer(BonusType.PADDLE_WIDEN);
+		timers.add(new Timer(10,BonusType.PADDLE_WIDEN));
+	}
+	
+	
+	private void removeTypedTimer(BonusType bonus) {
+		for (int i=0; i<timers.size();i++) {
+			if(timers.get(i).bt==bonus){
+				timers.remove(i);
+				i--;
+			}
+		}		
 	}
 	public void invert() {
 		// TODO Auto-generated method stub
