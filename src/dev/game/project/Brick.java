@@ -20,17 +20,17 @@ public class Brick extends Collidable {
 
 	@Override
 	public void collided(GameObject o) {
-		if(!((Ball)o).flipped){
-			((Ball)o).flipped=true;
+		if(!((Ball)o).isFlipped()){
+			((Ball)o).setFlipped(true);
 			if(((o.coordX>=(coordX-(dimX/2+o.dimX/2)))&&(o.coordX<=(coordX+(dimX/2+o.dimX/2))))&&
 			(((o.coordY<=(coordY-dimY/2))&&(o.coordY>=(coordY-(dimY/2+o.dimX/2)))) ||
 			((o.coordY<=(coordY+(dimY/2+o.dimX/2)))&&(o.coordY>=(coordY+dimY/2)))))
 			{
-				((Ball)o).speedY*=-1;//if the ball hits something, bounce it back
+				((Ball)o).setSpeedY(((Ball)o).getSpeedY() * -1);//if the ball hits something, bounce it back
 				
 			}
 			else{
-				((Ball)o).speedX*=-1;
+				((Ball)o).setSpeedX(((Ball)o).getSpeedX() * -1);
 			}
 			if(--hitPoints==0){
 				destroyed=true;

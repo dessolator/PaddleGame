@@ -7,11 +7,11 @@ import org.lwjgl.opengl.Display;
 public class Level {
 	ArrayList<Collidable> blocks;
 	ArrayList<Bonus> bonuses;
-	static int num = 17;//variable used for brick generation
-	static float coordx = Display.getWidth()/16;//first brick coordinate
-	static float coordy = (Display.getHeight()*(5.5f))/6;//first brick coordinate
-	private static PlayerPaddle myPaddle= new PlayerPaddle(Display.getWidth()/2,Display.getHeight()/12,Display.getWidth()/8,Display.getHeight()/30);//create player paddle
-	private static Ball myBall = new Ball(Display.getWidth()/2,Display.getHeight()/6,Display.getHeight()/60);//create the ball
+	int num = 17;//variable used for brick generation
+	float coordx = Display.getWidth()/16;//first brick coordinate
+	float coordy = (Display.getHeight()*(5.5f))/6;//first brick coordinate
+	private PlayerPaddle myPaddle= new PlayerPaddle(Display.getWidth()/2,Display.getHeight()/12,Display.getWidth()/8,Display.getHeight()/30);//create player paddle
+	private Ball myBall = new Ball(Display.getWidth()/2,Display.getHeight()/6,Display.getHeight()/60);//create the ball
 	
 	//public void save(){}
 	
@@ -22,7 +22,7 @@ public class Level {
 		bonuses=new ArrayList<Bonus>();
 		for (int j = 0; j<4; j++) {//change row to add bricks to
 			for (int i = 0; i < num; i++) {//add bricks to row
-				blocks.add(new Brick(coordx,coordy,Display.getWidth()/20,Display.getHeight()/30,(j+1),true));
+				blocks.add(new Brick(coordx,coordy,Display.getWidth()/20,Display.getHeight()/30,(j+1),(Math.random()<0.5?true:false)));
 				coordx+=(int)Display.getWidth()/(18.6f);
 			}
 			coordy-=(int)Display.getHeight()/(27.27f);//reset brick coordinates
@@ -56,7 +56,7 @@ public class Level {
 
 
 
-	public static void movePaddle(int i) {
+	public void movePaddle(int i) {
 		myPaddle.move(i);
 		
 	}
@@ -65,6 +65,7 @@ public class Level {
 
 	public void update() {
 		myBall.update();
+		Timer.update();
 		for (int i=0; i<bonuses.size();i++) {
 			bonuses.get(i).update();
 		}

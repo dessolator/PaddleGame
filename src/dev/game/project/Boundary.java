@@ -17,22 +17,19 @@ public class Boundary extends Collidable{
 
 	@Override
 	public void collided(GameObject o) {
-		((Ball)o).flipped=true;
+		((Ball)o).setFlipped(true);
 		switch(side){
 		case LEFT:
-			((Ball)o).speedX*=-1;//bounce the ball off
+			((Ball)o).setSpeedX(((Ball)o).getSpeedX() * -1);//bounce the ball off
 			break;
 		case RIGHT:
-			((Ball)o).speedX*=-1;//bounce the ball off
+			((Ball)o).setSpeedX(((Ball)o).getSpeedX() * -1);//bounce the ball off
 			break;
 		case TOP:
-			((Ball)o).speedY*=-1;// bounce the ball back down
+			((Ball)o).setSpeedY(((Ball)o).getSpeedY() * -1);// bounce the ball back down
 			break;
 		case BOTTOM:
-			o.coordX=PaddleGame.getLevel().getPaddle().coordX;
-			o.coordY=PaddleGame.getLevel().getPaddle().coordY+PaddleGame.getLevel().getPaddle().dimY/2+o.dimX/2+3;
-			((Ball)o).speedX=0;
-			((Ball)o).speedY=8f;
+			((Ball)o).reset();
 			break;
 		default:
 			//BROKEN

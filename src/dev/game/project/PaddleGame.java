@@ -31,7 +31,7 @@ public class PaddleGame {
 		voodooMode=voodoo;//read voodooMode param
 		while((!Display.isCloseRequested())&&!terminate) {//if ESCAPE hasn't been hit and the display hasn't been closed otherwise
 			glClear(GL_COLOR_BUFFER_BIT);//for each frame clear the screen
-			displayFPS();//print framerate for debug purposes
+			//displayFPS();//print framerate for debug purposes
 			processInput();//read player input
 			myLevel.update();
 			myLevel.render();
@@ -47,6 +47,7 @@ public class PaddleGame {
 	/**
 	 * Function used to calculate and display the framerate.
 	 */
+	@SuppressWarnings("unused")
 	private static void displayFPS() {
 		long currentTime=System.nanoTime();//read current time
 		if(currentTime-frameStart>=1000000000){//if more than a second has passed
@@ -85,11 +86,11 @@ public class PaddleGame {
 	 */
 	private static void processInput() {
 		if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){//if left was pressed
-			Level.movePaddle(-1);//move left
+			myLevel.movePaddle(-1);//move left
 			return;
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_D)||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){//else if right was pressed
-			Level.movePaddle(1);//move right
+			myLevel.movePaddle(1);//move right
 			return;
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){

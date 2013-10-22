@@ -1,10 +1,10 @@
 package dev.game.project;
 
 public abstract class GameObject {
-	float coordX;//Variable used to store onscreen location in X
-	float coordY;//Variable used to store onscreen location in Y
-	float dimX;//Variable used to store the size of the game object in X
-	float dimY;//Variable used to store the size of the game object in Y
+	protected float coordX;//Variable used to store onscreen location in X
+	protected float coordY;//Variable used to store onscreen location in Y
+	protected float dimX;//Variable used to store the size of the game object in X
+	protected float dimY;//Variable used to store the size of the game object in Y
 	public abstract void update();//function used to track game changes frame by frame
 	public abstract void render();
 

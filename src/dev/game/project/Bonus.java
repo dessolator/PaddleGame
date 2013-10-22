@@ -16,7 +16,7 @@ public class Bonus extends Collidable implements Movable{
 
 	public static void drop(Brick b) {
 		if(bonusesDropped<MAX_BONUSES_PER_LEVEL){
-			PaddleGame.getLevel().addBonus(new Bonus(BonusType.PADDLE_WIDEN,b.coordX,b.coordY));
+			PaddleGame.getLevel().addBonus(new Bonus(BonusType.random(),b.coordX,b.coordY));
 			bonusesDropped++;
 		}
 		
@@ -27,7 +27,6 @@ public class Bonus extends Collidable implements Movable{
 		coordY-=4;
 		if(coordY<0){
 			PaddleGame.getLevel().removeBonus(this);
-			System.out.println("droppedBonus");
 		}
 		
 	}
@@ -39,31 +38,36 @@ public class Bonus extends Collidable implements Movable{
 			switch (myType){
 				case PADDLE_WIDEN:
 					PaddleGame.getLevel().getPaddle().widen();
+					System.out.println("picked up widen");
 					break;
 				case BALL_SPEED:
 					PaddleGame.getLevel().getBall().speedUp();
+					System.out.println("picked up ball speed");
 					break;
 				case PADDLE_INVERT:
 					PaddleGame.getLevel().getPaddle().invert();
+					System.out.println("picked up invert");
 					break;
 				case PADDLE_SPEED:
 					PaddleGame.getLevel().getPaddle().speedUp();
+					System.out.println("picked up paddle speed");
 					break;
 				case PADDLE_NARROW:
 					PaddleGame.getLevel().getPaddle().narrow();
+					System.out.println("picked up narrow");
 					break;
 				case BALL_DAMAGE:
 					PaddleGame.getLevel().getBall().increaseDamage();
+					System.out.println("picked up ball damage");
 					break;
 				case MULTI_BALL:
 					PaddleGame.getLevel().spawnBall();
+					System.out.println("picked up multi ball");
 					break;
 				default:
 					break;
 									
 			}
-			
-			System.out.println("picked up bonus");
 		}
 		
 	}
