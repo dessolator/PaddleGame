@@ -2,8 +2,12 @@ package dev.game.project;
 
 public enum BonusType {
 	BALL_DAMAGE,PADDLE_SPEED,PADDLE_WIDEN,MULTI_BALL,
-	BALL_SPEED,PADDLE_NARROW,PADDLE_INVERT;
+	BALL_SPEED,PADDLE_NARROW,PADDLE_INVERT;//enum for bonuses
 
+	/**
+	 * Function used to randomize the bonuses.
+	 * @return The type of bonus to be dropped.
+	 */
 	public static BonusType random() {
 		double factor=Math.random();
 		if(factor>0.86)

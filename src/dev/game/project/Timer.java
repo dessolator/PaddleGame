@@ -3,6 +3,7 @@ package dev.game.project;
 import java.util.ArrayList;
 
 public class Timer {
+	private static final int BONUS_DURATION = 10;
 	private static ArrayList<Timer> timers;
 	long time;
 	BonusType bt;
@@ -21,10 +22,10 @@ public class Timer {
 	public boolean isPassed(){
 		return (System.nanoTime()>time?true:false);
 	}
-	public static ArrayList<Timer> getTimers() {
+	private static ArrayList<Timer> getTimers() {
 		return timers;
 	}
-	public static void removeTypedTimer(BonusType bonus) { 
+	private static void removeTypedTimer(BonusType bonus) { 
 		for (int i=0; i<Timer.getTimers().size();i++) {
 			if(Timer.getTimers().get(i).bt==bonus){
 				Timer.getTimers().remove(i);
@@ -74,6 +75,11 @@ public class Timer {
 				
 			}
 		}
+	}
+	public static void reset(BonusType bonus) {
+		Timer.removeTypedTimer(bonus);
+		timers.add(new Timer(BONUS_DURATION,bonus));
+		
 	}
 	
 }

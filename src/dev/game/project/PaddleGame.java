@@ -2,30 +2,28 @@ package dev.game.project;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
+
+import java.util.ArrayList;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 public class PaddleGame {
 	private static boolean voodooMode=false;//@credit Jovan Davidovic\
-	private static long voodooTriggered=0l;
-	
-	private static Level myLevel;
-	
+	private static long voodooTriggered=0l;//field uset to keep track of when voodooMode was last triggered
+	private static Level myLevel;//Level field containing all the game objects
 	private static boolean terminate=false;//variable used to check if the user hit ESCAPE
+	private static int currentLevel=1;
 	static{
-		/*
-		 * Add Boundaries to blocks to check for collisions
-		 */
 		
-		myLevel=new Level(1);
-
+		myLevel=new Level(currentLevel);
 		
 	}
 	
 	/**
 	 * The main game loop takes care of pretty much everything,
 	 * from user input to collisions.
-	 * @param Parameter for voodooMode. If set to true, the game objects will render in a different color each frame.
+	 * @param voodoo Parameter for voodooMode. If set to true, the game objects will render in a different color each frame.
 	 */
 	public static void startGame(boolean voodoo) {
 		setVoodooMode(voodoo);//read voodooMode param
@@ -33,8 +31,8 @@ public class PaddleGame {
 			glClear(GL_COLOR_BUFFER_BIT);//for each frame clear the screen
 			//displayFPS();//print framerate for debug purposes
 			processInput();//read player input
-			myLevel.update();
-			myLevel.render();
+			myLevel.update();//update the level
+			myLevel.render();//then render it
 			collisionPhysics();//do the collision physics and brick drawing
 			Display.sync(60);//force the framerate to 60 FPS or thereabouts
 			Display.update();//refresh the display
@@ -63,16 +61,17 @@ public class PaddleGame {
 	 * Function used to check for collisions and draw blocks.
 	 */
 	private static void collisionPhysics() {
-		for (int i=0; i<myLevel.getBlocks().size();i++) {//for each gameBlock
+		ArrayList<Collidable> temp = myLevel.getBlocks();//place blocks in temporary var, not to have to get them every time
+		for (int i=0; i<temp.size();i++) {//for each gameBlock
 			
-			Collidable o=myLevel.getBlocks().get(i);//store current element in variable to avoid parsing array
+			Collidable o=temp.get(i);//store current element in variable to avoid parsing array
 			o.update();//update the state of all gameBlocks (currently does nothing
 			o.render();//draw the bricks and paddle		
 			
 			if(GamePhysics.hit(myLevel.getBall(), o)) {//if a collision did occur
 				o.collided(myLevel.getBall());//trigger collision function
 				if(o.destroyed){//check if the object was destroyed
-					myLevel.getBlocks().remove(i);//if so remove it
+					temp.remove(i);//if so remove it
 					i--;//and correct iterator
 				}
 				
@@ -95,14 +94,14 @@ public class PaddleGame {
 			terminate=true;//set terminate flag
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_V)){
-			if(!isVoodooMode()&&(((long)System.nanoTime()-voodooTriggered)>250000000)){
+			if(!isVoodooMode()&&(((long)System.nanoTime()-voodooTriggered)>250000000)){//if voodooMode is off and the break time passed
 				voodooTriggered=System.nanoTime();
-				setVoodooMode(true);
+				setVoodooMode(true);//turn on voodooMode
 			}
 			else{
-				if(isVoodooMode()&&(((long)System.nanoTime()-voodooTriggered)>250000000)){
+				if(isVoodooMode()&&(((long)System.nanoTime()-voodooTriggered)>250000000)){//if voodooMode is on and break time passed
 					voodooTriggered=System.nanoTime();
-					setVoodooMode(false);
+					setVoodooMode(false);//turn voodooMode off
 				}
 			}
 		}
@@ -117,13 +116,15 @@ public class PaddleGame {
 		return myLevel;
 	}
 	/**
-	 * @return the voodooMode
+	 * Getter for voodooMode.
+	 * @return is voodooMode turned on.
 	 */
 	public static boolean isVoodooMode() {
 		return voodooMode;
 	}
 	/**
-	 * @param voodooMode the voodooMode to set
+	 * Setter for voodooMode.
+	 * @param voodooMode  value to set.
 	 */
 	public static void setVoodooMode(boolean voodooMode) {
 		PaddleGame.voodooMode = voodooMode;

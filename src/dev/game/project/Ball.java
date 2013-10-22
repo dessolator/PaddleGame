@@ -54,8 +54,7 @@ public class Ball extends GameObject implements Movable {
 			speedY*=2;
 			
 		}
-		Timer.removeTypedTimer(BonusType.BALL_SPEED);
-		Timer.getTimers().add(new Timer(10,BonusType.BALL_SPEED));
+		Timer.reset(BonusType.BALL_SPEED);
 		
 	}
 
@@ -64,8 +63,8 @@ public class Ball extends GameObject implements Movable {
 		if(getDamage()==1){
 			setDamage(getDamage() * 3);
 		}
-		Timer.removeTypedTimer(BonusType.BALL_DAMAGE);
-		Timer.getTimers().add(new Timer(10,BonusType.BALL_DAMAGE));
+		Timer.reset(BonusType.BALL_DAMAGE);
+
 		
 	}
 
