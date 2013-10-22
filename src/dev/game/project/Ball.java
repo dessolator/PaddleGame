@@ -9,6 +9,8 @@ public class Ball extends GameObject implements Movable {
 	private float speedY=8f;//vertical ball speed
 	private boolean flipped=false;
 	private boolean spedUp=false;
+	private int damage=1;
+	private int damageThisFrame=getDamage();
 	
 	public Ball( float cordX, float cordY, float radius) {
 		this.coordX = cordX;
@@ -21,7 +23,10 @@ public class Ball extends GameObject implements Movable {
 	
 	@Override
 	public void update() {
-		setFlipped(false);
+		if(flipped){
+			damageThisFrame=getDamage();
+			setFlipped(false);
+		}
 		move(0);//each frame, move the ball
 	}
 	/**
@@ -56,7 +61,11 @@ public class Ball extends GameObject implements Movable {
 
 
 	public void increaseDamage() {
-		// TODO Auto-generated method stub
+		if(getDamage()==1){
+			setDamage(getDamage() * 3);
+		}
+		Timer.removeTypedTimer(BonusType.BALL_DAMAGE);
+		Timer.getTimers().add(new Timer(10,BonusType.BALL_DAMAGE));
 		
 	}
 
@@ -128,12 +137,47 @@ public class Ball extends GameObject implements Movable {
 
 
 	public void reset() {
+		setDamage(1);
+		setDamageThisFrame(getDamage());
 		speedX=0f;
 		speedY=8f;
 		spedUp=false;
 		coordX=PaddleGame.getLevel().getPaddle().coordX;
 		coordY=PaddleGame.getLevel().getPaddle().coordY+PaddleGame.getLevel().getPaddle().dimY/2+dimX/2+3;
 		
+	}
+
+
+	/**
+	 * @return the damageThisFrame
+	 */
+	public int getDamageThisFrame() {
+		return damageThisFrame;
+	}
+
+
+	/**
+	 * @param damageThisFrame the damageThisFrame to set
+	 */
+	public int setDamageThisFrame(int damageThisFrame) {
+		this.damageThisFrame = damageThisFrame;
+		return damageThisFrame;
+	}
+
+
+	/**
+	 * @return the damage
+	 */
+	public int getDamage() {
+		return damage;
+	}
+
+
+	/**
+	 * @param damage the damage to set
+	 */
+	public void setDamage(int damage) {
+		this.damage = damage;
 	}
 
 }

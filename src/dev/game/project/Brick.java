@@ -21,6 +21,10 @@ public class Brick extends Collidable {
 	@Override
 	public void collided(GameObject o) {
 		if(!((Ball)o).isFlipped()){
+			int tempHP=hitPoints;
+			hitPoints-=((Ball)o).getDamageThisFrame();
+			((Ball)o).setDamageThisFrame(((Ball)o).getDamageThisFrame()-tempHP);
+			if(((Ball)o).getDamageThisFrame()<=0){//TODO could create potential issue when hitting two blocks at the same time
 			((Ball)o).setFlipped(true);
 			if(((o.coordX>=(coordX-(dimX/2+o.dimX/2)))&&(o.coordX<=(coordX+(dimX/2+o.dimX/2))))&&
 			(((o.coordY<=(coordY-dimY/2))&&(o.coordY>=(coordY-(dimY/2+o.dimX/2)))) ||
@@ -31,8 +35,8 @@ public class Brick extends Collidable {
 			}
 			else{
 				((Ball)o).setSpeedX(((Ball)o).getSpeedX() * -1);
-			}
-			if(--hitPoints==0){
+			}}
+			if(hitPoints<=0){
 				destroyed=true;
 				if(droppsBonus){
 					Bonus.drop(this);
