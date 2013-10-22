@@ -10,12 +10,16 @@ public class Level {
 	int num = 17;//variable used for brick generation
 	float coordx = Display.getWidth()/16;//first brick coordinate
 	float coordy = (Display.getHeight()*(5.5f))/6;//first brick coordinate
-	private PlayerPaddle myPaddle= new PlayerPaddle(Display.getWidth()/2,Display.getHeight()/12,Display.getWidth()/8,Display.getHeight()/30);//create player paddle
-	private Ball myBall = new Ball(Display.getWidth()/2,Display.getHeight()/6,Display.getHeight()/60);//create the ball
+	private PlayerPaddle myPaddle;
+	private ArrayList<Ball> myBalls;
+	
 
 	public Level(int levelNumber) {
+		setMyBalls(new ArrayList<Ball>());
 		blocks=new ArrayList<Collidable>();//init blocks
 		bonuses=new ArrayList<Bonus>();//init bonuses
+		myPaddle= new PlayerPaddle(Display.getWidth()/2,Display.getHeight()/12,Display.getWidth()/8,Display.getHeight()/30);//create player paddle
+		getMyBalls().add(new Ball(Display.getWidth()/2,Display.getHeight()/6,Display.getHeight()/60));//create the ball
 		for (int j = 0; j<4; j++) {//change row to add bricks to
 			for (int i = 0; i < num; i++) {//add bricks to row
 				blocks.add(new Brick(coordx,coordy,Display.getWidth()/20,Display.getHeight()/30,(j+1),(Math.random()<0.05?true:false)));
@@ -79,7 +83,9 @@ public class Level {
 	 * Function used to update the level.
 	 */
 	public void update() {
-		myBall.update();//update the ball array
+		for(Ball b:getMyBalls()){
+			b.update();//update the ball array
+		}
 		Timer.update();//update the timer for bonuses
 		for (int i=0; i<bonuses.size();i++) {
 			bonuses.get(i).update();//update the bonuses
@@ -94,7 +100,9 @@ public class Level {
 	 * Function used to render the level.
 	 */
 	public void render() {
-		myBall.render();//render the ball
+		for(Ball b:getMyBalls()){
+			b.render();//render the ball
+		}
 		for (int i=0; i<bonuses.size();i++) {
 			bonuses.get(i).render();//render the bonuses
 		}
@@ -107,8 +115,8 @@ public class Level {
 	 * Getter for the ball.
 	 * @return the Ball.
 	 */
-	public Ball getBall() {
-		return myBall;
+	public ArrayList<Ball> getBalls() {
+		return getMyBalls();
 	}
 
 
@@ -127,8 +135,36 @@ public class Level {
 	 * Function used to trigger the multi ball bonu
 	 */
 	public void spawnBall() {
-		// TODO Auto-generated method stub
+		Ball temp;
+		if(!myBalls.isEmpty()){
+			temp=new Ball(getMyBalls().get(0).coordX, getMyBalls().get(0).coordX, getMyBalls().get(0).getRadius());
+			temp.setSpeedX((getMyBalls().get(0).getSpeedX())-2f);
+			getMyBalls().get(0).setSpeedX((getMyBalls().get(0).getSpeedX())+2f);
+		}
+		else
+		{
+			temp=new Ball(Display.getWidth()/2,Display.getHeight()/6,Display.getHeight()/60);
+		}
+		getMyBalls().add(temp);
 		
+	}
+
+
+
+	/**
+	 * @return the myBalls
+	 */
+	public ArrayList<Ball> getMyBalls() {
+		return myBalls;
+	}
+
+
+
+	/**
+	 * @param myBalls the myBalls to set
+	 */
+	public void setMyBalls(ArrayList<Ball> myBalls) {
+		this.myBalls = myBalls;
 	}
 
 }

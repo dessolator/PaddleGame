@@ -41,7 +41,7 @@ public class Bonus extends Collidable implements Movable{
 					System.out.println("picked up widen");
 					break;
 				case BALL_SPEED:
-					PaddleGame.getLevel().getBall().speedUp();
+					Ball.speedUp();
 					System.out.println("picked up ball speed");
 					break;
 				case PADDLE_INVERT:
@@ -57,7 +57,7 @@ public class Bonus extends Collidable implements Movable{
 					System.out.println("picked up narrow");
 					break;
 				case BALL_DAMAGE:
-					PaddleGame.getLevel().getBall().increaseDamage();
+					Ball.increaseDamage();
 					System.out.println("picked up ball damage");
 					break;
 				case MULTI_BALL:

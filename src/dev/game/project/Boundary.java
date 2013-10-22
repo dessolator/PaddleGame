@@ -40,10 +40,11 @@ public class Boundary extends Collidable{
 			((Ball)o).setSpeedX(((Ball)o).getSpeedX() * -1);//bounce the ball off
 			break;
 		case TOP:
-			((Ball)o).setSpeedY(((Ball)o).getSpeedY() * -1);// bounce the ball back down
+			((Ball)o).setDirection(((Ball)o).getDirection() * -1);// bounce the ball back down
 			break;
 		case BOTTOM:
-			((Ball)o).reset();//reset the ball
+			PaddleGame.getLevel().getMyBalls().remove((Ball)o);
+			Ball.reset();//reset the ball
 			break;
 		default:
 			//BROKEN

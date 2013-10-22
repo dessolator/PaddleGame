@@ -68,14 +68,17 @@ public class PaddleGame {
 			o.update();//update the state of all gameBlocks (currently does nothing
 			o.render();//draw the bricks and paddle		
 			
-			if(GamePhysics.hit(myLevel.getBall(), o)) {//if a collision did occur
-				o.collided(myLevel.getBall());//trigger collision function
-				if(o.destroyed){//check if the object was destroyed
-					temp.remove(i);//if so remove it
-					i--;//and correct iterator
+			ArrayList<Ball> tempBallArray=myLevel.getBalls();
+			for(Ball b:tempBallArray){
+				if(GamePhysics.hit(b, o)) {//if a collision did occur
+					o.collided(b);//trigger collision function
+					if(o.destroyed){//check if the object was destroyed
+						temp.remove(i);//if so remove it
+						i--;//and correct iterator
+					}
+					
+					
 				}
-				
-				
 			}
 		}
 		

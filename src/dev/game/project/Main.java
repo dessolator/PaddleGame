@@ -11,10 +11,13 @@ public class Main {
 	
 	/*
 	 * TODO TEXTURES
-	 * TODO MULTI_BALL
-	 * TODO CODE COMMENTS
+	 * TODO SQUISH BUG REAPPEARED WHEN IMPLEMENTING MULTIBALL
+	 * TODO COMMENT TIMER
+	 * TODO COMMENT BRICK
+	 * TODO COMMENT BONUS
+	 * TODO COMMENT BALL
 	 * TODO GAME MENU
-	 * TODO LEVEL GENERATION
+	 * TODO LEVEL GENERATION AND PROGRESSION
 	 * TODO SCORING
 	 */
 	
@@ -23,9 +26,9 @@ public class Main {
 	
 	
 	public static void main(String[] args) {
-		initEngine();//start the engine
-		PaddleGame.startGame(false);//start the game with voodooMode on
-		killEngine();//kill the engine
+		initEngine();//start the engine.
+		PaddleGame.startGame(false);//start the game with voodooMode off.
+		killEngine();//kill the engine.
 	}
 	
 	
@@ -42,7 +45,7 @@ public class Main {
 	private static void initEngine() {
 		try {			
 			DisplayMode[] modes = Display.getAvailableDisplayModes();
-//			for (int i=0;i<modes.length;i++) {//loop to print out all the possible fullscreen display modes
+//			for (int i=0;i<modes.length;i++) {//loop to print out all the possible fullscreen display modes.
 //			    DisplayMode current = modes[i];
 //			    if(modes[i].isFullscreenCapable())
 //			    System.out.println(i+":"+current.getWidth() + "x" + current.getHeight() + "x" +
@@ -50,51 +53,51 @@ public class Main {
 //			}
 			
 			/*
-			 * Display initialization
+			 * Display initialization.
 			 */
-			Display.setDisplayMode(modes[75]);//set to my native resolution
-			Display.setFullscreen(true);//set to fullscreen
-			Display.create();//init the Display object
-			Display.setVSyncEnabled(true);//enable Vsync to avoid visual glitches
+			Display.setDisplayMode(modes[75]);//set to my native resolution.
+			Display.setFullscreen(true);//set to fullscreen.
+			Display.create();//init the Display object.
+			Display.setVSyncEnabled(true);//enable Vsync to avoid visual glitches.
 			
 			/*
-			 * GL initialization
+			 * GL initialization.
 			 */
-			glMatrixMode(GL_PROJECTION);//choose the GL_PROJECTION matrix
-			glLoadIdentity();//and clear it
-			glOrtho(0,Display.getWidth(),0,Display.getHeight(),-1,1);//set the view to the initial plane
-			glMatrixMode(GL_MODELVIEW);//choose the GL_MODELVIEW matrix
-			glClearColor(0,0,0,1);//set background to black
-			glDisable(GL_DEPTH_TEST);//disable GL_DEPTH_TEST because the z axis is unused
-			glClear(GL_COLOR_BUFFER_BIT);//wipe random data from color buffer
-			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan
-			glLoadIdentity();//clear GL_MODELVIEW matrix
+			glMatrixMode(GL_PROJECTION);//choose the GL_PROJECTION matrix,
+			glLoadIdentity();//and clear it.
+			glOrtho(0,Display.getWidth(),0,Display.getHeight(),-1,1);//set the view to the initial plane.
+			glMatrixMode(GL_MODELVIEW);//choose the GL_MODELVIEW matrix.
+			glClearColor(0,0,0,1);//set background to black.
+			glDisable(GL_DEPTH_TEST);//disable GL_DEPTH_TEST because the z axis is unused.
+			glClear(GL_COLOR_BUFFER_BIT);//wipe random data from color buffer.
+			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
+			glLoadIdentity();//clear GL_MODELVIEW matrix.
 			
 			/*
-			 * Keyboard initialization
+			 * Keyboard initialization.
 			 */
-			Keyboard.create();//init Keyboard object
+			Keyboard.create();//init Keyboard object.
 			
 			/*
-			 * Mouse initialization
+			 * Mouse initialization.
 			 */
-			Mouse.create();//init Mouse object
-			Mouse.setGrabbed(true);//hide mouse pointer
+			Mouse.create();//init Mouse object.
+			Mouse.setGrabbed(true);//hide mouse pointer.
 			
 		} catch (LWJGLException e) {
 			
-			e.printStackTrace();//if GLinit went south, tell me where
+			e.printStackTrace();//if GLinit went south, tell me where.
 			
 		}		
 	}
 	/**
-	 * Function used for post-game cleanup. Simply destroys the display
+	 * Function used for post-game cleanup. Simply destroys the display.
 	 */
 	private static void killEngine() {
 		
-		Display.destroy();//destroy Display object
-		Keyboard.destroy();//destroy Keyboard object
-		Mouse.destroy();//destroy Mouse object
+		Display.destroy();//destroy Display object.
+		Keyboard.destroy();//destroy Keyboard object.
+		Mouse.destroy();//destroy Mouse object.
 		
 	}
 

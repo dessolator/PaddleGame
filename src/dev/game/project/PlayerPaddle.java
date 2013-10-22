@@ -52,7 +52,7 @@ public class PlayerPaddle extends Collidable implements Movable{
 	 */
 	@Override
 	public void collided(GameObject o) {
-		((Ball)o).setSpeedY(((Ball)o).getSpeedY() * ((coordY-o.coordY<0)?-1:1));//bounce the ball back,
+		((Ball)o).setDirection((((Ball)o).getDirection() * ((coordY-o.coordY<0)?-1:1)));//bounce the ball back,
 		((Ball)o).setSpeedX((float) (((Ball)o).getSpeedX() + (o.coordX-coordX)*0.8));//taking the angle into account.
 		if(((Ball)o).getSpeedX()>Ball.MAX_SPEED){//make sure ball speed doesn't exceed max,
 			((Ball)o).setSpeedX(Ball.MAX_SPEED);//if it does, set speed to max.

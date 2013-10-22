@@ -45,14 +45,14 @@ public class Timer {
 					PaddleGame.getLevel().getPaddle().setWidened(false);
 					break;
 				case BALL_DAMAGE:
-					if(PaddleGame.getLevel().getBall().getDamage()!=1){
-						PaddleGame.getLevel().getBall().setDamage(1);
+					if(Ball.getDamage()!=1){
+						Ball.setDamage(1);
 					}
 					break;
 				case BALL_SPEED:
-					if(PaddleGame.getLevel().getBall().isSpedUp()){
-						PaddleGame.getLevel().getBall().setSpedUp(false);
-						PaddleGame.getLevel().getBall().setSpeedY(PaddleGame.getLevel().getBall().getSpeedY()/2);
+					if(Ball.isSpedUp()){
+						Ball.setSpedUp(false);
+						Ball.setSpeedY(Ball.getSpeedY()/2);
 					}
 					break;
 				case MULTI_BALL:

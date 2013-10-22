@@ -30,7 +30,7 @@ public class Brick extends Collidable {
 			(((o.coordY<=(coordY-dimY/2))&&(o.coordY>=(coordY-(dimY/2+o.dimX/2)))) ||
 			((o.coordY<=(coordY+(dimY/2+o.dimX/2)))&&(o.coordY>=(coordY+dimY/2)))))
 			{
-				((Ball)o).setSpeedY(((Ball)o).getSpeedY() * -1);//if the ball hits something, bounce it back
+				((Ball)o).setDirection(((Ball)o).getDirection() * -1);//if the ball hits something, bounce it back
 				
 			}
 			else{
