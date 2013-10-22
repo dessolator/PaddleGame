@@ -6,8 +6,8 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 public class PaddleGame {
-	static boolean voodooMode=false;//@credit Jovan Davidovic\
-	
+	private static boolean voodooMode=false;//@credit Jovan Davidovic\
+	private static long voodooTriggered=0l;
 	
 	private static Level myLevel;
 	
@@ -28,7 +28,7 @@ public class PaddleGame {
 	 * @param Parameter for voodooMode. If set to true, the game objects will render in a different color each frame.
 	 */
 	public static void startGame(boolean voodoo) {
-		voodooMode=voodoo;//read voodooMode param
+		setVoodooMode(voodoo);//read voodooMode param
 		while((!Display.isCloseRequested())&&!terminate) {//if ESCAPE hasn't been hit and the display hasn't been closed otherwise
 			glClear(GL_COLOR_BUFFER_BIT);//for each frame clear the screen
 			//displayFPS();//print framerate for debug purposes
@@ -87,15 +87,24 @@ public class PaddleGame {
 	private static void processInput() {
 		if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){//if left was pressed
 			myLevel.movePaddle(-1);//move left
-			return;
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_D)||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){//else if right was pressed
 			myLevel.movePaddle(1);//move right
-			return;
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
 			terminate=true;//set terminate flag
-			return;
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_V)){
+			if(!isVoodooMode()&&(((long)System.nanoTime()-voodooTriggered)>250000000)){
+				voodooTriggered=System.nanoTime();
+				setVoodooMode(true);
+			}
+			else{
+				if(isVoodooMode()&&(((long)System.nanoTime()-voodooTriggered)>250000000)){
+					voodooTriggered=System.nanoTime();
+					setVoodooMode(false);
+				}
+			}
 		}
 		
 	}
@@ -106,6 +115,18 @@ public class PaddleGame {
 
 	public static Level getLevel() {
 		return myLevel;
+	}
+	/**
+	 * @return the voodooMode
+	 */
+	public static boolean isVoodooMode() {
+		return voodooMode;
+	}
+	/**
+	 * @param voodooMode the voodooMode to set
+	 */
+	public static void setVoodooMode(boolean voodooMode) {
+		PaddleGame.voodooMode = voodooMode;
 	}
 	
 }

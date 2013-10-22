@@ -49,7 +49,7 @@ public class PlayerPaddle extends Collidable implements Movable{
 	}
 	@Override
 	public void render() {
-		if(!PaddleGame.voodooMode){
+		if(!PaddleGame.isVoodooMode()){
 			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan
 		}
 		DrawObject.drawRect(coordX, coordY, dimX, dimY);

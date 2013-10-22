@@ -24,7 +24,7 @@ public class Brick extends Collidable {
 			int tempHP=hitPoints;
 			hitPoints-=((Ball)o).getDamageThisFrame();
 			((Ball)o).setDamageThisFrame(((Ball)o).getDamageThisFrame()-tempHP);
-			if(((Ball)o).getDamageThisFrame()<=0){//TODO could create potential issue when hitting two blocks at the same time
+			if(((Ball)o).getDamageThisFrame()<=0){
 			((Ball)o).setFlipped(true);
 			if(((o.coordX>=(coordX-(dimX/2+o.dimX/2)))&&(o.coordX<=(coordX+(dimX/2+o.dimX/2))))&&
 			(((o.coordY<=(coordY-dimY/2))&&(o.coordY>=(coordY-(dimY/2+o.dimX/2)))) ||
@@ -47,7 +47,7 @@ public class Brick extends Collidable {
 	}
 	@Override
 	public void render() {
-		if(!PaddleGame.voodooMode){
+		if(!PaddleGame.isVoodooMode()){
 			switch(hitPoints){
 			case 1:
 				glColor3f(1f, 1f, 0f);//set drawing color to yellow

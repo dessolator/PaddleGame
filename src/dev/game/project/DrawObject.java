@@ -18,7 +18,7 @@ public class DrawObject {
 		 * values adjusted so that coordinates are now,
 		 * at the center of the rectangle
 		 */
-		if(PaddleGame.voodooMode){
+		if(PaddleGame.isVoodooMode()){
 		float r=(float)Math.random();
 		float g=(float)Math.random();
 		float b=(float)Math.random();

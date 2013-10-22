@@ -40,7 +40,7 @@ public class Ball extends GameObject implements Movable {
 
 	@Override
 	public void render() {
-		if(!PaddleGame.voodooMode){
+		if(!PaddleGame.isVoodooMode()){
 			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan
 		}
 		DrawObject.drawCirclef(coordX,coordY, radius);//and draw it
