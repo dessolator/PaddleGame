@@ -38,31 +38,24 @@ public class Bonus extends Collidable implements Movable{
 			switch (myType){
 				case PADDLE_WIDEN:
 					PaddleGame.getLevel().getPaddle().widen();
-					System.out.println("picked up widen");
 					break;
 				case BALL_SPEED:
 					Ball.speedUp();
-					System.out.println("picked up ball speed");
 					break;
 				case PADDLE_INVERT:
 					PaddleGame.getLevel().getPaddle().invert();
-					System.out.println("picked up invert");
 					break;
 				case PADDLE_SPEED:
 					PaddleGame.getLevel().getPaddle().speedUp();
-					System.out.println("picked up paddle speed");
 					break;
 				case PADDLE_NARROW:
 					PaddleGame.getLevel().getPaddle().narrow();
-					System.out.println("picked up narrow");
 					break;
 				case BALL_DAMAGE:
 					Ball.increaseDamage();
-					System.out.println("picked up ball damage");
 					break;
 				case MULTI_BALL:
 					PaddleGame.getLevel().spawnBall();
-					System.out.println("picked up multi ball");
 					break;
 				default:
 					break;

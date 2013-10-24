@@ -6,74 +6,95 @@ import java.util.ArrayList;
 
 public class Ball extends GameObject implements Movable {
 	public static final float MAX_SPEED = 8f;//constant used to keep track of the maximum ball speed
-	private float radius;//radius of the ball
-	private float speedX=0.0f;//horizontal ball speed
-	private static float speedY=8f;//vertical ball speed
-	private boolean flipped=false;
-	private int direction=1;
-	private static boolean spedUp=false;
-	private static int damage=1;
-	private int damageThisFrame=getDamage();
+	private static float radius;//radius of the ball
+	private float speedX=0.0f;//horizontal ball speed individual to all balls
+	private static float speedY=8f;//vertical ball speed common to all balls
+	private boolean flipped=false;//variable used to stop the ball from hitting multiple blocks in a frame
+	private int direction=1;//vertical direction of a ball individual to all balls
+	private static boolean spedUp=false;//flag keeping track if the ball was sped up or not
+	private static int damage=1;//ball damage multiplier
+	private int damageThisFrame=getDamage();//damage the ball can still do in any given frame
 	
+	/**
+	 * The Constructor for the ball.
+	 * @param cordX	The x coordinate of the ball's center.
+	 * @param cordY	The y coordinate of the ball's center.
+	 * @param radius The radius of the ball.
+	 */
 	public Ball( float cordX, float cordY, float radius) {
-		this.coordX = cordX;
-		this.coordY = cordY;
-		this.setRadius(radius);
-		this.dimX=radius*2;
-		this.dimY=radius*2;
+		this.coordX = cordX;//Set coordX to the passed value.
+		this.coordY = cordY;//Set coordY to the passed value.
+		this.setRadius(radius);//Set radius to the passed value.
+		this.dimX=radius*2;//Calculate the x dimension.
+		this.dimY=radius*2;//Calculate the y dimension.
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see dev.game.project.GameObject#update()
+	 */
 	@Override
 	public void update() {
-		if(flipped){
-			damageThisFrame=getDamage();
-			setFlipped(false);
+		if(flipped){//if the ball was flipped,
+			damageThisFrame=getDamage();//reset the frameDamage,
+			setFlipped(false);//and "unflip" the ball
 		}
-		move(0);//each frame, move the ball
+		move(0);//move the ball.
 	}
-	/**
-	 * Function used to move the ball in a preset direction.
+	
+	/* (non-Javadoc)
+	 * @see dev.game.project.Movable#move(int)
 	 */
+	@Override
 	public void move(int i) {
 		coordX+=getSpeedX();//increase the x position
 		coordY+=(getSpeedY()*getDirection());//increase the y position
 	}
 
 
+	/* (non-Javadoc)
+	 * @see dev.game.project.GameObject#render()
+	 */
 	@Override
 	public void render() {
-		if(!PaddleGame.isVoodooMode()){
-			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan
+		if(!PaddleGame.isVoodooMode()){//if voodooMode is off,
+			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
 		}
-		DrawObject.drawCirclef(coordX,coordY, getRadius());//and draw it
+		DrawObject.drawCirclef(coordX,coordY, getRadius());//draw the ball.
 		
 	}
 
 
+	/**
+	 * Function used to trigger the ball speed bonus.
+	 */
 	public static void speedUp() {
-		if(!isSpedUp()){
-			setSpedUp(true);
-			speedY*=1.5f;
+		if(!isSpedUp()){//if ball was not yet sped up,
+			setSpedUp(true);//set the flag,
+			speedY*=1.5f;//and speed it up.
 			
 		}
-		Timer.reset(BonusType.BALL_SPEED);
+		Timer.reset(BonusType.BALL_SPEED);//if the ball was already sped up the timer needs to be reset, if not make a new one.
 		
 	}
 
 
+	/**
+	 * Function used to trigger the ball damage bonus.
+	 */
 	public static void increaseDamage() {
-		if(getDamage()==1){
-			setDamage(getDamage() * 3);
+		if(getDamage()==1){//if the ball damage was not yet increased,
+			setDamage(getDamage() * 3);//increase the damage.
 		}
-		Timer.reset(BonusType.BALL_DAMAGE);
+		Timer.reset(BonusType.BALL_DAMAGE);//if the ball's damage was already increased the timer needs to be reset, if not make a new one.
 
 		
 	}
 
 
 	/**
-	 * @return the speedX
+	 * Getter for speedX.
+	 * @return The value of speedX.
 	 */
 	public float getSpeedX() {
 		return speedX;
@@ -81,7 +102,8 @@ public class Ball extends GameObject implements Movable {
 
 
 	/**
-	 * @param speedX the speedX to set
+	 * Setter for speedX.
+	 * @param speedX The value of speedX to set.
 	 */
 	public void setSpeedX(float speedX) {
 		this.speedX = speedX;
@@ -89,7 +111,8 @@ public class Ball extends GameObject implements Movable {
 
 
 	/**
-	 * @return the speedY
+	 * Getter for speedY.
+	 * @return The value of speedY.
 	 */
 	public static float getSpeedY() {
 		return speedY;
@@ -97,7 +120,8 @@ public class Ball extends GameObject implements Movable {
 
 
 	/**
-	 * @param speedY the speedY to set
+	 * Setter for speedY.
+	 * @param speedY The value of speedY to set.
 	 */
 	public static void setSpeedY(float speedY) {
 		Ball.speedY = speedY;
@@ -105,7 +129,8 @@ public class Ball extends GameObject implements Movable {
 
 
 	/**
-	 * @return the flipped
+	 * Getter for flipped.
+	 * @return The value of flipped.
 	 */
 	public boolean isFlipped() {
 		return flipped;
@@ -113,7 +138,8 @@ public class Ball extends GameObject implements Movable {
 
 
 	/**
-	 * @param flipped the flipped to set
+	 * Setter for flipped.
+	 * @param flipped The value of flipped to set.
 	 */
 	public void setFlipped(boolean flipped) {
 		this.flipped = flipped;
@@ -121,7 +147,8 @@ public class Ball extends GameObject implements Movable {
 
 
 	/**
-	 * @return the spedUp
+	 * Getter for spedUp.
+	 * @return The value of spedUp.
 	 */
 	public static boolean isSpedUp() {
 		return spedUp;
@@ -129,7 +156,8 @@ public class Ball extends GameObject implements Movable {
 
 
 	/**
-	 * @param spedUp the spedUp to set
+	 * Setter for spedUp.
+	 * @param spedUp The value of spedUp to set.
 	 */
 	public static void setSpedUp(boolean spedUp) {
 		Ball.spedUp = spedUp;
@@ -138,17 +166,20 @@ public class Ball extends GameObject implements Movable {
 
 
 
+	/**
+	 * Function used to reset the ball.
+	 */
 	public static void reset() {
 		ArrayList<Ball> temp=PaddleGame.getLevel().getBalls();
-		if(temp.isEmpty()){
-			PaddleGame.getLevel().spawnBall();
-			setDamage(1);
-			temp.get(0).setDamageThisFrame(getDamage());
-			temp.get(0).speedX=0f;
-			temp.get(0).setDirection(1);
-			speedY=8f;
-			spedUp=false;
-			temp.get(0).coordX=PaddleGame.getLevel().getPaddle().coordX;
+		if(temp.isEmpty()){//if there are no balls in the level,
+			PaddleGame.getLevel().spawnBall();//make a new one,
+			setDamage(1);//reset the ball damage,
+			temp.get(0).setDamageThisFrame(getDamage());//ball frame damage,
+			temp.get(0).speedX=0f;//ball x speed,
+			temp.get(0).setDirection(1);//ball direction,
+			speedY=8f;//ball y speed,
+			spedUp=false;//ball flags,
+			temp.get(0).coordX=PaddleGame.getLevel().getPaddle().coordX;//and ball coordinates.
 			temp.get(0).coordY=PaddleGame.getLevel().getPaddle().coordY+PaddleGame.getLevel().getPaddle().dimY/2+temp.get(0).dimX/2+3;
 		}
 		
@@ -156,7 +187,8 @@ public class Ball extends GameObject implements Movable {
 
 
 	/**
-	 * @return the damageThisFrame
+	 * Getter for damageThisFrame.
+	 * @return The value of damageThisFrame.
 	 */
 	public int getDamageThisFrame() {
 		return damageThisFrame;
@@ -164,7 +196,8 @@ public class Ball extends GameObject implements Movable {
 
 
 	/**
-	 * @param damageThisFrame the damageThisFrame to set
+	 * Setter for damageThisFrame.
+	 * @param damageThisFrame The value of damageThisFrame to set.
 	 */
 	public int setDamageThisFrame(int damageThisFrame) {
 		this.damageThisFrame = damageThisFrame;
@@ -173,7 +206,8 @@ public class Ball extends GameObject implements Movable {
 
 
 	/**
-	 * @return the damage
+	 * Getter for the damage.
+	 * @return The value of damage.
 	 */
 	public static int getDamage() {
 		return damage;
@@ -181,7 +215,8 @@ public class Ball extends GameObject implements Movable {
 
 
 	/**
-	 * @param damage the damage to set
+	 * Setter for the damage.
+	 * @param damage The value of damage to set.
 	 */
 	public static void setDamage(int damage) {
 		Ball.damage = damage;
@@ -189,7 +224,8 @@ public class Ball extends GameObject implements Movable {
 
 
 	/**
-	 * @return the direction
+	 * Getter for direction.
+	 * @return The value of direction.
 	 */
 	public int getDirection() {
 		return direction;
@@ -197,7 +233,8 @@ public class Ball extends GameObject implements Movable {
 
 
 	/**
-	 * @param direction the direction to set
+	 * Setter for direction.
+	 * @param direction The value of direction to set.
 	 */
 	public void setDirection(int direction) {
 		this.direction = direction;
@@ -205,7 +242,8 @@ public class Ball extends GameObject implements Movable {
 
 
 	/**
-	 * @return the radius
+	 * Getter for the radius.
+	 * @return The value of the radius.
 	 */
 	public float getRadius() {
 		return radius;
@@ -213,10 +251,11 @@ public class Ball extends GameObject implements Movable {
 
 
 	/**
-	 * @param radius the radius to set
+	 * Setter for the radius.
+	 * @param radius The value of the radius to set.
 	 */
 	public void setRadius(float radius) {
-		this.radius = radius;
+		Ball.radius = radius;
 	}
 
 }

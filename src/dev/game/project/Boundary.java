@@ -34,17 +34,17 @@ public class Boundary extends Collidable{
 	public void collided(GameObject o) {
 		switch(side){
 		case LEFT:
-			((Ball)o).setSpeedX(((Ball)o).getSpeedX() * -1);//bounce the ball off
+			((Ball)o).setSpeedX(((Ball)o).getSpeedX() * -1);//bounce the ball off.
 			break;
 		case RIGHT:
-			((Ball)o).setSpeedX(((Ball)o).getSpeedX() * -1);//bounce the ball off
+			((Ball)o).setSpeedX(((Ball)o).getSpeedX() * -1);//bounce the ball off.
 			break;
 		case TOP:
-			((Ball)o).setDirection(((Ball)o).getDirection() * -1);// bounce the ball back down
+			((Ball)o).setDirection(((Ball)o).getDirection() * -1);// bounce the ball back down.
 			break;
 		case BOTTOM:
 			PaddleGame.getLevel().getMyBalls().remove((Ball)o);
-			Ball.reset();//reset the ball
+			Ball.reset();//reset the ball.
 			break;
 		default:
 			//BROKEN
@@ -60,6 +60,6 @@ public class Boundary extends Collidable{
 	 */
 	@Override
 	public void render() {
-		DrawObject.drawRect(coordX, coordY, dimX, dimY);//simply draw the side as it's color is entirely irrelevant, it's always out of view		
+		DrawObject.drawRect(coordX, coordY, dimX, dimY);//simply draw the side as it's color is entirely irrelevant, it's always out of view.	
 	}
 }
