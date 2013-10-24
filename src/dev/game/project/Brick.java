@@ -2,6 +2,13 @@ package dev.game.project;
 
 import static org.lwjgl.opengl.GL11.glColor3f;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.newdawn.slick.opengl.TextureLoader;
+
 public class Brick extends Collidable {
 	private int hitPoints;//field used to keep track of the block's h.
 	private boolean droppsBonus;//field used to check if the block drops a bonus on destruction.
@@ -22,6 +29,28 @@ public class Brick extends Collidable {
 		this.setDimY(dimY);//Set the y dimension to the passed value.
 		this.hitPoints=hitPoints;//Set the hit points to the passed value.
 		this.droppsBonus=droppsBonus;//Set the bonus drop to the passed value.
+		try {
+			switch(hitPoints){
+				case 4:
+					setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/veryHeavyBrick.png"))));
+					break;
+				case 3:
+					setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/heavyBrick.png"))));
+					break;
+				case 2:
+					setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/mediumBrick.png"))));
+					break;
+				case 1:
+					setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/lightBrick.png"))));
+					break;
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	/* (non-Javadoc)
 	 * @see dev.game.project.GameObject#update()
@@ -60,6 +89,30 @@ public class Brick extends Collidable {
 					Bonus.drop(this);//drop a bonus.
 				}
 			}
+			else{
+				try {
+					switch(hitPoints){
+						case 4:
+							setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/veryHeavyBrick.png"))));
+							break;
+						case 3:
+							setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/heavyBrick.png"))));
+							break;
+						case 2:
+							setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/mediumBrick.png"))));
+							break;
+						case 1:
+							setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/lightBrick.png"))));
+							break;
+					}
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		
 	}
@@ -85,7 +138,7 @@ public class Brick extends Collidable {
 				
 			}
 		}
-		DrawObject.drawRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the brick		
+		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the brick		
 	}
 
 

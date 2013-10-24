@@ -2,6 +2,14 @@ package dev.game.project;
 
 import static org.lwjgl.opengl.GL11.glColor3f;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.lwjgl.opengl.Display;
+import org.newdawn.slick.opengl.TextureLoader;
+
 public class Bonus extends Collidable implements Movable{
 	private BonusType myType;
 	private static final int MAX_BONUSES_PER_LEVEL=6;
@@ -11,7 +19,40 @@ public class Bonus extends Collidable implements Movable{
 	public Bonus(BonusType bt, float coordX, float coordY) {
 		this.setCoordX(coordX);
 		this.setCoordY(coordY);
+		this.setDimX(Display.getHeight()/30);
+		this.setDimY(Display.getHeight()/30);
 		myType=bt;
+		try {
+			switch(bt){
+				case PADDLE_NARROW: 
+					setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/paddleNarrowBonus.png"))));
+					break;
+				case BALL_DAMAGE:
+					setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/ballDamageBonus.png"))));
+					break;
+				case BALL_SPEED:
+					setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/ballSpeedBonus.png"))));
+					break;
+				case MULTI_BALL:
+					setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/multiBallBonus.png"))));
+					break;
+				case PADDLE_INVERT:
+					setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/paddleInvertBonus.png"))));
+					break;
+				case PADDLE_SPEED:
+					setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/paddleSpeedBonus.png"))));
+					break;
+				case PADDLE_WIDEN:
+					setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/paddleWidenBonus.png"))));
+					break;
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static void drop(Brick b) {
@@ -75,7 +116,7 @@ public class Bonus extends Collidable implements Movable{
 	@Override
 	public void render() {
 		glColor3f(1f, 0f, 1f);
-		DrawObject.drawRect(getCoordX(), getCoordY(), 10, 10);
+		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());
 				
 	}
 

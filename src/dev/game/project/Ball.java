@@ -2,7 +2,13 @@ package dev.game.project;
 
 import static org.lwjgl.opengl.GL11.glColor3f;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import org.newdawn.slick.opengl.TextureLoader;
 
 public class Ball extends GameObject implements Movable {
 	public static final float MAX_SPEED = 8f;//constant used to keep track of the maximum ball speed
@@ -27,6 +33,15 @@ public class Ball extends GameObject implements Movable {
 		this.setRadius(radius);//Set radius to the passed value.
 		this.setDimX(radius*2);//Calculate the x dimension.
 		this.setDimY(radius*2);//Calculate the y dimension.
+		try {
+			setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/ball.png"))));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -60,8 +75,8 @@ public class Ball extends GameObject implements Movable {
 		if(!PaddleGame.isVoodooMode()){//if voodooMode is off,
 			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
 		}
-		DrawObject.drawCirclef(getCoordX(),getCoordY(), getRadius());//draw the ball.
-		
+		//DrawObject.drawcoloredCirclef(getCoordX(),getCoordY(), getRadius());//draw the ball.
+		DrawObject.drawGameObject(this);
 	}
 
 

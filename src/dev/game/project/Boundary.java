@@ -60,6 +60,6 @@ public class Boundary extends Collidable{
 	 */
 	@Override
 	public void render() {
-		DrawObject.drawRect(getCoordX(), getCoordY(), getDimX(), getDimY());//simply draw the side as it's color is entirely irrelevant, it's always out of view.	
+		//DrawObject.drawRect(getCoordX(), getCoordY(), getDimX(), getDimY());//simply draw the side as it's color is entirely irrelevant, it's always out of view.	
 	}
 }

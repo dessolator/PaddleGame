@@ -2,9 +2,15 @@ package dev.game.project;
 
 import static org.lwjgl.opengl.GL11.glColor3f;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 
 
 import org.lwjgl.opengl.Display;
+import org.newdawn.slick.opengl.TextureLoader;
 
 public class PlayerPaddle extends Collidable implements Movable{
 	
@@ -34,6 +40,15 @@ public class PlayerPaddle extends Collidable implements Movable{
 		this.setCoordY(cordY);//set coordY to passed value.
 		this.setDimX(dimX);//set dimX to passed value.
 		this.setDimY(dimY);//set dimY to passed value.
+		try {
+			setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/playerPaddle.png"))));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	/* (non-Javadoc)
 	 * @see dev.game.project.Movable#move(int)
@@ -71,7 +86,7 @@ public class PlayerPaddle extends Collidable implements Movable{
 		if(!PaddleGame.isVoodooMode()){//if voodooMode is off,
 			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
 		}
-		DrawObject.drawRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the rectangle
+		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the rectangle
 		
 	}
 	/**
