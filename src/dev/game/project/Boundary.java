@@ -20,10 +20,10 @@ public class Boundary extends Collidable{
 	 */
 	public Boundary(float coordX, float coordY, float dimX, float dimY,Sides side) {
 		this.side=side;//set side to passed value.
-		this.coordX = coordX;//set coordX to passed value.
-		this.coordY = coordY;//set coordY to passed value.
-		this.dimX = dimX;//set dimX to passed value.
-		this.dimY = dimY;//set dimY to passed value.
+		this.setCoordX(coordX);//set coordX to passed value.
+		this.setCoordY(coordY);//set coordY to passed value.
+		this.setDimX(dimX);//set dimX to passed value.
+		this.setDimY(dimY);//set dimY to passed value.
 	}
 
 
@@ -60,6 +60,6 @@ public class Boundary extends Collidable{
 	 */
 	@Override
 	public void render() {
-		DrawObject.drawRect(coordX, coordY, dimX, dimY);//simply draw the side as it's color is entirely irrelevant, it's always out of view.	
+		DrawObject.drawRect(getCoordX(), getCoordY(), getDimX(), getDimY());//simply draw the side as it's color is entirely irrelevant, it's always out of view.	
 	}
 }

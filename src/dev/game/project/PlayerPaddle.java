@@ -30,21 +30,21 @@ public class PlayerPaddle extends Collidable implements Movable{
 	 * @param dimY The y dimension of the paddle.
 	 */
 	public PlayerPaddle(float cordX, float cordY, float dimX, float dimY) {
-		this.coordX = cordX;//set coordX to passed value.
-		this.coordY = cordY;//set coordY to passed value.
-		this.dimX = dimX;//set dimX to passed value.
-		this.dimY = dimY;//set dimY to passed value.
+		this.setCoordX(cordX);//set coordX to passed value.
+		this.setCoordY(cordY);//set coordY to passed value.
+		this.setDimX(dimX);//set dimX to passed value.
+		this.setDimY(dimY);//set dimY to passed value.
 	}
 	/* (non-Javadoc)
 	 * @see dev.game.project.Movable#move(int)
 	 */
 	public void move(int i) {
-		coordX+=PADDLE_SPEED*i*getInverted()*getPaddleSpeedUp();//move left or right
-		if(coordX+dimX/2>Display.getWidth()){//check if boundary was hit,
-			coordX=Display.getWidth()-dimX/2;//if it was, stop.
+		setCoordX(getCoordX() + PADDLE_SPEED*i*getInverted()*getPaddleSpeedUp());//move left or right
+		if(getCoordX()+getDimX()/2>Display.getWidth()){//check if boundary was hit,
+			setCoordX(Display.getWidth()-getDimX()/2);//if it was, stop.
 		}
-		if(coordX-dimX/2<0){//check if boundary was hit,
-			coordX=dimX/2;//if it was, stop.
+		if(getCoordX()-getDimX()/2<0){//check if boundary was hit,
+			setCoordX(getDimX()/2);//if it was, stop.
 		}
 	}
 	/* (non-Javadoc)
@@ -52,8 +52,8 @@ public class PlayerPaddle extends Collidable implements Movable{
 	 */
 	@Override
 	public void collided(GameObject o) {
-		((Ball)o).setDirection((((Ball)o).getDirection() * ((coordY-o.coordY<0)?-1:1)));//bounce the ball back,
-		((Ball)o).setSpeedX((float) (((Ball)o).getSpeedX() + (o.coordX-coordX)*0.8));//taking the angle into account.
+		((Ball)o).setDirection((((Ball)o).getDirection() * ((getCoordY()-o.getCoordY()<0)?-1:1)));//bounce the ball back,
+		((Ball)o).setSpeedX((float) (((Ball)o).getSpeedX() + (o.getCoordX()-getCoordX())*0.8));//taking the angle into account.
 		if(((Ball)o).getSpeedX()>Ball.MAX_SPEED){//make sure ball speed doesn't exceed max,
 			((Ball)o).setSpeedX(Ball.MAX_SPEED);//if it does, set speed to max.
 		}
@@ -71,7 +71,7 @@ public class PlayerPaddle extends Collidable implements Movable{
 		if(!PaddleGame.isVoodooMode()){//if voodooMode is off,
 			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
 		}
-		DrawObject.drawRect(coordX, coordY, dimX, dimY);//draw the rectangle
+		DrawObject.drawRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the rectangle
 		
 	}
 	/**
@@ -80,7 +80,7 @@ public class PlayerPaddle extends Collidable implements Movable{
 	public void widen() {
 		if(!isWidened()){//if paddle isn't already widened,
 			setWidened(true);//set the flag,
-			this.dimX*=1.5f;//widen the paddle.
+			this.setDimX(this.getDimX() * 1.5f);//widen the paddle.
 			}
 		Timer.reset(BonusType.PADDLE_WIDEN);//if the paddle was already widened the timer needs to be reset, if not make a new one.
 	}
@@ -112,7 +112,7 @@ public class PlayerPaddle extends Collidable implements Movable{
 	public void narrow() {
 		if(!isNarrowed()){//if the paddle isn't already narrowed,
 			setNarrowed(true);//set the flag,
-			this.dimX/=1.5f;//narrow the paddle.
+			this.setDimX(this.getDimX() / 1.5f);//narrow the paddle.
 			}
 		Timer.reset(BonusType.PADDLE_NARROW);//if the paddle was already narrowed reset the timer, if not make a new one.
 	}

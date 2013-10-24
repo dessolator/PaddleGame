@@ -62,7 +62,7 @@ public class Timer {
 			if(timers.get(i).isPassed()){//if the timer expired, revert bonus.
 				switch(timers.get(i).bt){
 				case PADDLE_WIDEN:
-					PaddleGame.getLevel().getPaddle().dimX/=1.5f;
+					PaddleGame.getLevel().getPaddle().setDimX(PaddleGame.getLevel().getPaddle().getDimX() / 1.5f);
 					PaddleGame.getLevel().getPaddle().setWidened(false);
 					break;
 				case BALL_DAMAGE:
@@ -82,7 +82,7 @@ public class Timer {
 					PaddleGame.getLevel().getPaddle().setInverted(1);
 					break;
 				case PADDLE_NARROW:
-					PaddleGame.getLevel().getPaddle().dimX*=1.5f;
+					PaddleGame.getLevel().getPaddle().setDimX(PaddleGame.getLevel().getPaddle().getDimX() * 1.5f);
 					PaddleGame.getLevel().getPaddle().setNarrowed(false);
 					break;
 				case PADDLE_SPEED:

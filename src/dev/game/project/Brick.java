@@ -16,10 +16,10 @@ public class Brick extends Collidable {
 	 * @param droppsBonus Field indicating if the brick dropps a bonus or not.
 	 */
 	public Brick(float cordX, float cordY, float dimX, float dimY,int hitPoints,boolean droppsBonus) {
-		this.coordX = cordX;//Set the x coordinate to the passed value.
-		this.coordY = cordY;//Set the y coordinate to the passed value.
-		this.dimX = dimX;//Set the x dimension to the passed value.
-		this.dimY = dimY;//Set the y dimension to the passed value.
+		this.setCoordX(cordX);//Set the x coordinate to the passed value.
+		this.setCoordY(cordY);//Set the y coordinate to the passed value.
+		this.setDimX(dimX);//Set the x dimension to the passed value.
+		this.setDimY(dimY);//Set the y dimension to the passed value.
 		this.hitPoints=hitPoints;//Set the hit points to the passed value.
 		this.droppsBonus=droppsBonus;//Set the bonus drop to the passed value.
 	}
@@ -44,9 +44,9 @@ public class Brick extends Collidable {
 			/*
 			 * For the following if statement please consult the bounce logic appendix (bounceLogic.md)
 			 */
-			if(((o.coordX>=(coordX-(dimX/2+o.dimX/2)))&&(o.coordX<=(coordX+(dimX/2+o.dimX/2))))&&
-			(((o.coordY<=(coordY-dimY/2))&&(o.coordY>=(coordY-(dimY/2+o.dimX/2)))) ||
-			((o.coordY<=(coordY+(dimY/2+o.dimX/2)))&&(o.coordY>=(coordY+dimY/2)))))
+			if(((o.getCoordX()>=(getCoordX()-(getDimX()/2+o.getDimX()/2)))&&(o.getCoordX()<=(getCoordX()+(getDimX()/2+o.getDimX()/2))))&&
+			(((o.getCoordY()<=(getCoordY()-getDimY()/2))&&(o.getCoordY()>=(getCoordY()-(getDimY()/2+o.getDimX()/2)))) ||
+			((o.getCoordY()<=(getCoordY()+(getDimY()/2+o.getDimX()/2)))&&(o.getCoordY()>=(getCoordY()+getDimY()/2)))))
 			{
 				((Ball)o).setDirection(((Ball)o).getDirection() * -1);//if the ball hits something, bounce it back
 				
@@ -63,26 +63,29 @@ public class Brick extends Collidable {
 		}
 		
 	}
+	/* (non-Javadoc)
+	 * @see dev.game.project.GameObject#render()
+	 */
 	@Override
 	public void render() {
 		if(!PaddleGame.isVoodooMode()){
 			switch(hitPoints){
 			case 1:
-				glColor3f(1f, 1f, 0f);//set drawing color to yellow
+				glColor3f(1f, 1f, 0f);//set drawing color to yellow.
 				break;
 			case 2:
-				glColor3f(1f, 0.25f, 0f);//set drawing color to orange
+				glColor3f(1f, 0.25f, 0f);//set drawing color to orange.
 				break;
 			case 3:
-				glColor3f(0.25f, 1f, 0.25f);//set drawing color to green				
+				glColor3f(0.25f, 1f, 0.25f);//set drawing color to green.			
 				break;
 			default:
-				glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan
+				glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
 				break;
 				
 			}
 		}
-		DrawObject.drawRect(coordX, coordY, dimX, dimY);		
+		DrawObject.drawRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the brick		
 	}
 
 

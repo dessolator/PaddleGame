@@ -9,14 +9,14 @@ public class Bonus extends Collidable implements Movable{
 	
 	
 	public Bonus(BonusType bt, float coordX, float coordY) {
-		this.coordX=coordX;
-		this.coordY=coordY;
+		this.setCoordX(coordX);
+		this.setCoordY(coordY);
 		myType=bt;
 	}
 
 	public static void drop(Brick b) {
 		if(bonusesDropped<MAX_BONUSES_PER_LEVEL){
-			PaddleGame.getLevel().addBonus(new Bonus(BonusType.random(),b.coordX,b.coordY));
+			PaddleGame.getLevel().addBonus(new Bonus(BonusType.random(),b.getCoordX(),b.getCoordY()));
 			bonusesDropped++;
 		}
 		
@@ -24,8 +24,8 @@ public class Bonus extends Collidable implements Movable{
 
 	@Override
 	public void move(int i) {
-		coordY-=4;
-		if(coordY<0){
+		setCoordY(getCoordY() - 4);
+		if(getCoordY()<0){
 			PaddleGame.getLevel().removeBonus(this);
 		}
 		
@@ -75,7 +75,7 @@ public class Bonus extends Collidable implements Movable{
 	@Override
 	public void render() {
 		glColor3f(1f, 0f, 1f);
-		DrawObject.drawRect(coordX, coordY, 10, 10);
+		DrawObject.drawRect(getCoordX(), getCoordY(), 10, 10);
 				
 	}
 

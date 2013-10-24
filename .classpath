@@ -3,5 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/lwjgl"/>
+	<classpathentry kind="lib" path="L:/Users/Dessolator/workspace/PaddleGame/lib/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="L:/Users/Dessolator/workspace/PaddleGame/lib/slick-util.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

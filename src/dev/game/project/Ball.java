@@ -22,11 +22,11 @@ public class Ball extends GameObject implements Movable {
 	 * @param radius The radius of the ball.
 	 */
 	public Ball( float cordX, float cordY, float radius) {
-		this.coordX = cordX;//Set coordX to the passed value.
-		this.coordY = cordY;//Set coordY to the passed value.
+		this.setCoordX(cordX);//Set coordX to the passed value.
+		this.setCoordY(cordY);//Set coordY to the passed value.
 		this.setRadius(radius);//Set radius to the passed value.
-		this.dimX=radius*2;//Calculate the x dimension.
-		this.dimY=radius*2;//Calculate the y dimension.
+		this.setDimX(radius*2);//Calculate the x dimension.
+		this.setDimY(radius*2);//Calculate the y dimension.
 	}
 	
 	
@@ -47,8 +47,8 @@ public class Ball extends GameObject implements Movable {
 	 */
 	@Override
 	public void move(int i) {
-		coordX+=getSpeedX();//increase the x position
-		coordY+=(getSpeedY()*getDirection());//increase the y position
+		setCoordX(getCoordX() + getSpeedX());//increase the x position
+		setCoordY(getCoordY() + (getSpeedY()*getDirection()));//increase the y position
 	}
 
 
@@ -60,7 +60,7 @@ public class Ball extends GameObject implements Movable {
 		if(!PaddleGame.isVoodooMode()){//if voodooMode is off,
 			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
 		}
-		DrawObject.drawCirclef(coordX,coordY, getRadius());//draw the ball.
+		DrawObject.drawCirclef(getCoordX(),getCoordY(), getRadius());//draw the ball.
 		
 	}
 
@@ -179,8 +179,8 @@ public class Ball extends GameObject implements Movable {
 			temp.get(0).setDirection(1);//ball direction,
 			speedY=8f;//ball y speed,
 			spedUp=false;//ball flags,
-			temp.get(0).coordX=PaddleGame.getLevel().getPaddle().coordX;//and ball coordinates.
-			temp.get(0).coordY=PaddleGame.getLevel().getPaddle().coordY+PaddleGame.getLevel().getPaddle().dimY/2+temp.get(0).dimX/2+3;
+			temp.get(0).setCoordX(PaddleGame.getLevel().getPaddle().getCoordX());//and ball coordinates.
+			temp.get(0).setCoordY(PaddleGame.getLevel().getPaddle().getCoordY()+PaddleGame.getLevel().getPaddle().getDimY()/2+temp.get(0).getDimX()/2+3);
 		}
 		
 	}

@@ -137,7 +137,7 @@ public class Level {
 	public void spawnBall() {
 		Ball temp;
 		if(!myBalls.isEmpty()){
-			temp=new Ball(getMyBalls().get(0).coordX, getMyBalls().get(0).coordX, getMyBalls().get(0).getRadius());
+			temp=new Ball(getMyBalls().get(0).getCoordX(), getMyBalls().get(0).getCoordX(), getMyBalls().get(0).getRadius());
 			temp.setSpeedX((getMyBalls().get(0).getSpeedX())-2f);
 			getMyBalls().get(0).setSpeedX((getMyBalls().get(0).getSpeedX())+2f);
 		}

@@ -12,14 +12,14 @@ public class GamePhysics {
 	 * @return Function returns true if the two passed objects have indeed collided.
 	 */
 	public static boolean hit(GameObject a, GameObject b){
-		GameObject left=(a.coordX<b.coordX)?a:b;
-		GameObject right=(a.coordX<b.coordX)?b:a;
-		if((left.coordX+left.dimX/2)<(right.coordX-right.dimX/2)){//if right edge of left object is to the left of the left edge of the right object they can't possibly be colliding.
+		GameObject left=(a.getCoordX()<b.getCoordX())?a:b;
+		GameObject right=(a.getCoordX()<b.getCoordX())?b:a;
+		if((left.getCoordX()+left.getDimX()/2)<(right.getCoordX()-right.getDimX()/2)){//if right edge of left object is to the left of the left edge of the right object they can't possibly be colliding.
 			return false;
 		}
-		GameObject upper=(a.coordY<b.coordY)?b:a;
-		GameObject lower=(a.coordY<b.coordY)?a:b;
-		if((lower.coordY+lower.dimY/2)<(upper.coordY-upper.dimY/2)){//same logic as above.
+		GameObject upper=(a.getCoordY()<b.getCoordY())?b:a;
+		GameObject lower=(a.getCoordY()<b.getCoordY())?a:b;
+		if((lower.getCoordY()+lower.getDimY()/2)<(upper.getCoordY()-upper.getDimY()/2)){//same logic as above.
 			return false;
 		}
 		return true;

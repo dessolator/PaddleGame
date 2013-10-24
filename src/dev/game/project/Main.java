@@ -12,7 +12,6 @@ public class Main {
 	/*
 	 * TODO TEXTURES
 	 * TODO SQUISH BUG REAPPEARED WHEN IMPLEMENTING MULTIBALL
-	 * TODO COMMENT BRICK
 	 * TODO COMMENT BONUS
 	 * TODO GAME MENU
 	 * TODO LEVEL GENERATION AND PROGRESSION
@@ -70,6 +69,7 @@ public class Main {
 			glClear(GL_COLOR_BUFFER_BIT);//wipe random data from color buffer.
 			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
 			glLoadIdentity();//clear GL_MODELVIEW matrix.
+			glEnable(GL_TEXTURE_2D);//enable textures
 			
 			/*
 			 * Keyboard initialization.
