@@ -7,7 +7,6 @@ public class UpperBoundary extends Boundary{
 
 	public UpperBoundary(float coordX, float coordY, float dimX, float dimY) {
 		super(coordX, coordY, dimX, dimY);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

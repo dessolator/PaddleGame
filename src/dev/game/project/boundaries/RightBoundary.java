@@ -7,7 +7,6 @@ public class RightBoundary extends Boundary {
 
 	public RightBoundary(float coordX, float coordY, float dimX, float dimY) {
 		super(coordX, coordY, dimX, dimY);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

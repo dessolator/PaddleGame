@@ -8,12 +8,11 @@ public class LowerBoundary extends Boundary{
 
 	public LowerBoundary(float coordX, float coordY, float dimX, float dimY) {
 		super(coordX, coordY, dimX, dimY);
-		// TODO Auto-generated constructor stub
-	}
+		}
 
 	@Override
 	public void collided(GameObject o) {
-		PaddleGame.getLevel().getMyBalls().remove((Ball)o);
+		PaddleGame.getLevel().getBalls().remove((Ball)o);
 		Ball.reset();//reset the ball.
 		
 	}

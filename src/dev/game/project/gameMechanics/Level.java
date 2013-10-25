@@ -29,21 +29,65 @@ public class Level {
 		setMyBalls(new ArrayList<Ball>());
 		blocks=new ArrayList<Collidable>();//init blocks.
 		bonuses=new ArrayList<Bonus>();//init bonuses.
-		myPaddle= new PlayerPaddle(Display.getWidth()/2,Display.getHeight()/12,Display.getWidth()/8,Display.getHeight()/30);//create player paddle.
-		getMyBalls().add(new Ball(Display.getWidth()/2,Display.getHeight()/6,Display.getHeight()/60));//create the ball.
+		
+		myPaddle= new PlayerPaddle(
+				Display.getWidth()/2,
+				Display.getHeight()/12,
+				Display.getWidth()/8,
+				Display.getHeight()/30);//create player paddle.
+		
+		myBalls.add(new Ball(
+				Display.getWidth()/2,
+				Display.getHeight()/6,
+				Display.getHeight()/60)
+		);//create the ball.
+		
 		for (int j = 0; j<4; j++) {//change row to add bricks to.
 			for (int i = 0; i < num; i++) {//add bricks to row.
-				blocks.add(new Brick(coordx,coordy,Display.getWidth()/20,Display.getHeight()/30,(j+1),(Math.random()<0.05?true:false)));
+				
+				blocks.add(new Brick(
+						coordx,
+						coordy,
+						Display.getWidth()/20,
+						Display.getHeight()/30,
+						(j+1),
+						(Math.random()<0.05?true:false))
+				);
+				
 				coordx+=(int)Display.getWidth()/(18.6f);
 			}
 			coordy-=(int)Display.getHeight()/(27.27f);//reset brick coordinates.
 			coordx-=num*(int)Display.getWidth()/(18.6f);
 		}
 		
-		blocks.add(new RightBoundary(Display.getWidth()+0.5f,Display.getHeight()/2,1,Display.getHeight()));//add right boundary.
-		blocks.add(new UpperBoundary(Display.getWidth()/2,Display.getHeight()+0.5f,Display.getWidth(),1));//add top boundary.
-		blocks.add(new LeftBoundary(-0.5f,Display.getHeight()/2,1,Display.getHeight()));//add left boundary.
-		blocks.add(new LowerBoundary(Display.getWidth()/2,0-0.5f,Display.getWidth(),1));//add bottom boundary.
+		blocks.add(new RightBoundary(
+				Display.getWidth()+0.5f,
+				Display.getHeight()/2,
+				1,
+				Display.getHeight())
+		);//add right boundary.
+		
+		blocks.add(new UpperBoundary(
+				Display.getWidth()/2,
+				Display.getHeight()+0.5f,
+				Display.getWidth(),
+				1)
+		);//add top boundary.
+		
+		blocks.add(new LeftBoundary(
+				-0.5f,
+				Display.getHeight()/2,
+				1,
+				Display.getHeight())
+		);//add left boundary.
+		
+		blocks.add(new LowerBoundary(
+				Display.getWidth()/2,
+				0-0.5f,
+				Display.getWidth(),
+				1)
+		);//add bottom boundary.
+		
 		blocks.add(myPaddle);
 		
 	}
@@ -94,7 +138,7 @@ public class Level {
 	 * Function used to update the level.
 	 */
 	public void update() {
-		for(Ball b:getMyBalls()){
+		for(Ball b:myBalls){
 			b.update();//update the ball array.
 		}
 		Timer.update();//update the timer for bonuses.
@@ -111,7 +155,7 @@ public class Level {
 	 * Function used to render the level.
 	 */
 	public void render() {
-		for(Ball b:getMyBalls()){
+		for(Ball b:myBalls){
 			b.render();//render the ball.
 		}
 		for (int i=0; i<bonuses.size();i++) {
@@ -127,7 +171,7 @@ public class Level {
 	 * @return the Ball.
 	 */
 	public ArrayList<Ball> getBalls() {
-		return getMyBalls();
+		return myBalls;
 	}
 
 
@@ -148,27 +192,32 @@ public class Level {
 	public void spawnBall() {
 		Ball temp;
 		if(!myBalls.isEmpty()){
-			temp=new Ball(getMyBalls().get(0).getCoordX(), getMyBalls().get(0).getCoordX(), getMyBalls().get(0).getRadius());
-			temp.setSpeedX((getMyBalls().get(0).getSpeedX())-2f);
-			getMyBalls().get(0).setSpeedX((getMyBalls().get(0).getSpeedX())+2f);
+			
+			temp=new Ball(
+					getBalls().get(0).getCoordX(),
+					getBalls().get(0).getCoordX(),
+					getBalls().get(0).getRadius()
+					);
+			
+			temp.setSpeedX((getBalls().get(0).getSpeedX())-2f);
+			getBalls().get(0).setSpeedX((getBalls().get(0).getSpeedX())+2f);
+			
 		}
 		else
 		{
-			temp=new Ball(Display.getWidth()/2,Display.getHeight()/6,Display.getHeight()/60);
+			
+			temp=new Ball(
+					Display.getWidth()/2,
+					Display.getHeight()/6,
+					Display.getHeight()/60
+					);
+			
 		}
-		getMyBalls().add(temp);
+		getBalls().add(temp);
 		
 	}
 
 
-
-	/**
-	 * Getter for array of balls.
-	 * @return The array of balls.
-	 */
-	public ArrayList<Ball> getMyBalls() {
-		return myBalls;
-	}
 
 
 
