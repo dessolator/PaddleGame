@@ -1,4 +1,4 @@
-package dev.game.project.gameObjects;
+package dev.game.project.engine;
 
 public interface Movable {
 	

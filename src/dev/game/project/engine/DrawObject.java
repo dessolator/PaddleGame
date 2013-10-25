@@ -1,6 +1,6 @@
-package dev.game.project.gameMechanics;
+package dev.game.project.engine;
 import static org.lwjgl.opengl.GL11.*;
-import dev.game.project.gameObjects.GameObject;
+import dev.game.project.gameMechanics.PaddleGame;
 
 
 public class DrawObject {

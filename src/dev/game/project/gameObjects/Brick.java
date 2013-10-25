@@ -10,9 +10,11 @@ import java.io.IOException;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
-import dev.game.project.bonuses.Bonus;
-import dev.game.project.gameMechanics.DrawObject;
+import dev.game.project.engine.Collidable;
+import dev.game.project.engine.DrawObject;
+import dev.game.project.engine.GameObject;
 import dev.game.project.gameMechanics.PaddleGame;
+import dev.game.project.gameObjects.bonuses.Bonus;
 
 public class Brick extends Collidable {
 	private int hitPoints;//field used to keep track of the block's h.

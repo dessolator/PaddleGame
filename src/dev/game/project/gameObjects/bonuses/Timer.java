@@ -1,15 +1,12 @@
-package dev.game.project.bonuses;
+package dev.game.project.gameObjects.bonuses;
 
 import java.util.ArrayList;
-
-import dev.game.project.gameMechanics.PaddleGame;
-import dev.game.project.gameObjects.Ball;
 
 public class Timer {
 	private static final int BONUS_DURATION = 10;//constant for bonus durations.
 	private static ArrayList<Timer> timers;//arraylist of active for active bonuses.
 	long time;//time the bonus expires.
-	BonusType bt;//the type of bonus this timer represents.
+	private Bonus b;
 	
 	static{
 		timers= new ArrayList<Timer>();//initialize list of timers.
@@ -22,8 +19,8 @@ public class Timer {
 	 * @param seconds The time in seconds that this bonus lasts.
 	 * @param bt The type of bonus this timer represents.
 	 */
-	public Timer(int seconds,BonusType bt){
-		this.bt=bt;//set bonus type to the passed value.
+	public Timer(int seconds,Bonus b){
+		this.b=b;//set bonus type to the passed value.
 		time=System.nanoTime();//set time to current system time.
 		time+=(long)seconds*1000000000;//add the number of seconds to be waited.
 	}
@@ -46,9 +43,9 @@ public class Timer {
 	 * Function used to remove timers for a given bonus type from timers.
 	 * @param bonus	The bonus type for which to remove timers.
 	 */
-	private static void removeTypedTimer(BonusType bonus) { 
+	private static void removeTypedTimer(Bonus bonus) { 
 		for (int i=0; i<Timer.getTimers().size();i++) {
-			if(Timer.getTimers().get(i).bt==bonus){
+			if(Timer.getTimers().get(i).b==bonus){
 				Timer.getTimers().remove(i);
 				i--;
 			}
@@ -63,37 +60,7 @@ public class Timer {
 	public static void update(){
 		for (int i=0; i<timers.size();i++) {//for each timer in the list,
 			if(timers.get(i).isPassed()){//if the timer expired, revert bonus.
-				switch(timers.get(i).bt){
-				case PADDLE_WIDEN:
-					PaddleGame.getLevel().getPaddle().setDimX(PaddleGame.getLevel().getPaddle().getDimX() / 1.5f);
-					PaddleGame.getLevel().getPaddle().setWidened(false);
-					break;
-				case BALL_DAMAGE:
-					if(Ball.getDamage()!=1){
-						Ball.setDamage(1);
-					}
-					break;
-				case BALL_SPEED:
-					if(Ball.isSpedUp()){
-						Ball.setSpedUp(false);
-						Ball.setSpeedY(Ball.getSpeedY()/2);
-					}
-					break;
-				case MULTI_BALL:
-					break;
-				case PADDLE_INVERT:
-					PaddleGame.getLevel().getPaddle().setInverted(1);
-					break;
-				case PADDLE_NARROW:
-					PaddleGame.getLevel().getPaddle().setDimX(PaddleGame.getLevel().getPaddle().getDimX() * 1.5f);
-					PaddleGame.getLevel().getPaddle().setNarrowed(false);
-					break;
-				case PADDLE_SPEED:
-					PaddleGame.getLevel().getPaddle().setPaddleSpeedUp(1f);
-					break;
-				default:
-					break;
-				}
+				timers.get(i).b.undo();
 				Timer.getTimers().remove(i);//remove the expired timer,
 				i--;//and correct the index.
 				
@@ -104,7 +71,7 @@ public class Timer {
 	 * Function used to reset the timer for a given bonus type.
 	 * @param bonus The bonus type for which to reset the timer.
 	 */
-	public static void reset(BonusType bonus) {
+	public static void reset(Bonus bonus) {
 		Timer.removeTypedTimer(bonus);//remove the old timer if it exists.
 		timers.add(new Timer(BONUS_DURATION,bonus));//add a new one.
 		

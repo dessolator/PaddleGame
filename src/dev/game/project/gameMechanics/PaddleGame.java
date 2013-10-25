@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
+import dev.game.project.engine.Collidable;
+import dev.game.project.engine.GamePhysics;
 import dev.game.project.gameObjects.Ball;
-import dev.game.project.gameObjects.Collidable;
 
 public class PaddleGame {
 	private static boolean voodooMode=false;//@credit Jovan Davidovic\
@@ -72,9 +73,9 @@ public class PaddleGame {
 			o.render();//draw the bricks and paddle		
 			
 			ArrayList<Ball> tempBallArray=myLevel.getBalls();
-			for(Ball b:tempBallArray){
-				if(GamePhysics.hit(b, o)) {//if a collision did occur
-					o.collided(b);//trigger collision function
+			for(int j=0;j<tempBallArray.size();j++){
+				if(GamePhysics.hit(tempBallArray.get(j), o)) {//if a collision did occur
+					o.collided(tempBallArray.get(j));//trigger collision function
 					if(o.destroyed){//check if the object was destroyed
 						temp.remove(i);//if so remove it
 						i--;//and correct iterator

@@ -4,20 +4,20 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.Display;
 
-import dev.game.project.bonuses.Bonus;
-import dev.game.project.bonuses.Timer;
 import dev.game.project.boundaries.LeftBoundary;
 import dev.game.project.boundaries.LowerBoundary;
 import dev.game.project.boundaries.RightBoundary;
 import dev.game.project.boundaries.UpperBoundary;
+import dev.game.project.engine.Collidable;
 import dev.game.project.gameObjects.Ball;
 import dev.game.project.gameObjects.Brick;
-import dev.game.project.gameObjects.Collidable;
 import dev.game.project.gameObjects.PlayerPaddle;
+import dev.game.project.gameObjects.bonuses.Bonus;
+import dev.game.project.gameObjects.bonuses.Timer;
 
 public class Level {
-	ArrayList<Collidable> blocks;//arraylist keeping track of bricks and boundaries.
-	ArrayList<Bonus> bonuses;//arraylist keeping track of spawned bonuses.
+	private ArrayList<Collidable> blocks;//arraylist keeping track of bricks and boundaries.
+	private ArrayList<Bonus> bonuses;//arraylist keeping track of spawned bonuses.
 	int num = 17;//variable used for brick generation.
 	float coordx = Display.getWidth()/16;//first brick coordinate.
 	float coordy = (Display.getHeight()*(5.5f))/6;//first brick coordinate.
@@ -26,7 +26,7 @@ public class Level {
 	
 
 	public Level(int levelNumber) {
-		setMyBalls(new ArrayList<Ball>());
+		myBalls=new ArrayList<Ball>();
 		blocks=new ArrayList<Collidable>();//init blocks.
 		bonuses=new ArrayList<Bonus>();//init bonuses.
 		
@@ -51,7 +51,7 @@ public class Level {
 						Display.getWidth()/20,
 						Display.getHeight()/30,
 						(j+1),
-						(Math.random()<0.05?true:false))
+						(Math.random()<0.5?true:false))
 				);
 				
 				coordx+=(int)Display.getWidth()/(18.6f);
@@ -194,13 +194,13 @@ public class Level {
 		if(!myBalls.isEmpty()){
 			
 			temp=new Ball(
-					getBalls().get(0).getCoordX(),
-					getBalls().get(0).getCoordX(),
-					getBalls().get(0).getRadius()
+					myBalls.get(0).getCoordX(),
+					myBalls.get(0).getCoordX(),
+					myBalls.get(0).getRadius()
 					);
 			
-			temp.setSpeedX((getBalls().get(0).getSpeedX())-2f);
-			getBalls().get(0).setSpeedX((getBalls().get(0).getSpeedX())+2f);
+			temp.setSpeedX((myBalls.get(0).getSpeedX())-2f);
+			myBalls.get(0).setSpeedX((myBalls.get(0).getSpeedX())+2f);
 			
 		}
 		else

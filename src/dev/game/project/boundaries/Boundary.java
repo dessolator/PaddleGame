@@ -1,6 +1,6 @@
 package dev.game.project.boundaries;
 
-import dev.game.project.gameObjects.Collidable;
+import dev.game.project.engine.Collidable;
 
 public abstract class Boundary extends Collidable{
 	

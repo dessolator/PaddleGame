@@ -7,12 +7,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import org.newdawn.slick.opengl.TextureLoader;
 
-import dev.game.project.bonuses.BonusType;
-import dev.game.project.bonuses.Timer;
-import dev.game.project.gameMechanics.DrawObject;
+import dev.game.project.engine.DrawObject;
+import dev.game.project.engine.GameObject;
+import dev.game.project.engine.Movable;
 import dev.game.project.gameMechanics.PaddleGame;
 
 public class Ball extends GameObject implements Movable {
@@ -120,10 +119,7 @@ public class Ball extends GameObject implements Movable {
 			setSpedUp(true);//set the flag,
 			speedY*=1.5f;//and speed it up.
 			
-		}
-		
-		Timer.reset(BonusType.BALL_SPEED);//if the ball was already sped up the timer needs to be reset, if not make a new one.
-		
+		}		
 	}
 
 
@@ -135,9 +131,6 @@ public class Ball extends GameObject implements Movable {
 		if(getDamage()==1){//if the ball damage was not yet increased,
 			setDamage(getDamage() * 3);//increase the damage.
 		}
-		
-		Timer.reset(BonusType.BALL_DAMAGE);//if the ball's damage was already increased the timer needs to be reset, if not make a new one.
-
 		
 	}
 

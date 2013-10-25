@@ -1,20 +1,17 @@
 package dev.game.project.gameObjects;
 
 import static org.lwjgl.opengl.GL11.glColor3f;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-
-
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.TextureLoader;
 
-import dev.game.project.bonuses.BonusType;
-import dev.game.project.bonuses.Timer;
-import dev.game.project.gameMechanics.DrawObject;
+import dev.game.project.engine.Collidable;
+import dev.game.project.engine.DrawObject;
+import dev.game.project.engine.GameObject;
+import dev.game.project.engine.Movable;
 import dev.game.project.gameMechanics.PaddleGame;
 
 public class PlayerPaddle extends Collidable implements Movable{
@@ -48,10 +45,8 @@ public class PlayerPaddle extends Collidable implements Movable{
 		try {
 			setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/playerPaddle.png"))));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -102,7 +97,6 @@ public class PlayerPaddle extends Collidable implements Movable{
 			setWidened(true);//set the flag,
 			this.setDimX(this.getDimX() * 1.5f);//widen the paddle.
 			}
-		Timer.reset(BonusType.PADDLE_WIDEN);//if the paddle was already widened the timer needs to be reset, if not make a new one.
 	}
 	
 	
@@ -114,7 +108,6 @@ public class PlayerPaddle extends Collidable implements Movable{
 		if(getInverted()==1){//if paddle isn't already inverted,
 			setInverted(-1);//invert the paddle.
 		}
-		Timer.reset(BonusType.PADDLE_INVERT);//if the paddle was already inverted reset the timer, if not make a new one.
 		
 	}
 	/**
@@ -124,7 +117,6 @@ public class PlayerPaddle extends Collidable implements Movable{
 		if(getPaddleSpeedUp()==1){//if the paddle isn't already sped up,
 			setPaddleSpeedUp(1.5f);//speed it up.
 		}
-		Timer.reset(BonusType.PADDLE_SPEED);//if the paddle was already sped up reset the timer, if not make a new one.
 	}
 	/**
 	 * Function used to trigger the narrow bonus.
@@ -134,7 +126,6 @@ public class PlayerPaddle extends Collidable implements Movable{
 			setNarrowed(true);//set the flag,
 			this.setDimX(this.getDimX() / 1.5f);//narrow the paddle.
 			}
-		Timer.reset(BonusType.PADDLE_NARROW);//if the paddle was already narrowed reset the timer, if not make a new one.
 	}
 	/**
 	 * Getter for inverted.
