@@ -1,4 +1,4 @@
-package dev.game.project.boundaries;
+package dev.game.project.gameObjects.boundaries;
 
 import dev.game.project.engine.Collidable;
 

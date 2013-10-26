@@ -87,7 +87,7 @@ public class PlayerPaddle extends Collidable implements Movable{
 			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
 		}
 		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the rectangle
-		
+		//DrawObject.draw(this);
 	}
 	/**
 	 * Function used to trigger the widen bonus.

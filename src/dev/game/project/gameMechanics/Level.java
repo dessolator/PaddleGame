@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.Display;
 
-import dev.game.project.boundaries.LeftBoundary;
-import dev.game.project.boundaries.LowerBoundary;
-import dev.game.project.boundaries.RightBoundary;
-import dev.game.project.boundaries.UpperBoundary;
 import dev.game.project.engine.Collidable;
 import dev.game.project.gameObjects.Ball;
 import dev.game.project.gameObjects.Brick;
 import dev.game.project.gameObjects.PlayerPaddle;
 import dev.game.project.gameObjects.bonuses.Bonus;
 import dev.game.project.gameObjects.bonuses.Timer;
+import dev.game.project.gameObjects.boundaries.LeftBoundary;
+import dev.game.project.gameObjects.boundaries.LowerBoundary;
+import dev.game.project.gameObjects.boundaries.RightBoundary;
+import dev.game.project.gameObjects.boundaries.UpperBoundary;
 
 public class Level {
 	private ArrayList<Collidable> blocks;//arraylist keeping track of bricks and boundaries.
@@ -195,12 +195,16 @@ public class Level {
 			
 			temp=new Ball(
 					myBalls.get(0).getCoordX(),
-					myBalls.get(0).getCoordX(),
+					myBalls.get(0).getCoordY(),//Fixed Bug was CoordX instead of CoordY @credit Houstor - Sejn
 					myBalls.get(0).getRadius()
 					);
 			
-			temp.setSpeedX((myBalls.get(0).getSpeedX())-2f);
-			myBalls.get(0).setSpeedX((myBalls.get(0).getSpeedX())+2f);
+			if(myBalls.get(0).getSpeedX()==0){
+				temp.setSpeedX(-2f);
+				myBalls.get(0).setSpeedX(2f);
+			}
+			else
+				temp.setSpeedX(-myBalls.get(0).getSpeedX());
 			
 		}
 		else
@@ -214,7 +218,6 @@ public class Level {
 			
 		}
 		getBalls().add(temp);
-		
 	}
 
 

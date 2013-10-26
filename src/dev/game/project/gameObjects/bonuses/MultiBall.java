@@ -18,9 +18,9 @@ public class MultiBall extends Bonus {
 		try {
 			setTexture(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/multiBallBonus.png"))));
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		//	e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+		//	e.printStackTrace();
 		}
 	}
 	public void collided(GameObject o) {

@@ -30,21 +30,21 @@ public abstract class Bonus extends Collidable implements Movable{
 
 	public static void drop(Brick b) {
 		if(bonusesDropped<MAX_BONUSES_PER_LEVEL){
-//			double factor=Math.random();
-//			if(factor>0.86)
-//				PaddleGame.getLevel().addBonus(new BallDamage(b.getCoordX(),b.getCoordY()));
-//			if(factor>0.72)
-//				PaddleGame.getLevel().addBonus(new BallSpeed(b.getCoordX(),b.getCoordY()));
-//			if(factor>0.58)
+			double factor=Math.random();
+			if(factor>0.86)
+				PaddleGame.getLevel().addBonus(new BallDamage(b.getCoordX(),b.getCoordY()));
+			else if(factor>0.72)
+				PaddleGame.getLevel().addBonus(new BallSpeed(b.getCoordX(),b.getCoordY()));
+			else if(factor>0.58)
 				PaddleGame.getLevel().addBonus(new MultiBall(b.getCoordX(),b.getCoordY()));
-//			if(factor>0.44)
-//				PaddleGame.getLevel().addBonus(new PaddleWiden(b.getCoordX(),b.getCoordY()));
-//			if(factor>0.30)
-//				PaddleGame.getLevel().addBonus(new PaddleNarrow(b.getCoordX(),b.getCoordY()));
-//			if(factor>0.16)
-//				PaddleGame.getLevel().addBonus(new PaddleInvert(b.getCoordX(),b.getCoordY()));
-//			if(factor>0)
-//				PaddleGame.getLevel().addBonus(new PaddleSpeed(b.getCoordX(),b.getCoordY()));			
+			else if(factor>0.44)
+				PaddleGame.getLevel().addBonus(new PaddleWiden(b.getCoordX(),b.getCoordY()));
+			else if(factor>0.30)
+				PaddleGame.getLevel().addBonus(new PaddleNarrow(b.getCoordX(),b.getCoordY()));
+			else if(factor>0.16)
+				PaddleGame.getLevel().addBonus(new PaddleInvert(b.getCoordX(),b.getCoordY()));
+			else if(factor>0)
+				PaddleGame.getLevel().addBonus(new PaddleSpeed(b.getCoordX(),b.getCoordY()));			
 			bonusesDropped++;
 		}
 		
@@ -72,6 +72,7 @@ public abstract class Bonus extends Collidable implements Movable{
 	public void render() {
 		glColor3f(1f, 0f, 1f);
 		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());
+//		DrawObject.draw(this);
 				
 	}
 	public abstract void undo();

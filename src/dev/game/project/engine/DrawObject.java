@@ -12,11 +12,13 @@ public class DrawObject {
 	 * @param dimX The X dimension of the rectangle.
 	 * @param dimY The Y dimension of the rectangle.
 	 */
-	public static void drawGameObject(GameObject g){
+	public static void draw(Drawable g){
 		g.getTexture().bind();
 		glPushMatrix();//create new matrix for manipulation of the given rectangle.
 		glTranslatef(g.getCoordX(),g.getCoordY(),0);//set starting point to the coordinates needed.
-		glColor3f(1,1,1);//set color to random.
+		glColor3f(1,1,1);
+		glDisable(GL_BLEND);
+		glDisable(GL_LIGHTING);
 		glBegin(GL_QUADS);
 		{
 			glTexCoord2f(0, 0);

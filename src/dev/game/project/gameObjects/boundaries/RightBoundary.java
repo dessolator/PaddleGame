@@ -1,11 +1,11 @@
-package dev.game.project.boundaries;
+package dev.game.project.gameObjects.boundaries;
 
 import dev.game.project.engine.GameObject;
 import dev.game.project.gameObjects.Ball;
 
-public class LeftBoundary extends Boundary {
+public class RightBoundary extends Boundary {
 
-	public LeftBoundary(float coordX, float coordY, float dimX, float dimY) {
+	public RightBoundary(float coordX, float coordY, float dimX, float dimY) {
 		super(coordX, coordY, dimX, dimY);
 	}
 

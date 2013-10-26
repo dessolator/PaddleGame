@@ -139,7 +139,8 @@ public class Brick extends Collidable {
 				
 			}
 		}
-		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the brick		
+		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the brick	
+		//DrawObject.draw(this);
 	}
 
 
