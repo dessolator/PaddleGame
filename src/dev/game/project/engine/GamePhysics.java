@@ -1,5 +1,7 @@
 package dev.game.project.engine;
 
+import dev.game.project.gameObjects.GameObject;
+
 
 
 public class GamePhysics {

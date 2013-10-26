@@ -7,9 +7,9 @@ import java.io.IOException;
 
 import org.newdawn.slick.opengl.TextureLoader;
 
-import dev.game.project.engine.GameObject;
 import dev.game.project.engine.GamePhysics;
 import dev.game.project.gameMechanics.PaddleGame;
+import dev.game.project.gameObjects.GameObject;
 
 public class PaddleSpeed extends Bonus {
 

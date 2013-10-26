@@ -1,14 +1,16 @@
-package dev.game.project.engine;
+package dev.game.project.gameObjects;
 
 import org.newdawn.slick.opengl.Texture;
 
-public abstract class GameObject implements Drawable{
+import dev.game.project.engine.Drawable;
+import dev.game.project.gameMechanics.Updateable;
+
+public abstract class GameObject implements Drawable, Updateable{
 	private float coordX;//Variable used to store onscreen location in X.
 	private float coordY;//Variable used to store onscreen location in Y.
 	private float dimX;//Variable used to store the size of the game object in X.
 	private float dimY;//Variable used to store the size of the game object in Y.
 	private Texture texture=null;
-	public abstract void update();//function used to track game changes frame by frame.
 	/**
 	 * @return the texture
 	 */

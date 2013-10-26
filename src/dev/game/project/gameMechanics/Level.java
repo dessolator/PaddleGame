@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.lwjgl.opengl.Display;
 
 import dev.game.project.engine.Collidable;
+import dev.game.project.engine.Drawable;
 import dev.game.project.gameObjects.Ball;
 import dev.game.project.gameObjects.Brick;
 import dev.game.project.gameObjects.PlayerPaddle;
@@ -15,7 +16,7 @@ import dev.game.project.gameObjects.boundaries.LowerBoundary;
 import dev.game.project.gameObjects.boundaries.RightBoundary;
 import dev.game.project.gameObjects.boundaries.UpperBoundary;
 
-public class Level {
+public class Level implements Drawable, Updateable{
 	private ArrayList<Collidable> blocks;//arraylist keeping track of bricks and boundaries.
 	private ArrayList<Bonus> bonuses;//arraylist keeping track of spawned bonuses.
 	int num = 17;//variable used for brick generation.

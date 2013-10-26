@@ -9,18 +9,22 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 import dev.game.project.engine.Collidable;
+import dev.game.project.engine.Drawable;
 import dev.game.project.engine.GamePhysics;
 import dev.game.project.gameObjects.Ball;
+import dev.game.project.menus.MainMenu;
 
 public class PaddleGame {
 	private static boolean voodooMode=false;//@credit Jovan Davidovic\
 	private static long voodooTriggered=0l;//field uset to keep track of when voodooMode was last triggered
 	private static Level myLevel;//Level field containing all the game objects
+	private static MainMenu myMainMenu;
 	private static boolean terminate=false;//variable used to check if the user hit ESCAPE
 	private static int currentLevel=1;
 	static{
 		
 		myLevel=new Level(currentLevel);
+		myMainMenu=new MainMenu();
 		
 	}
 	
@@ -35,8 +39,8 @@ public class PaddleGame {
 			glClear(GL_COLOR_BUFFER_BIT);//for each frame clear the screen
 			//displayFPS();//print framerate for debug purposes
 			processInput();//read player input
-			myLevel.update();//update the level
-			myLevel.render();//then render it
+			getUpdate().update();//update the level
+			getDraw().render();//then render it
 			collisionPhysics();//do the collision physics and brick drawing
 			Display.sync(60);//force the framerate to 60 FPS or thereabouts
 			Display.update();//refresh the display
@@ -44,6 +48,27 @@ public class PaddleGame {
 		
 	}
 	
+	static int currentGameState=0;
+	static Drawable getDraw(){
+		switch(currentGameState){
+			case 0:
+				return myLevel;
+			case 1:
+				return myMainMenu;
+			default:
+				return null;
+		}
+	}
+	static Updateable getUpdate(){
+		switch(currentGameState){
+		case 0:
+			return myLevel;
+		case 1:
+			return myMainMenu;
+		default:
+			return null;
+		}
+	}
 	private static long frameStart=0;//Variable used to keep track of the frame start time
 	private static int frames=1;//number of frames in the current second
 	/**

@@ -12,7 +12,6 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 import dev.game.project.engine.Collidable;
 import dev.game.project.engine.DrawObject;
-import dev.game.project.engine.GameObject;
 import dev.game.project.gameMechanics.PaddleGame;
 import dev.game.project.gameObjects.bonuses.Bonus;
 

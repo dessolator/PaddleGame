@@ -16,7 +16,7 @@ import dev.game.project.menus.buttons.ScoresButton;
 import dev.game.project.menus.buttons.SettingsButton;
 
 public class MainMenu extends Menu {
-	MainMenu(){
+	public MainMenu(){
 		myButtons=new ArrayList<Button>();
 		myFrame=new MainMenuFrame(
 				Display.getWidth()/2,

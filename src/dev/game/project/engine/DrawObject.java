@@ -12,7 +12,7 @@ public class DrawObject {
 	 * @param dimX The X dimension of the rectangle.
 	 * @param dimY The Y dimension of the rectangle.
 	 */
-	public static void draw(Drawable g){
+	public static void draw(TextureDrawable g){
 		g.getTexture().bind();
 		glPushMatrix();//create new matrix for manipulation of the given rectangle.
 		glTranslatef(g.getCoordX(),g.getCoordY(),0);//set starting point to the coordinates needed.

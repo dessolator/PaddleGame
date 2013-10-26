@@ -3,9 +3,9 @@ package dev.game.project.menus.buttons;
 import org.newdawn.slick.opengl.Texture;
 
 import dev.game.project.engine.DrawObject;
-import dev.game.project.engine.Drawable;
+import dev.game.project.engine.TextureDrawable;
 
-public abstract class Button implements Drawable{
+public abstract class Button implements TextureDrawable{
 	protected Texture myTexture;
 	public Button(float coordX, float coordY, float dimX, float dimY) {
 		this.coordX = coordX;

@@ -6,10 +6,11 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 
 import dev.game.project.engine.DrawObject;
-import dev.game.project.engine.Drawable;
+import dev.game.project.engine.TextureDrawable;
+import dev.game.project.gameMechanics.Updateable;
 import dev.game.project.menus.buttons.Button;
 
-public abstract class Menu implements Drawable{
+public abstract class Menu implements TextureDrawable, Updateable{
 	protected ArrayList<Button> myButtons;
 	protected Texture background;
 	protected Frame myFrame;
@@ -40,6 +41,11 @@ public abstract class Menu implements Drawable{
 	@Override
 	public float getDimY(){
 		return (float)Display.getHeight();
+	}
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

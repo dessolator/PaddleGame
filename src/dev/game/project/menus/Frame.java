@@ -4,9 +4,9 @@ package dev.game.project.menus;
 import org.newdawn.slick.opengl.Texture;
 
 import dev.game.project.engine.DrawObject;
-import dev.game.project.engine.Drawable;
+import dev.game.project.engine.TextureDrawable;
 
-public abstract class Frame implements Drawable {
+public abstract class Frame implements TextureDrawable {
 	protected Texture frame;
 	private float coordX;
 	private float coordY;

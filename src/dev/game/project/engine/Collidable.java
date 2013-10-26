@@ -1,5 +1,7 @@
 package dev.game.project.engine;
 
+import dev.game.project.gameObjects.GameObject;
+
 
 public abstract class Collidable extends GameObject{
 	public abstract void collided(GameObject o);//collidable objects need to collide with something
