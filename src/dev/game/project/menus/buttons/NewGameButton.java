@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import org.newdawn.slick.opengl.TextureLoader;
 
-import dev.game.project.menu.buttons.Button;
 
 public class NewGameButton extends Button {
 

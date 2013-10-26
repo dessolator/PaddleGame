@@ -7,7 +7,7 @@ import org.newdawn.slick.opengl.Texture;
 
 import dev.game.project.engine.DrawObject;
 import dev.game.project.engine.Drawable;
-import dev.game.project.menu.buttons.Button;
+import dev.game.project.menus.buttons.Button;
 
 public abstract class Menu implements Drawable{
 	protected ArrayList<Button> myButtons;
