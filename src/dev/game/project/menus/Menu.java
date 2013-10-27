@@ -2,6 +2,7 @@ package dev.game.project.menus;
 
 import java.util.ArrayList;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 
@@ -44,8 +45,25 @@ public abstract class Menu implements Drawable, Updateable{
 	}
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		if(Mouse.getEventButtonState()){
+			if(Mouse.isButtonDown(0)){
+				for(Button b:myButtons){
+					if(b.isInBounds(Mouse.getX(), Mouse.getY())){
+						b.click();
+					}
+				}
+			}
+		}else
+		{
+			for(Button b:myButtons){
+				if(b.isInBounds(Mouse.getX(), Mouse.getY()) && b.isClicked()){
+					b.pressed();
+				}
+				else{
+					b.unClick();
+				}
+			}
+		}
 	}
 
 }

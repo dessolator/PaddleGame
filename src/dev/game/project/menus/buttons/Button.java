@@ -9,6 +9,7 @@ import dev.game.project.engine.Drawable;
 
 public abstract class Button implements Drawable{
 	protected Texture myTexture;
+	protected boolean clicked=false;
 	public Button(float coordX, float coordY, float dimX, float dimY) {
 		this.coordX = coordX;
 		this.coordY = coordY;
@@ -23,6 +24,26 @@ public abstract class Button implements Drawable{
 		glColor3f(0.25f, 0.25f, 0.5f);
 		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());
 		//DrawObject.draw(this);
+	}
+	public void click(){
+		clicked=true;
+	}
+	public void unClick(){
+		clicked=false;
+	}
+	public boolean isClicked(){
+		return clicked;
+	}
+	public boolean isInBounds(float x,float y){
+		if (x<(coordX-(dimX/2)))
+			return false;
+		if (x>(coordX+(dimX/2)))
+			return false;
+		if (y>(coordY+(dimY/2)))
+			return false;
+		if (y>(coordY-(dimY/2)))
+			return false;
+		return true;
 	}
 	@Override
 	public Texture getTexture() {
@@ -44,5 +65,6 @@ public abstract class Button implements Drawable{
 	public float getDimY() {
 		return dimY;
 	}
+	public abstract void pressed();
 
 }
