@@ -63,7 +63,7 @@ public class Level implements Drawable, Updateable{
 						Display.getWidth()/20,
 						Display.getHeight()/30,
 						(j+1),
-						(Math.random()<0.5?true:false))
+						(Math.random()<0.07?true:false))
 				);
 				
 				coordx+=(int)Display.getWidth()/(18.6f);
