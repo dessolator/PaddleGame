@@ -26,13 +26,13 @@ public class DrawObject {
 		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 		glBegin(GL_QUADS);
 		{
-			glTexCoord2f(0f, 0f);
+			glTexCoord2f(0f, 1f);
 			glVertex2f(-g.getDimX()/2, -g.getDimY()/2);
-			glTexCoord2f(1f, 0f);
-			glVertex2f(g.getDimX()/2,-g.getDimY()/2);
 			glTexCoord2f(1f, 1f);
+			glVertex2f(g.getDimX()/2,-g.getDimY()/2);
+			glTexCoord2f(1f, 0f);
 			glVertex2f(g.getDimX()/2, g.getDimY()/2);
-			glTexCoord2f(0, 1f);
+			glTexCoord2f(0, 0f);
 			glVertex2f(-g.getDimX()/2, g.getDimY()/2);			
 		}
 		glEnd();
