@@ -1,5 +1,7 @@
 package dev.game.project.menus.buttons;
 
+import static org.lwjgl.opengl.GL11.glColor3f;
+
 import org.newdawn.slick.opengl.Texture;
 
 import dev.game.project.engine.DrawObject;
@@ -18,7 +20,9 @@ public abstract class Button implements TextureDrawable{
 	private float dimX;
 	private float dimY;
 	public void render(){
-		DrawObject.draw(this);
+		glColor3f(0.25f, 0.25f, 0.5f);
+		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());
+		//DrawObject.draw(this);
 	}
 	@Override
 	public Texture getTexture() {

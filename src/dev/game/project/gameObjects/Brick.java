@@ -1,24 +1,34 @@
 package dev.game.project.gameObjects;
 
-import static org.lwjgl.opengl.GL11.glColor3f;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
-
 import dev.game.project.engine.Collidable;
 import dev.game.project.engine.DrawObject;
-import dev.game.project.gameMechanics.PaddleGame;
 import dev.game.project.gameObjects.bonuses.Bonus;
 
-public class Brick extends Collidable {
+public class Brick extends GameObject implements Collidable {
 	private int hitPoints;//field used to keep track of the block's h.
 	private boolean droppsBonus;//field used to check if the block drops a bonus on destruction.\
-	Texture [] hpTextures;
+	private static Texture [] hpTextures;
+	private boolean destroyed=false;
+	static{
+		try {
+			hpTextures=new Texture[4];
+			hpTextures[3]=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/veryHeavyBrick.png")));
+			hpTextures[2]=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/heavyBrick.png")));	
+			hpTextures[1]=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/mediumBrick.png")));
+			hpTextures[0]=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/lightBrick.png")));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	/**
 	 * THe Constructor for bircks.
@@ -30,35 +40,13 @@ public class Brick extends Collidable {
 	 * @param droppsBonus Field indicating if the brick dropps a bonus or not.
 	 */
 	public Brick(float cordX, float cordY, float dimX, float dimY,int hitPoints,boolean droppsBonus) {
-		hpTextures=new Texture[4];
 		this.setCoordX(cordX);//Set the x coordinate to the passed value.
 		this.setCoordY(cordY);//Set the y coordinate to the passed value.
 		this.setDimX(dimX);//Set the x dimension to the passed value.
 		this.setDimY(dimY);//Set the y dimension to the passed value.
 		this.hitPoints=hitPoints;//Set the hit points to the passed value.
 		this.droppsBonus=droppsBonus;//Set the bonus drop to the passed value.
-		try {
-			switch(hitPoints){
-				case 4:
-					hpTextures[0]=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/veryHeavyBrick.png")));
-					break;
-				case 3:
-					hpTextures[1]=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/heavyBrick.png")));
-					break;
-				case 2:
-					hpTextures[2]=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/mediumBrick.png")));
-					break;
-				case 1:
-					hpTextures[3]=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/lightBrick.png")));
-					break;
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.setTexture(hpTextures[hitPoints-1]);
 	}
 	/* (non-Javadoc)
 	 * @see dev.game.project.GameObject#update()
@@ -92,26 +80,13 @@ public class Brick extends Collidable {
 				((Ball)o).setSpeedX(((Ball)o).getSpeedX() * -1);
 			}}
 			if(hitPoints<=0){//if the ball's hitpoints are 0 or below it has been destroyed,
-				destroyed=true;//mark it as destroyed.
+				setDestroyed(true);//mark it as destroyed.
 				if(droppsBonus){//if the brick was supposed to drop a bonus,
 					Bonus.drop(this);//drop a bonus.
 				}
 			}
 			else{
-					switch(hitPoints){
-						case 4:
-							setTexture(hpTextures[0]);
-							break;
-						case 3:
-							setTexture(hpTextures[1]);
-							break;
-						case 2:
-							setTexture(hpTextures[2]);
-							break;
-						case 1:
-							setTexture(hpTextures[3]);
-							break;
-					}
+				setTexture(hpTextures[hitPoints-1]);
 			}
 		}
 		
@@ -121,25 +96,38 @@ public class Brick extends Collidable {
 	 */
 	@Override
 	public void render() {
-		if(!PaddleGame.isVoodooMode()){
-			switch(hitPoints){
-			case 1:
-				glColor3f(1f, 1f, 0f);//set drawing color to yellow.
-				break;
-			case 2:
-				glColor3f(1f, 0.25f, 0f);//set drawing color to orange.
-				break;
-			case 3:
-				glColor3f(0.25f, 1f, 0.25f);//set drawing color to green.			
-				break;
-			default:
-				glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
-				break;
-				
-			}
-		}
-		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the brick	
-		//DrawObject.draw(this);
+//		if(!PaddleGame.isVoodooMode()){
+//			switch(hitPoints){
+//			case 1:
+//				glColor3f(1f, 1f, 0f);//set drawing color to yellow.
+//				break;
+//			case 2:
+//				glColor3f(1f, 0.25f, 0f);//set drawing color to orange.
+//				break;
+//			case 3:
+//				glColor3f(0.25f, 1f, 0.25f);//set drawing color to green.			
+//				break;
+//			default:
+//				glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
+//				break;
+//				
+//			}
+//		}
+		//DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the brick	
+		//this.setTexture(hpTextures[2]);
+		DrawObject.draw(this);
+	}
+	/**
+	 * @return the destroyed
+	 */
+	public boolean isDestroyed() {
+		return destroyed;
+	}
+	/**
+	 * @param destroyed the destroyed to set
+	 */
+	public void setDestroyed(boolean destroyed) {
+		this.destroyed = destroyed;
 	}
 
 

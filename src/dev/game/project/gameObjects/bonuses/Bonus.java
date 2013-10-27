@@ -1,12 +1,7 @@
 package dev.game.project.gameObjects.bonuses;
 
 import static org.lwjgl.opengl.GL11.glColor3f;
-
-
-
 import org.lwjgl.opengl.Display;
-
-
 import dev.game.project.engine.Collidable;
 import dev.game.project.engine.DrawObject;
 import dev.game.project.engine.Movable;
@@ -14,9 +9,10 @@ import dev.game.project.engine.Movable;
 import dev.game.project.gameMechanics.PaddleGame;
 
 import dev.game.project.gameObjects.Brick;
+import dev.game.project.gameObjects.GameObject;
 
 
-public abstract class Bonus extends Collidable implements Movable{
+public abstract class Bonus extends GameObject implements Movable,Collidable{
 	private static final int MAX_BONUSES_PER_LEVEL=6;
 	private static int bonusesDropped=0;
 	

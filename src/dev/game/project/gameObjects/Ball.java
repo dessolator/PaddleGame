@@ -104,8 +104,8 @@ public class Ball extends GameObject implements Movable {
 			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
 		}
 		
-		DrawObject.drawcoloredCirclef(getCoordX(),getCoordY(), getRadius());//draw the ball.
-		//DrawObject.draw(this);//draw the Ball using textures
+		//DrawObject.drawcoloredCirclef(getCoordX(),getCoordY(), getRadius());//draw the ball.
+		DrawObject.draw(this);//draw the Ball using textures
 	}
 
 

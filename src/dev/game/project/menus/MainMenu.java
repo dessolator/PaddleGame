@@ -26,25 +26,25 @@ public class MainMenu extends Menu {
 				);
 		myButtons.add(new NewGameButton(
 				Display.getWidth()/2,
-				0,
+				Display.getHeight()/2-Display.getHeight()/7,
 				Display.getWidth()/10,
 				Display.getHeight()/15)
 		);
 		myButtons.add(new SettingsButton(
 				Display.getWidth()/2,
-				0,
+				Display.getHeight()/2-Display.getHeight()/15,
 				Display.getWidth()/10,
 				Display.getHeight()/15)
 		);
 		myButtons.add(new ScoresButton(
 				Display.getWidth()/2,
-				0,
+				Display.getHeight()/2,
 				Display.getWidth()/10,
 				Display.getHeight()/15)
 		);
 		myButtons.add(new ExitGameButton(
 				Display.getWidth()/2,
-				0,
+				Display.getHeight()/2+Display.getHeight()/15,
 				Display.getWidth()/10,
 				Display.getHeight()/15)
 		);

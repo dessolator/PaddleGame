@@ -7,13 +7,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.TextureLoader;
-
 import dev.game.project.engine.Collidable;
 import dev.game.project.engine.DrawObject;
 import dev.game.project.engine.Movable;
 import dev.game.project.gameMechanics.PaddleGame;
 
-public class PlayerPaddle extends Collidable implements Movable{
+public class PlayerPaddle extends GameObject implements Movable,Collidable{
 	
 	private boolean widened;//flag for the widen bonus.
 	private boolean narrowed;//flag for the narrow bonus.
@@ -85,8 +84,8 @@ public class PlayerPaddle extends Collidable implements Movable{
 		if(!PaddleGame.isVoodooMode()){//if voodooMode is off,
 			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
 		}
-		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the rectangle
-		//DrawObject.draw(this);
+		//DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the rectangle
+		DrawObject.draw(this);
 	}
 	/**
 	 * Function used to trigger the widen bonus.

@@ -13,21 +13,26 @@ public class DrawObject {
 	 * @param dimY The Y dimension of the rectangle.
 	 */
 	public static void draw(TextureDrawable g){
-		g.getTexture().bind();
+		if(g.getTexture()!=null)
+			g.getTexture().bind();
+//		else
+//			System.out.println("NULL TEXTURE!!!");
 		glPushMatrix();//create new matrix for manipulation of the given rectangle.
 		glTranslatef(g.getCoordX(),g.getCoordY(),0);//set starting point to the coordinates needed.
 		glColor3f(1,1,1);
-		glDisable(GL_BLEND);
-		glDisable(GL_LIGHTING);
+		glEnable(GL_TEXTURE_2D);    
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 		glBegin(GL_QUADS);
 		{
-			glTexCoord2f(0, 0);
+			glTexCoord2f(0f, 0f);
 			glVertex2f(-g.getDimX()/2, -g.getDimY()/2);
-			glTexCoord2f(1, 0);
+			glTexCoord2f(1f, 0f);
 			glVertex2f(g.getDimX()/2,-g.getDimY()/2);
-			glTexCoord2f(1, 1);
+			glTexCoord2f(1f, 1f);
 			glVertex2f(g.getDimX()/2, g.getDimY()/2);
-			glTexCoord2f(0, 1);
+			glTexCoord2f(0, 1f);
 			glVertex2f(-g.getDimX()/2, g.getDimY()/2);			
 		}
 		glEnd();
@@ -50,6 +55,7 @@ public class DrawObject {
 		 * values adjusted so that coordinates are now,
 		 * at the center of the rectangle.
 		 */
+		glDisable(GL_TEXTURE_2D);//Disable textures... why? no clue, doesn't actually take color into account without this    
 		glBegin(GL_QUADS);
 		{
 			glVertex2f(-dimX/2, -dimY/2);

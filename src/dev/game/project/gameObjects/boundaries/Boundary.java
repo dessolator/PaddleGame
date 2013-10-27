@@ -1,8 +1,10 @@
 package dev.game.project.gameObjects.boundaries;
 
-import dev.game.project.engine.Collidable;
 
-public abstract class Boundary extends Collidable{
+import dev.game.project.engine.Collidable;
+import dev.game.project.gameObjects.GameObject;
+
+public abstract class Boundary extends GameObject implements Collidable{
 	
 	
 	/* (non-Javadoc)
