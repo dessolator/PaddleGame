@@ -11,7 +11,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 import dev.game.project.engine.DrawObject;
 import dev.game.project.engine.GamePhysics;
-import dev.game.project.engine.TextureDrawable;
+import dev.game.project.engine.Drawable;
 import dev.game.project.gameObjects.Ball;
 import dev.game.project.gameObjects.Brick;
 import dev.game.project.gameObjects.PlayerPaddle;
@@ -23,7 +23,7 @@ import dev.game.project.gameObjects.boundaries.LowerBoundary;
 import dev.game.project.gameObjects.boundaries.RightBoundary;
 import dev.game.project.gameObjects.boundaries.UpperBoundary;
 
-public class Level implements TextureDrawable, Updateable{
+public class Level implements Drawable, Updateable{
 	private ArrayList<Brick> bricks;//arraylist keeping track of bricks.
 	private ArrayList<Boundary> boundaries;
 	private ArrayList<Bonus> bonuses;//arraylist keeping track of spawned bonuses.
@@ -36,7 +36,7 @@ public class Level implements TextureDrawable, Updateable{
 	
 
 	public Level(int levelNumber) {
-		myBackground=getLevelBackground();
+		myBackground=getLevelBackground(levelNumber);
 		myBalls=new ArrayList<Ball>();
 		bricks=new ArrayList<Brick>();//init bricks.
 		boundaries=new ArrayList<Boundary>();
@@ -105,7 +105,7 @@ public class Level implements TextureDrawable, Updateable{
 
 
 
-	private static Texture getLevelBackground() {
+	private static Texture getLevelBackground(int levelNumber) {
 		//TODO switch case here
 		try {
 			return TextureLoader.getTexture("PNG", new FileInputStream(new File("res/levelBackground.png")));
@@ -282,15 +282,15 @@ public class Level implements TextureDrawable, Updateable{
 			}
 		}
 		for(Boundary b:boundaries){
-			for(Ball ball:myBalls){
-				if(GamePhysics.hit(ball, b)){
-					b.collided(ball);
+			for(int j=0;j<myBalls.size();j++){
+				if(GamePhysics.hit(myBalls.get(j), b)){
+					b.collided(myBalls.get(j));
 				}
 			}
 		}
-		for(Ball ball:myBalls){
-			if(GamePhysics.hit(ball, myPaddle)){
-				myPaddle.collided(ball);
+		for(int j=0;j<myBalls.size();j++){
+			if(GamePhysics.hit(myBalls.get(j), myPaddle)){
+				myPaddle.collided(myBalls.get(j));
 			}
 		}
 		

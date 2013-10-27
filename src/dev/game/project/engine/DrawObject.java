@@ -12,7 +12,7 @@ public class DrawObject {
 	 * @param dimX The X dimension of the rectangle.
 	 * @param dimY The Y dimension of the rectangle.
 	 */
-	public static void draw(TextureDrawable g){
+	public static void draw(Drawable g){
 		if(g.getTexture()!=null)
 			g.getTexture().bind();
 //		else

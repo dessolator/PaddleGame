@@ -2,11 +2,8 @@ package dev.game.project.gameMechanics;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
-
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
-
 import dev.game.project.engine.Drawable;
 import dev.game.project.menus.MainMenu;
 

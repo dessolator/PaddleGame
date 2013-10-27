@@ -5,9 +5,9 @@ import static org.lwjgl.opengl.GL11.glColor3f;
 import org.newdawn.slick.opengl.Texture;
 
 import dev.game.project.engine.DrawObject;
-import dev.game.project.engine.TextureDrawable;
+import dev.game.project.engine.Drawable;
 
-public abstract class Button implements TextureDrawable{
+public abstract class Button implements Drawable{
 	protected Texture myTexture;
 	public Button(float coordX, float coordY, float dimX, float dimY) {
 		this.coordX = coordX;

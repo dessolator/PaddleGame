@@ -1,6 +1,5 @@
 package dev.game.project.gameObjects.bonuses;
 
-import static org.lwjgl.opengl.GL11.glColor3f;
 import org.lwjgl.opengl.Display;
 import dev.game.project.engine.Collidable;
 import dev.game.project.engine.DrawObject;
@@ -66,9 +65,9 @@ public abstract class Bonus extends GameObject implements Movable,Collidable{
 
 	@Override
 	public void render() {
-		glColor3f(1f, 0f, 1f);
-		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());
-//		DrawObject.draw(this);
+//		glColor3f(1f, 0f, 1f);
+//		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());
+		DrawObject.draw(this);
 				
 	}
 	public abstract void undo();
