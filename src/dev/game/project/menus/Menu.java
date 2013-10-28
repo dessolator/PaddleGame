@@ -18,6 +18,7 @@ public abstract class Menu implements Drawable, Updateable{
 	
 	@Override
 	public void render() {
+		Mouse.setGrabbed(false);
 		DrawObject.draw(this);
 		myFrame.render();
 		for (Button b:myButtons)
@@ -45,22 +46,26 @@ public abstract class Menu implements Drawable, Updateable{
 	}
 	@Override
 	public void update() {
-		if(Mouse.getEventButtonState()){
-			if(Mouse.isButtonDown(0)){
-				for(Button b:myButtons){
-					if(b.isInBounds(Mouse.getX(), Mouse.getY())){
-						b.click();
+		while(Mouse.next()){
+			if(Mouse.getEventButtonState()){
+				if(Mouse.getEventButton()==0){
+					for(Button b:myButtons){
+						if(b.isInBounds(Mouse.getX(), Mouse.getY())){
+							b.click();
+						}
 					}
 				}
-			}
-		}else
-		{
-			for(Button b:myButtons){
-				if(b.isInBounds(Mouse.getX(), Mouse.getY()) && b.isClicked()){
-					b.pressed();
-				}
-				else{
-					b.unClick();
+			}else
+			{
+				if(Mouse.getEventButton()==0){
+					for(Button b:myButtons){
+						if(b.isInBounds(Mouse.getX(), Mouse.getY()) && b.isClicked()){
+							b.pressed();
+						}
+						else{
+							b.unClick();
+						}
+					}
 				}
 			}
 		}

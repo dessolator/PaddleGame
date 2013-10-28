@@ -28,7 +28,7 @@ public class PaddleGame {
 	 */
 	public static void startGame(boolean voodoo) {
 		setVoodooMode(voodoo);//read voodooMode param
-		while((!Display.isCloseRequested())&&!terminate) {//if ESCAPE hasn't been hit and the display hasn't been closed otherwise
+		while((!Display.isCloseRequested())&&!isTerminate()) {//if ESCAPE hasn't been hit and the display hasn't been closed otherwise
 			glClear(GL_COLOR_BUFFER_BIT);//for each frame clear the screen
 			//displayFPS();//print framerate for debug purposes
 			processInput();//read player input
@@ -40,9 +40,9 @@ public class PaddleGame {
 		
 	}
 	
-	static int currentGameState=0;
+	private static int currentGameState=1;
 	static Drawable getDraw(){
-		switch(currentGameState){
+		switch(getCurrentGameState()){
 			case 0:
 				return myLevel;
 			case 1:
@@ -52,7 +52,7 @@ public class PaddleGame {
 		}
 	}
 	static Updateable getUpdate(){
-		switch(currentGameState){
+		switch(getCurrentGameState()){
 		case 0:
 			return myLevel;
 		case 1:
@@ -89,7 +89,7 @@ public class PaddleGame {
 			myLevel.movePaddle(1);//move right
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
-			terminate=true;//set terminate flag
+			setTerminate(true);//set terminate flag
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_V)){
 			if(!isVoodooMode()&&(((long)System.nanoTime()-voodooTriggered)>250000000)){//if voodooMode is off and the break time passed
@@ -126,6 +126,30 @@ public class PaddleGame {
 	 */
 	public static void setVoodooMode(boolean voodooMode) {
 		PaddleGame.voodooMode = voodooMode;
+	}
+	/**
+	 * @return the terminate
+	 */
+	public static boolean isTerminate() {
+		return terminate;
+	}
+	/**
+	 * @param terminate the terminate to set
+	 */
+	public static void setTerminate(boolean terminate) {
+		PaddleGame.terminate = terminate;
+	}
+	/**
+	 * @return the currentGameState
+	 */
+	public static int getCurrentGameState() {
+		return currentGameState;
+	}
+	/**
+	 * @param currentGameState the currentGameState to set
+	 */
+	public static void setCurrentGameState(int currentGameState) {
+		PaddleGame.currentGameState = currentGameState;
 	}
 	
 }

@@ -7,6 +7,8 @@ import java.io.IOException;
 
 import org.newdawn.slick.opengl.TextureLoader;
 
+import dev.game.project.gameMechanics.PaddleGame;
+
 
 public class NewGameButton extends Button {
 
@@ -19,6 +21,12 @@ public class NewGameButton extends Button {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void pressed() {
+		PaddleGame.setCurrentGameState(0);
+		
 	}
 
 }

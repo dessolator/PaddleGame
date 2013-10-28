@@ -41,7 +41,7 @@ public abstract class Button implements Drawable{
 			return false;
 		if (y>(coordY+(dimY/2)))
 			return false;
-		if (y>(coordY-(dimY/2)))
+		if (y<(coordY-(dimY/2)))
 			return false;
 		return true;
 	}
