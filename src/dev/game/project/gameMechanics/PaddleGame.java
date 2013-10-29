@@ -89,7 +89,7 @@ public class PaddleGame {
 			myLevel.movePaddle(1);//move right
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
-			setTerminate(true);//set terminate flag
+			goBack();//set terminate flag
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_V)){
 			if(!isVoodooMode()&&(((long)System.nanoTime()-voodooTriggered)>250000000)){//if voodooMode is off and the break time passed
@@ -104,6 +104,12 @@ public class PaddleGame {
 			}
 		}
 		
+	}
+	private static void goBack() {
+		//switch(currentGameState){
+		//case:
+		//}
+		currentGameState=1;		
 	}
 	/**
 	 * Getter for the paddle object.

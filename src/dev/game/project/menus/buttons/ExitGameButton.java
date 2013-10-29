@@ -16,11 +16,13 @@ public class ExitGameButton extends Button {
 		super(coordX, coordY, dimX, dimY);
 		try {
 			myTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/exitGameButton.png")));
+			pressedTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/exitGameButton.png")));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	@Override

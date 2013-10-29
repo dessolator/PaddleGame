@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
@@ -178,6 +180,7 @@ public class Level implements Drawable, Updateable{
 	 * Function used to render the level.
 	 */
 	public void render() {
+		Mouse.setGrabbed(true);
 		DrawObject.draw(this);
 		myPaddle.render();
 		for(Brick b:bricks){

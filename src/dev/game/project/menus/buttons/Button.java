@@ -9,6 +9,7 @@ import dev.game.project.engine.Drawable;
 
 public abstract class Button implements Drawable{
 	protected Texture myTexture;
+	protected Texture pressedTexture;
 	protected boolean clicked=false;
 	public Button(float coordX, float coordY, float dimX, float dimY) {
 		this.coordX = coordX;
@@ -47,6 +48,8 @@ public abstract class Button implements Drawable{
 	}
 	@Override
 	public Texture getTexture() {
+		if(clicked)
+			return pressedTexture;
 		return myTexture;
 	}
 	@Override
