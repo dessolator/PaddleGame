@@ -81,10 +81,12 @@ public class PlayerPaddle extends GameObject implements Movable,Collidable{
 	 */
 	@Override
 	public void render() {
-		if(!PaddleGame.isVoodooMode()){//if voodooMode is off,
-			glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
-		}
-		//DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the rectangle
+		if(!PaddleGame.isDrawTextures()){
+			if(!PaddleGame.isVoodooMode()){//if voodooMode is off,
+				glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
+			}
+			DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the rectangle
+		}else
 		DrawObject.draw(this);
 	}
 	/**

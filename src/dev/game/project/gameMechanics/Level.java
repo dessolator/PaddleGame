@@ -181,7 +181,8 @@ public class Level implements Drawable, Updateable{
 	 */
 	public void render() {
 		Mouse.setGrabbed(true);
-		DrawObject.draw(this);
+		if(PaddleGame.isDrawTextures())
+			DrawObject.draw(this);
 		myPaddle.render();
 		for(Brick b:bricks){
 			b.render();

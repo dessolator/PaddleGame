@@ -14,6 +14,7 @@ public class PaddleGame {
 	private static MainMenu myMainMenu;
 	private static boolean terminate=false;//variable used to check if the user hit ESCAPE
 	private static int currentLevel=1;
+	private static boolean drawTextures=false;
 	static{
 		
 		myLevel=new Level(currentLevel);
@@ -156,6 +157,18 @@ public class PaddleGame {
 	 */
 	public static void setCurrentGameState(int currentGameState) {
 		PaddleGame.currentGameState = currentGameState;
+	}
+	/**
+	 * @return the drawTextures
+	 */
+	public static boolean isDrawTextures() {
+		return drawTextures;
+	}
+	/**
+	 * @param drawTextures the drawTextures to set
+	 */
+	public static void setDrawTextures(boolean drawTextures) {
+		PaddleGame.drawTextures = drawTextures;
 	}
 	
 }

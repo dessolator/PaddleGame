@@ -1,6 +1,7 @@
 package dev.game.project.gameObjects;
 
 import java.io.File;
+import static org.lwjgl.opengl.GL11.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import dev.game.project.engine.Collidable;
 import dev.game.project.engine.DrawObject;
+import dev.game.project.gameMechanics.PaddleGame;
 import dev.game.project.gameObjects.bonuses.Bonus;
 
 public class Brick extends GameObject implements Collidable {
@@ -96,25 +98,26 @@ public class Brick extends GameObject implements Collidable {
 	 */
 	@Override
 	public void render() {
-//		if(!PaddleGame.isVoodooMode()){
-//			switch(hitPoints){
-//			case 1:
-//				glColor3f(1f, 1f, 0f);//set drawing color to yellow.
-//				break;
-//			case 2:
-//				glColor3f(1f, 0.25f, 0f);//set drawing color to orange.
-//				break;
-//			case 3:
-//				glColor3f(0.25f, 1f, 0.25f);//set drawing color to green.			
-//				break;
-//			default:
-//				glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
-//				break;
-//				
-//			}
-//		}
-		//DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the brick	
-		//this.setTexture(hpTextures[2]);
+		if(!PaddleGame.isDrawTextures()){
+			if(!PaddleGame.isVoodooMode()){
+				switch(hitPoints){
+				case 1:
+					glColor3f(1f, 1f, 0f);//set drawing color to yellow.
+					break;
+				case 2:
+					glColor3f(1f, 0.25f, 0f);//set drawing color to orange.
+					break;
+				case 3:
+					glColor3f(0.25f, 1f, 0.25f);//set drawing color to green.			
+					break;
+				default:
+					glColor3f(0.25f, 0.75f, 0.5f);//set drawing color to cyan.
+					break;
+					
+				}
+			}
+			DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());//draw the brick	
+		}else
 		DrawObject.draw(this);
 	}
 	/**
