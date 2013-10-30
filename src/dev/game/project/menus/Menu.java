@@ -10,6 +10,7 @@ import dev.game.project.engine.DrawObject;
 import dev.game.project.engine.Drawable;
 import dev.game.project.gameMechanics.Updateable;
 import dev.game.project.menus.buttons.Button;
+import dev.game.project.menus.elements.Frame;
 
 public abstract class Menu implements Drawable, Updateable{
 	protected ArrayList<Button> myButtons;

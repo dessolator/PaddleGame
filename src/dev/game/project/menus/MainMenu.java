@@ -14,6 +14,7 @@ import dev.game.project.menus.buttons.ExitGameButton;
 import dev.game.project.menus.buttons.NewGameButton;
 import dev.game.project.menus.buttons.ScoresButton;
 import dev.game.project.menus.buttons.SettingsButton;
+import dev.game.project.menus.elements.BasicFrame;
 
 public class MainMenu extends Menu {
 	public MainMenu(){

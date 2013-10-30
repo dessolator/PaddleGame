@@ -9,12 +9,12 @@ import dev.game.project.menus.MainMenu;
 import dev.game.project.menus.PauseMenu;
 
 public class PaddleGame {
-	private static boolean voodooMode=false;//@credit Jovan Davidovic\
+	private static boolean voodooMode=false;//@credit Jovan Davidovic\\
 	private static long voodooTriggered=0l;//field used to keep track of when voodooMode was last triggered
 	private static Level myLevel;//Level field containing all the game objects
 	private static MainMenu myMainMenu;
-	private static PauseMenu myPauseMenu;//TODO 
-	//private static SettingsMenu mySettingsMenu;
+	private static PauseMenu myPauseMenu; 
+	//private static SettingsMenu mySettingsMenu;//TODO
 	//private static ScoresMenu myScoresMenu;
 	private static boolean terminate=false;//variable used to check if the user hit ESCAPE
 	private static int currentLevel=1;//variable used to keep track of the current level
@@ -26,7 +26,7 @@ public class PaddleGame {
 		myMainMenu=new MainMenu();
 		myPauseMenu=new PauseMenu();
 		//mySettingsMenu=new SettingsMenu();
-		//myScoresMenu=new ScoresMenu();//TODO maybe have menus as static?
+		//myScoresMenu=new ScoresMenu();//TODO probably have menus as static?
 		
 	}
 	

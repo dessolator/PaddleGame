@@ -10,6 +10,7 @@ import dev.game.project.gameMechanics.PaddleGame;
 import dev.game.project.menus.buttons.Button;
 import dev.game.project.menus.buttons.MainMenuButton;
 import dev.game.project.menus.buttons.ResumeGameButton;
+import dev.game.project.menus.elements.BasicFrame;
 
 
 public class PauseMenu extends Menu {
@@ -51,24 +52,5 @@ public class PauseMenu extends Menu {
 		return null;
 	}
 
-	@Override
-	public float getCoordX() {
-		return Display.getWidth()/2;
-	}
-
-	@Override
-	public float getDimX() {
-		return Display.getWidth();
-	}
-
-	@Override
-	public float getCoordY() {
-		return Display.getHeight()/2;
-	}
-
-	@Override
-	public float getDimY() {
-		return Display.getHeight();
-	}
-
+	
 }

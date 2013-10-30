@@ -1,4 +1,4 @@
-package dev.game.project.menus;
+package dev.game.project.menus.elements;
 
 
 import org.newdawn.slick.opengl.Texture;
