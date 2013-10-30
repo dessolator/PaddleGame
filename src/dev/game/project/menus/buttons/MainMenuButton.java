@@ -9,27 +9,24 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 import dev.game.project.gameMechanics.PaddleGame;
 
+public class MainMenuButton extends Button {
 
-public class NewGameButton extends Button {
-
-
-	public NewGameButton(float coordX, float coordY, float dimX, float dimY) {
+	public MainMenuButton(float coordX, float coordY, float dimX, float dimY) {
 		super(coordX, coordY, dimX, dimY);
 		try {
-			myTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/newGameButton.png")));
-			pressedTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/newGameButton.png")));
+			myTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/mainMenuButton.png")));
+			pressedTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/mainMenuButton.png")));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	@Override
 	public void pressed() {
-		PaddleGame.setCurrentGameState(1);
-		
+		PaddleGame.setCurrentGameState(0);
+
 	}
 
 }

@@ -49,6 +49,9 @@ public class DrawObject {
 		float b=(float)Math.random();//randomize green component.
 		glColor3f(r,g,b);//set color to random.
 		}
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 		
 		/*
 		 * Draw Rectangle using GL,

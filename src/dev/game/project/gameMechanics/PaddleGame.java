@@ -6,19 +6,27 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import dev.game.project.engine.Drawable;
 import dev.game.project.menus.MainMenu;
+import dev.game.project.menus.PauseMenu;
 
 public class PaddleGame {
 	private static boolean voodooMode=false;//@credit Jovan Davidovic\
-	private static long voodooTriggered=0l;//field uset to keep track of when voodooMode was last triggered
-	static Level myLevel;//Level field containing all the game objects
+	private static long voodooTriggered=0l;//field used to keep track of when voodooMode was last triggered
+	private static Level myLevel;//Level field containing all the game objects
 	private static MainMenu myMainMenu;
+	private static PauseMenu myPauseMenu;//TODO 
+	//private static SettingsMenu mySettingsMenu;
+	//private static ScoresMenu myScoresMenu;
 	private static boolean terminate=false;//variable used to check if the user hit ESCAPE
-	private static int currentLevel=1;
-	private static boolean drawTextures=false;
+	private static int currentLevel=1;//variable used to keep track of the current level
+	private static boolean drawTextures=true;//flag used to draw textures/colors
+	private static int currentGameState=0;//variable used to keep track of the current game state.
 	static{
 		
 		myLevel=new Level(currentLevel);
 		myMainMenu=new MainMenu();
+		myPauseMenu=new PauseMenu();
+		//mySettingsMenu=new SettingsMenu();
+		//myScoresMenu=new ScoresMenu();//TODO maybe have menus as static?
 		
 	}
 	
@@ -41,26 +49,46 @@ public class PaddleGame {
 		
 	}
 	
-	private static int currentGameState=1;
-	static Drawable getDraw(){
+	
+	/**
+	 * Function used to determine which game state to draw.
+	 * @return The game state to be drawn.
+	 */
+	static Drawable getDraw(){//TODO
 		switch(getCurrentGameState()){
 			case 0:
-				return myLevel;
-			case 1:
 				return myMainMenu;
+			case 1:
+				return myLevel;
+			case 2:
+				return myPauseMenu;
+			case 3:
+//				return myScoresMenu;
+			case 4:
+//				return mySettingsMenu;
 			default:
 				return null;
 		}
 	}
-	static Updateable getUpdate(){
+	/**
+	 * Function used to determine which game state to update.
+	 * @return The game state to be updated.
+	 */
+	static Updateable getUpdate(){//TODO
 		switch(getCurrentGameState()){
 		case 0:
-			return myLevel;
-		case 1:
 			return myMainMenu;
+		case 1:
+			return myLevel;
+		case 2:
+			return myPauseMenu;
+		case 3:
+//			return myScoresMenu;
+		case 4:
+//			return mySettingsMenu;
 		default:
 			return null;
-		}
+	}
 	}
 	private static long frameStart=0;//Variable used to keep track of the frame start time
 	private static int frames=1;//number of frames in the current second
@@ -106,11 +134,30 @@ public class PaddleGame {
 		}
 		
 	}
+	/**
+	 * Sets the gamestate to be returned to when the esc key is hit. 
+	 */
 	private static void goBack() {
-		//switch(currentGameState){
-		//case:
-		//}
-		currentGameState=1;		
+		switch(getCurrentGameState()){
+			case 0:
+				//display "Are You Sure You Want To Quit Dialogue".
+				terminate=true;
+				break;
+			case 1:
+				currentGameState=2;//display PauseMenu.
+				break;
+			case 2:
+				currentGameState=1;//go back to Game.
+				break;
+			case 3:
+				currentGameState=0;//go back to main menu.
+				break;
+			case 4:
+				currentGameState=0;//go back to main menu.
+				break;
+			default:
+				currentGameState=0;
+		}	
 	}
 	/**
 	 * Getter for the paddle object.
@@ -169,6 +216,28 @@ public class PaddleGame {
 	 */
 	public static void setDrawTextures(boolean drawTextures) {
 		PaddleGame.drawTextures = drawTextures;
+	}
+	/**
+	 * Function used to progress to next level.
+	 */
+	public static void beatLevel(){
+		myLevel=new Level(++currentLevel);
+	}
+
+
+	/**
+	 * @return the myLevel
+	 */
+	public static Level getMyLevel() {
+		return myLevel;
+	}
+
+
+	/**
+	 * @param myLevel the myLevel to set
+	 */
+	public static void setMyLevel(Level myLevel) {
+		PaddleGame.myLevel = myLevel;
 	}
 	
 }
