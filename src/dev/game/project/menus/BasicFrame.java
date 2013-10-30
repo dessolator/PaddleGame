@@ -7,9 +7,9 @@ import java.io.IOException;
 
 import org.newdawn.slick.opengl.TextureLoader;
 
-public class MainMenuFrame extends Frame {
+public class BasicFrame extends Frame {
 
-	public MainMenuFrame(float coordX, float coordY, float dimX, float dimY) {
+	public BasicFrame(float coordX, float coordY, float dimX, float dimY) {
 		super(coordX, coordY, dimX, dimY);
 		try {
 			frame=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/mainMenuFrame.png")));

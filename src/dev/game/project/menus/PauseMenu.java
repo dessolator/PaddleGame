@@ -15,9 +15,15 @@ import dev.game.project.menus.buttons.ResumeGameButton;
 public class PauseMenu extends Menu {
 	public PauseMenu(){
 		myButtons=new ArrayList<Button>();
+		myFrame=new BasicFrame(
+				Display.getWidth()/2,
+				Display.getHeight()/2,
+				Display.getWidth()/5,
+				Display.getHeight()/2
+				);
 		myButtons.add(new MainMenuButton(
 				Display.getWidth()/2,
-				Display.getHeight()/2-Display.getHeight()/7+Display.getHeight()/30,
+				Display.getHeight()/2+Display.getHeight()/30,
 				Display.getWidth()/10,
 				Display.getHeight()/15)
 		);
@@ -35,6 +41,7 @@ public class PauseMenu extends Menu {
 		glColor4f(0f, 0f, 0f,0.5f);
 		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());
 		Mouse.setGrabbed(false);
+		myFrame.render();
 		for (Button b:myButtons)
 			DrawObject.draw(b);
 	}
