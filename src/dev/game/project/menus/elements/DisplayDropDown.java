@@ -3,6 +3,7 @@ package dev.game.project.menus.elements;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.lwjgl.LWJGLException;
@@ -48,8 +49,18 @@ public class DisplayDropDown extends DropDown {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for(int i=1;i<modes.length;i++){
-			myEntries.add(new ResEntry(modes[i].getWidth(),modes[i].getHeight(),getCoordX(),(getCoordY()-i*getDimY()),getDimX(),getDimY()));
+		int added=1;
+		for(int i=0;i<modes.length;i++){
+			
+			boolean add=true;
+			for(DropDownEntry r:myEntries){
+				if(((ResEntry)r).getHeight()==modes[i].getHeight()&&((ResEntry)r).getWidth()==modes[i].getWidth())
+					add=false;
+			}
+			if(add){
+				myEntries.add(new ResEntry(modes[i].getWidth(),modes[i].getHeight(),getCoordX(),(getCoordY()-added*getDimY()),getDimX(),getDimY()));
+				added++;
+			}
 		}
 	}
 
