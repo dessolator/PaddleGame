@@ -7,6 +7,7 @@ import org.lwjgl.opengl.Display;
 import dev.game.project.engine.Drawable;
 import dev.game.project.menus.MainMenu;
 import dev.game.project.menus.PauseMenu;
+import dev.game.project.menus.SettingsMenu;
 
 public class PaddleGame {
 	private static boolean voodooMode=false;//@credit Jovan Davidovic\\
@@ -14,8 +15,8 @@ public class PaddleGame {
 	private static Level myLevel;//Level field containing all the game objects
 	private static MainMenu myMainMenu;
 	private static PauseMenu myPauseMenu; 
-	//private static SettingsMenu mySettingsMenu;//TODO
-	//private static ScoresMenu myScoresMenu;
+	private static SettingsMenu mySettingsMenu;
+	//private static ScoresMenu myScoresMenu;//TODO
 	private static boolean terminate=false;//variable used to check if the user hit ESCAPE
 	private static int currentLevel=1;//variable used to keep track of the current level
 	private static boolean drawTextures=true;//flag used to draw textures/colors
@@ -25,7 +26,7 @@ public class PaddleGame {
 		myLevel=new Level(currentLevel);
 		myMainMenu=new MainMenu();
 		myPauseMenu=new PauseMenu();
-		//mySettingsMenu=new SettingsMenu();
+		mySettingsMenu=new SettingsMenu();
 		//myScoresMenu=new ScoresMenu();//TODO probably have menus as static?
 		
 	}
@@ -65,7 +66,7 @@ public class PaddleGame {
 			case 3:
 //				return myScoresMenu;
 			case 4:
-//				return mySettingsMenu;
+				return mySettingsMenu;
 			default:
 				return null;
 		}
@@ -85,7 +86,7 @@ public class PaddleGame {
 		case 3:
 //			return myScoresMenu;
 		case 4:
-//			return mySettingsMenu;
+			return mySettingsMenu;
 		default:
 			return null;
 	}

@@ -9,16 +9,34 @@ import dev.game.project.menus.elements.CheckBox;
 import dev.game.project.menus.elements.ColorsBox;
 import dev.game.project.menus.elements.DisplayDropDown;
 import dev.game.project.menus.elements.DropDown;
+import dev.game.project.menus.elements.SettingsFrame;
 
 public class SettingsMenu extends Menu {
 	@Override
 	public void render() {
-		//super.render();
+		myFrame.render();
+		for(Button b:myButtons){
+			b.render();
+		}
+		for(CheckBox c:myCheckBoxes){
+			c.render();
+		}
+		for(DropDown d:myDropDowns){
+			d.render();
+		}
 	}
 
 	@Override
 	public void update() {
-		//super.update();
+		for(Button b:myButtons){
+			b.update();
+		}
+		for(CheckBox c:myCheckBoxes){
+			c.update();
+		}
+		for(DropDown d:myDropDowns){
+			d.update();
+		}
 	}
 
 	ArrayList<CheckBox> myCheckBoxes;
@@ -47,17 +65,17 @@ public class SettingsMenu extends Menu {
 				Display.getWidth()/10,
 				Display.getHeight()/15)
 		);
-		myCheckBoxes.add(new ColorsBox(
-				0,
-				0,
-				0,
-				0)
-		);
+		//myCheckBoxes.add(new ColorsBox(
+//				0,
+//				0,
+//				0,
+//				0)
+//		);
 		myDropDowns.add(new DisplayDropDown(
-				0,
-				0,
-				0,
-				0)
+				Display.getWidth()/4,
+				Display.getHeight()/2,
+				Display.getWidth()/10,
+				Display.getHeight()/30)
 		);
 	}
 	

@@ -1,6 +1,5 @@
-package dev.game.project.menus;
+package dev.game.project.menus.elements;
 
-import dev.game.project.menus.elements.Frame;
 
 public class SettingsFrame extends Frame {
 

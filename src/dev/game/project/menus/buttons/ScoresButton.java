@@ -27,7 +27,7 @@ public class ScoresButton extends Button {
 
 	@Override
 	public void pressed() {
-		PaddleGame.setCurrentGameState(2);
+		PaddleGame.setCurrentGameState(3);
 		
 	}
 }

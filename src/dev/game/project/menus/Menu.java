@@ -23,7 +23,7 @@ public abstract class Menu implements Drawable, Updateable{
 		DrawObject.draw(this);
 		myFrame.render();
 		for (Button b:myButtons)
-			DrawObject.draw(b);		
+			b.render();		
 	}
 	@Override
 	public Texture getTexture() {
@@ -51,21 +51,14 @@ public abstract class Menu implements Drawable, Updateable{
 			if(Mouse.getEventButtonState()){
 				if(Mouse.getEventButton()==0){
 					for(Button b:myButtons){
-						if(b.isInBounds(Mouse.getX(), Mouse.getY())){
-							b.click();
-						}
+						b.update();
 					}
 				}
 			}else
 			{
 				if(Mouse.getEventButton()==0){
 					for(Button b:myButtons){
-						if(b.isInBounds(Mouse.getX(), Mouse.getY()) && b.isClicked()){
-							b.pressed();
-						}
-						else{
-							b.unClick();
-						}
+						b.update();
 					}
 				}
 			}

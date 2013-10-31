@@ -18,6 +18,7 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
 
 public class Engine {
 	/**
@@ -26,13 +27,13 @@ public class Engine {
 	 */
 	public static void init() {
 		try {			
-//			DisplayMode[] modes = Display.getAvailableDisplayModes();
-//			for (int i=0;i<modes.length;i++) {//loop to print out all the possible fullscreen display modes.
-//			    DisplayMode current = modes[i];
-//			    if(modes[i].isFullscreenCapable())
-//			    System.out.println(i+":"+current.getWidth() + "x" + current.getHeight() + "x" +
-//			                        current.getBitsPerPixel() + " " + current.getFrequency() + "Hz");
-//			}
+			DisplayMode[] modes = Display.getAvailableDisplayModes();
+			for (int i=0;i<modes.length;i++) {//loop to print out all the possible fullscreen display modes.
+			    DisplayMode current = modes[i];
+			    if(modes[i].isFullscreenCapable())
+			    System.out.println(i+":"+current.getWidth() + "x" + current.getHeight() + "x" +
+			                        current.getBitsPerPixel() + " " + current.getFrequency() + "Hz");
+			}
 			
 			/*
 			 * Display initialization.

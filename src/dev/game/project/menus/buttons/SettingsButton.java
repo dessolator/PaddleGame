@@ -27,7 +27,7 @@ public class SettingsButton extends Button {
 	}
 	@Override
 	public void pressed() {
-		PaddleGame.setCurrentGameState(3);
+		PaddleGame.setCurrentGameState(4);
 		
 	}
 

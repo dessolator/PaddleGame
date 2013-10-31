@@ -1,13 +1,15 @@
 package dev.game.project.menus.buttons;
 
-import static org.lwjgl.opengl.GL11.glColor3f;
+//import static org.lwjgl.opengl.GL11.glColor3f;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.opengl.Texture;
 
 import dev.game.project.engine.DrawObject;
 import dev.game.project.engine.Drawable;
+import dev.game.project.gameMechanics.Updateable;
 
-public abstract class Button implements Drawable{
+public abstract class Button implements Drawable, Updateable{
 	protected Texture myTexture;
 	protected Texture pressedTexture;
 	protected boolean clicked=false;
@@ -22,9 +24,9 @@ public abstract class Button implements Drawable{
 	private float dimX;
 	private float dimY;
 	public void render(){
-		glColor3f(0.25f, 0.25f, 0.5f);
-		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());
-		//DrawObject.draw(this);
+		//glColor3f(0.25f, 0.25f, 0.5f);
+		//DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());
+		DrawObject.draw(this);
 	}
 	public void click(){
 		clicked=true;
@@ -69,5 +71,18 @@ public abstract class Button implements Drawable{
 		return dimY;
 	}
 	public abstract void pressed();
+	@Override
+	public void update() {
+		if(isInBounds(Mouse.getX(), Mouse.getY())){
+			click();
+		}
+		if(isInBounds(Mouse.getX(), Mouse.getY()) && isClicked()){
+			pressed();
+		}
+		else{
+			unClick();
+		}
+		
+	}
 
 }
