@@ -1,5 +1,12 @@
 package dev.game.project.menus.buttons;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import dev.game.project.gameMechanics.PaddleGame;
+import dev.game.project.menus.elements.ResEntry;
+
 
 public class ApplyButton extends Button {
 
@@ -10,9 +17,17 @@ public class ApplyButton extends Button {
 
 	@Override
 	public void pressed() {
-		//TODO write setRes.getWidth() into file
-		//TODO write setRes.getHeight() into file
-		
+		try {
+			FileWriter fstreamWrite;
+			fstreamWrite = new FileWriter("Settings.ini");
+			BufferedWriter out = new BufferedWriter(fstreamWrite);
+			out.write("Resolution= "+ResEntry.getSetRes().getWidth()+" x "+ResEntry.getSetRes().getHeight()+" ;\n");
+			//out.write("Color = "+ColorsBox.value+";\n");
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		PaddleGame.setCurrentGameState(0);
 
 	}
 

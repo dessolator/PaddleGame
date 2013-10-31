@@ -7,6 +7,7 @@ import org.lwjgl.opengl.Display;
 import dev.game.project.engine.Drawable;
 import dev.game.project.engine.Updateable;
 import dev.game.project.menus.MainMenu;
+import dev.game.project.menus.Menu;
 import dev.game.project.menus.PauseMenu;
 import dev.game.project.menus.SettingsMenu;
 
@@ -205,6 +206,7 @@ public class PaddleGame {
 	 * @param currentGameState the currentGameState to set
 	 */
 	public static void setCurrentGameState(int currentGameState) {
+		Menu.setMenuCalled(System.nanoTime());
 		PaddleGame.currentGameState = currentGameState;
 	}
 	/**

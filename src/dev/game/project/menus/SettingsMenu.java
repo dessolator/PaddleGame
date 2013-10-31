@@ -28,9 +28,7 @@ public class SettingsMenu extends Menu {
 
 	@Override
 	public void update() {
-		for(Button b:myButtons){
-			b.update();
-		}
+		super.update();
 		for(CheckBox c:myCheckBoxes){
 			c.update();
 		}
