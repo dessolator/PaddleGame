@@ -2,7 +2,7 @@ package dev.game.project.gameObjects;
 
 import org.newdawn.slick.opengl.Texture;
 import dev.game.project.engine.Drawable;
-import dev.game.project.gameMechanics.Updateable;
+import dev.game.project.engine.Updateable;
 
 public abstract class GameObject implements Drawable, Updateable{
 	private float coordX;//Variable used to store onscreen location in X.

@@ -3,9 +3,7 @@ package dev.game.project.menus.elements;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.Scanner;
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -31,15 +29,16 @@ public class DisplayDropDown extends DropDown {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("moo");
-		System.out.println(s.next());
-		System.out.println(s.next());
-		System.out.println(s.next());
-		System.out.println(s.next());
-		System.out.println(s.next());
-//		while(s.next()!="Resolution");
+//		String c=s.next();
+//		while(!c.contentEquals("Resolution")){
+//			c=s.next();
+		while(!s.hasNextInt()){
+			s.next();
+		}
 		first=s.nextInt();
-		System.out.println(s.next());
+		while(!s.hasNextInt()){
+			s.next();
+		}
 		second=s.nextInt();
 		def=new ResEntry(first,second,getCoordX(),getCoordY(),getDimX(),getDimY());
 		def.pressed();

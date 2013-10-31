@@ -6,7 +6,7 @@ import org.lwjgl.input.Mouse;
 import org.newdawn.slick.opengl.Texture;
 
 import dev.game.project.engine.Drawable;
-import dev.game.project.gameMechanics.Updateable;
+import dev.game.project.engine.Updateable;
 
 public abstract class DropDown implements Drawable, Updateable{
 	ArrayList<DropDownEntry> myEntries;

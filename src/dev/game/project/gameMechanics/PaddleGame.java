@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL11.glClear;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import dev.game.project.engine.Drawable;
+import dev.game.project.engine.Updateable;
 import dev.game.project.menus.MainMenu;
 import dev.game.project.menus.PauseMenu;
 import dev.game.project.menus.SettingsMenu;
@@ -19,7 +20,7 @@ public class PaddleGame {
 	//private static ScoresMenu myScoresMenu;//TODO
 	private static boolean terminate=false;//variable used to check if the user hit ESCAPE
 	private static int currentLevel=1;//variable used to keep track of the current level
-	private static boolean drawTextures=true;//flag used to draw textures/colors
+	private static boolean drawTextures=false;//flag used to draw textures/colors
 	private static int currentGameState=0;//variable used to keep track of the current game state.
 	static{
 		

@@ -14,6 +14,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 import dev.game.project.engine.DrawObject;
 import dev.game.project.engine.GamePhysics;
 import dev.game.project.engine.Drawable;
+import dev.game.project.engine.Updateable;
 import dev.game.project.gameObjects.Ball;
 import dev.game.project.gameObjects.Brick;
 import dev.game.project.gameObjects.PlayerPaddle;
@@ -27,21 +28,25 @@ import dev.game.project.gameObjects.boundaries.UpperBoundary;
 
 public class Level implements Drawable, Updateable{
 	private ArrayList<Brick> bricks;//arraylist keeping track of bricks.
-	private ArrayList<Boundary> boundaries;
+	private ArrayList<Boundary> boundaries;//arraylist keeping track of boundaries.
 	private ArrayList<Bonus> bonuses;//arraylist keeping track of spawned bonuses.
 	int num = 17;//variable used for brick generation.
 	float coordx = Display.getWidth()/16;//first brick coordinate.
 	float coordy = (Display.getHeight()*(5.5f))/6;//first brick coordinate.
 	private PlayerPaddle myPaddle;//the player paddle.
 	private ArrayList<Ball> myBalls;//array of balls.
-	private Texture myBackground;
+	private Texture myBackground;//level background.
 	
 
+	/**
+	 * The level constructor.
+	 * @param levelNumber The number of the level to be created.
+	 */
 	public Level(int levelNumber) {
-		myBackground=getLevelBackground(levelNumber);
-		myBalls=new ArrayList<Ball>();
+		myBackground=getLevelBackground(levelNumber);//allows for different level backgrounds for different levels.
+		myBalls=new ArrayList<Ball>();//init balls
 		bricks=new ArrayList<Brick>();//init bricks.
-		boundaries=new ArrayList<Boundary>();
+		boundaries=new ArrayList<Boundary>();//init boundaries
 		bonuses=new ArrayList<Bonus>();//init bonuses.
 		
 		myPaddle= new PlayerPaddle(
@@ -107,15 +112,18 @@ public class Level implements Drawable, Updateable{
 
 
 
+	/**
+	 * The function used to add background on a per level basis.
+	 * @param levelNumber The number of the level whose background is to be returned.
+	 * @return The texture of the given level.
+	 */
 	private static Texture getLevelBackground(int levelNumber) {
 		//TODO switch case here
 		try {
 			return TextureLoader.getTexture("PNG", new FileInputStream(new File("res/levelBackground.png")));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -162,7 +170,7 @@ public class Level implements Drawable, Updateable{
 		Timer.update();//update the timer for bonuses.
 		myPaddle.update();
 		for(Brick b:bricks){
-			b.update();
+			b.update();//update the bricks.
 		}
 		for(Ball b:myBalls){
 			b.update();//update the ball array.
@@ -180,12 +188,12 @@ public class Level implements Drawable, Updateable{
 	 * Function used to render the level.
 	 */
 	public void render() {
-		Mouse.setGrabbed(true);
+		Mouse.setGrabbed(true);//hide the mouse
 		if(PaddleGame.isDrawTextures())
-			DrawObject.draw(this);
+			DrawObject.draw(this);//draw the level background
 		myPaddle.render();
 		for(Brick b:bricks){
-			b.render();
+			b.render();//render the bricks.
 		}
 		for(Ball b:myBalls){
 			b.render();//render the ball.
@@ -224,22 +232,20 @@ public class Level implements Drawable, Updateable{
 	public void spawnBall() {
 		Ball temp;
 		if(!myBalls.isEmpty()){
-			
+			//if there's a ball, create a new one based on it.
 			temp=new Ball(
 					myBalls.get(0).getCoordX(),
 					myBalls.get(0).getCoordY(),//Fixed Bug was CoordX instead of CoordY @credit Houstor - Sejn
 					myBalls.get(0).getRadius()
 					);
 			temp.setDirection(myBalls.get(0).getDirection());
-			if(myBalls.get(0).getSpeedX()==0){
-				temp.setSpeedX(-2f);
+			if(myBalls.get(0).getSpeedX()==0){//if the ball was moving only in y axis... shove it to the right... a bit.
 				myBalls.get(0).setSpeedX(2f);
 			}
-			else
-				temp.setSpeedX(-myBalls.get(0).getSpeedX());
+				temp.setSpeedX(-myBalls.get(0).getSpeedX());//mirror the new ball
 			
 		}
-		else
+		else//if there wasn't already a ball... spawn a new one with respect to the paddle.
 		{
 			
 			temp=new Ball(
@@ -249,7 +255,7 @@ public class Level implements Drawable, Updateable{
 					);
 			
 		}
-		getBalls().add(temp);
+		getBalls().add(temp);//add the new ball to the array.
 	}
 
 
@@ -270,7 +276,7 @@ public class Level implements Drawable, Updateable{
 	 * Function used to check for collisions and draw blocks.
 	 */
 	private void collisionPhysics() {
-		for (int i=0; i<bricks.size();i++) {//for each gameBlock
+		for (int i=0; i<bricks.size();i++) {//for each brick
 			Brick o=bricks.get(i);//store current element in variable to avoid parsing array		
 			
 			for(int j=0;j<myBalls.size();j++){

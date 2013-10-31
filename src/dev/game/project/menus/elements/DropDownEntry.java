@@ -8,7 +8,6 @@ public abstract class DropDownEntry extends Button {
 
 	@Override
 	public Texture getTexture() {
-		// TODO Auto-generated method stub
 		return myTexture;
 	}
 

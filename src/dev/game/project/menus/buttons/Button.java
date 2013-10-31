@@ -7,7 +7,7 @@ import org.newdawn.slick.opengl.Texture;
 
 import dev.game.project.engine.DrawObject;
 import dev.game.project.engine.Drawable;
-import dev.game.project.gameMechanics.Updateable;
+import dev.game.project.engine.Updateable;
 
 public abstract class Button implements Drawable, Updateable{
 	protected Texture myTexture;

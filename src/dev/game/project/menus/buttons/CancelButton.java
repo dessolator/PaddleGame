@@ -1,5 +1,7 @@
 package dev.game.project.menus.buttons;
 
+import dev.game.project.gameMechanics.PaddleGame;
+
 
 public class CancelButton extends Button {
 
@@ -10,7 +12,7 @@ public class CancelButton extends Button {
 
 	@Override
 	public void pressed() {
-		// TODO Auto-generated method stub
+		PaddleGame.setCurrentGameState(0);
 
 	}
 

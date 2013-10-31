@@ -10,7 +10,9 @@ public class ApplyButton extends Button {
 
 	@Override
 	public void pressed() {
-		// TODO Auto-generated method stub
+		//TODO write setRes.getWidth() into file
+		//TODO write setRes.getHeight() into file
+		
 
 	}
 

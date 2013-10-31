@@ -1,4 +1,4 @@
-package dev.game.project.gameMechanics;
+package dev.game.project.engine;
 
 public interface Updateable {
 	public void update();

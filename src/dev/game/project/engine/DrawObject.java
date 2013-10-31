@@ -5,25 +5,25 @@ import dev.game.project.gameMechanics.PaddleGame;
 
 public class DrawObject {
 	private static final int CIRCLE_ITER=8;//constant used to keep track of the number of iterations for circle drawing	
+	
 	/**
-	 * Function used to draw a rectangle.
-	 * @param x The X coordinate of the center of the rectangle.
-	 * @param y The Y coordinate of the center of the rectangle.
-	 * @param dimX The X dimension of the rectangle.
-	 * @param dimY The Y dimension of the rectangle.
+	 * The function used to draw a textured object.
+	 * @param g
 	 */
 	public static void draw(Drawable g){
 		if(g.getTexture()!=null)
 			g.getTexture().bind();
-//		else
-//			System.out.println("NULL TEXTURE!!!");
+
 		glPushMatrix();//create new matrix for manipulation of the given rectangle.
 		glTranslatef(g.getCoordX(),g.getCoordY(),0);//set starting point to the coordinates needed.
-		glColor3f(1,1,1);
-		glEnable(GL_TEXTURE_2D);    
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+		glColor3f(1,1,1);//set drawing color to white to compensate for gamma correction.
+		glEnable(GL_TEXTURE_2D);//enable textures
+		glEnable(GL_BLEND);//enable blending for transparent pngs
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);//set alpha function for transparency
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);//set texture drawing mode
+		/*
+		 * Map texture to object
+		 */
 		glBegin(GL_QUADS);
 		{
 			glTexCoord2f(0f, 1f);
@@ -39,6 +39,13 @@ public class DrawObject {
 		glPopMatrix();//when done with object manipulation merge model matrices.
 		
 	}
+	/**
+	 * Function used to draw a rectangle.
+	 * @param x The X coordinate of the center of the rectangle.
+	 * @param y The Y coordinate of the center of the rectangle.
+	 * @param dimX The X dimension of the rectangle.
+	 * @param dimY The Y dimension of the rectangle.
+	 */
 	public static void drawColoredRect(float x, float y, float dimX, float dimY){
 		glPushMatrix();//create new matrix for manipulation of the given rectangle.
 		glTranslatef(x,y,0);//set starting point to the coordinates needed.
@@ -49,10 +56,8 @@ public class DrawObject {
 		float b=(float)Math.random();//randomize green component.
 		glColor3f(r,g,b);//set color to random.
 		}
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-		
+		glEnable(GL_BLEND);//enable blending for transparency
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);//set alpha blend function		
 		/*
 		 * Draw Rectangle using GL,
 		 * values adjusted so that coordinates are now,
