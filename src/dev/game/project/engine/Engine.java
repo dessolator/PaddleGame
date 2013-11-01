@@ -14,10 +14,16 @@ import static org.lwjgl.opengl.GL11.glLoadIdentity;
 import static org.lwjgl.opengl.GL11.glMatrixMode;
 import static org.lwjgl.opengl.GL11.glOrtho;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
 
 public class Engine {
 	/**
@@ -38,8 +44,18 @@ public class Engine {
 			 * Display initialization.
 			 */
 			//Display.setDisplayMode(modes[75]);//set to my native resolution.
+			
+			
+			
+			
+			
+			
+			Display.setDisplayMode(getDisplayModeFromFile());
+			
 			Display.setFullscreen(true);//set to fullscreen.
 			Display.create();//init the Display object.
+			System.out.println(Display.getDisplayMode().getBitsPerPixel());
+			System.out.println(Display.getDisplayMode().getFrequency());
 			Display.setVSyncEnabled(true);//enable Vsync to avoid visual glitches.
 			
 			/*
@@ -71,7 +87,7 @@ public class Engine {
 			
 			e.printStackTrace();//if GLinit went south, tell me where.
 			
-		}		
+		} 		
 	}
 	/**
 	 * Function used for post-game cleanup. Simply destroys the display.
@@ -83,5 +99,38 @@ public class Engine {
 		Mouse.destroy();//destroy Mouse object.
 		
 	}
+	private static DisplayMode getDisplayModeFromFile() throws LWJGLException{
+		Scanner s = null;
+		int targetWidth;
+		int targetHeight;
+		try {
+			s = new Scanner(new BufferedReader(new FileReader("Settings.ini")));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while(!s.next().contentEquals("Resolution="));
+		while(!s.hasNextInt()){
+			s.next();
+		}
+		targetWidth=s.nextInt();
+		while(!s.hasNextInt()){
+			s.next();
+		}
+		targetHeight=s.nextInt();
+		//TODO add if fullscreen check here
+		DisplayMode [] available=Display.getAvailableDisplayModes();
+		for(DisplayMode d:available){
+			if(d.getWidth()==targetWidth && d.getHeight()==targetHeight){//TODO add refreshrate check
+				return d;
+			}
+		}
+		return new DisplayMode(800,600);
+		
+		
+		
+		
+	}
+	
 
 }
