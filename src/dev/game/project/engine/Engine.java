@@ -118,11 +118,12 @@ public class Engine {
 			s.next();
 		}
 		targetHeight=s.nextInt();
+		//testing eGitFetch
 		//TODO add if fullscreen check here
 		DisplayMode [] available=Display.getAvailableDisplayModes();
 		for(DisplayMode d:available){
 			if(d.getWidth()==targetWidth && d.getHeight()==targetHeight){//TODO add refreshrate check
-				return d;//tralalalala
+				return d;//some more eGitTesting
 			}
 		}
 		return new DisplayMode(800,600);
