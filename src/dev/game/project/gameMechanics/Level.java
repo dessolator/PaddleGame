@@ -188,6 +188,7 @@ public class Level implements Drawable, Updateable{
 	 * Function used to render the level.
 	 */
 	public void render() {
+		if(PaddleGame.getCurrentGameState()==1)
 		Mouse.setGrabbed(true);//hide the mouse
 		if(PaddleGame.isDrawTextures())
 			DrawObject.draw(this);//draw the level background
