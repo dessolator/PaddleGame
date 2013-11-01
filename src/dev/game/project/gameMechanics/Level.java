@@ -299,8 +299,9 @@ public class Level implements Drawable, Updateable{
 			}
 		}
 		for(int j=0;j<myBalls.size();j++){
-			if(GamePhysics.hit(myBalls.get(j), myPaddle)){
-				myPaddle.collided(myBalls.get(j));
+			if(GamePhysics.hit(myBalls.get(j), myPaddle) && myBalls.get(j).getUpdateCount()>10){ //if a collision did occur AND X updates have passed from the last collision
+				myBalls.get(j).setUpdateCount(0); //reset number of updates since last collision with paddle
+				myPaddle.collided(myBalls.get(j)); //trigger collision function
 			}
 		}
 		

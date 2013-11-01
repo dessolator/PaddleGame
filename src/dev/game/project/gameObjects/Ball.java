@@ -44,6 +44,7 @@ public class Ball extends GameObject implements Movable {
 	private boolean flipped=false;//variable used to stop the ball from hitting multiple blocks in a frame
 	private int direction=1;//vertical direction of a ball individual to all balls
 	private int damageThisFrame=getDamage();//damage the ball can still do in any given frame
+	private int updatesSinceCollision=10; // Counts updates since last collision of Ball and Paddle 
 	//====================================================================================================
 	
 	/**
@@ -78,7 +79,7 @@ public class Ball extends GameObject implements Movable {
 			damageThisFrame=getDamage();//reset the frameDamage,
 			setFlipped(false);//and "unflip" the ball
 		}
-		
+		updatesSinceCollision++;
 		move(0);//move the ball.
 	}
 	
@@ -335,5 +336,15 @@ public class Ball extends GameObject implements Movable {
 		Ball.radius = radius;
 		
 	}
+	
+	/**
+	 * Getter for the amount of updates between 2 collisions aimed to prevent repeated collisions between player paddle and ball.
+	 */
+	public int getUpdateCount(){return updatesSinceCollision;}
+	
+	/**
+	 * Setter for the amount of updates between 2 collisions aimed to prevent repeated collisions between player paddle and ball.
+	 */
+	public void setUpdateCount(int upd){updatesSinceCollision=upd;}
 
 }
