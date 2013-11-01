@@ -73,15 +73,15 @@ public abstract class Button implements Drawable, Updateable{
 	public abstract void pressed();
 	@Override
 	public void update() {
-		if(isInBounds(Mouse.getX(), Mouse.getY())){
+		if(Mouse.getEventButtonState()&&isInBounds(Mouse.getX(), Mouse.getY())){
 			click();
+			return;
 		}
-		if(isInBounds(Mouse.getX(), Mouse.getY()) && isClicked()){
+		if(!Mouse.getEventButtonState()&&isInBounds(Mouse.getX(), Mouse.getY()) && isClicked()){
 			pressed();
+			return;
 		}
-		else{
-			unClick();
-		}
+		unClick();
 		
 	}
 
