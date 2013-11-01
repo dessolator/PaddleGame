@@ -14,6 +14,7 @@ import dev.game.project.menus.SettingsMenu;
 public class PaddleGame {
 	private static boolean voodooMode=false;//@credit Jovan Davidovic\\
 	private static long voodooTriggered=0l;//field used to keep track of when voodooMode was last triggered
+	private static long escTriggered=0l;
 	private static Level myLevel;//Level field containing all the game objects
 	private static MainMenu myMainMenu;
 	private static PauseMenu myPauseMenu; 
@@ -121,7 +122,10 @@ public class PaddleGame {
 			myLevel.movePaddle(1);//move right
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
-			goBack();//set terminate flag
+			if((((long)System.nanoTime()-escTriggered)>250000000)){//if time passed
+				escTriggered=System.nanoTime();
+				goBack();//turn on voodooMode
+			}
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_V)){
 			if(!isVoodooMode()&&(((long)System.nanoTime()-voodooTriggered)>250000000)){//if voodooMode is off and the break time passed
