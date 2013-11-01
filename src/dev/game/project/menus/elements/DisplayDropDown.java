@@ -30,8 +30,7 @@ public class DisplayDropDown extends DropDown {
 			e.printStackTrace();
 		}
 //		String c=s.next();
-//		while(!c.contentEquals("Resolution")){
-//			c=s.next();
+		while(!s.next().contentEquals("Resolution="));
 		while(!s.hasNextInt()){
 			s.next();
 		}
