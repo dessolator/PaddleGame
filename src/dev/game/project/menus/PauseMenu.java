@@ -41,7 +41,7 @@ public class PauseMenu extends Menu {
 		PaddleGame.getMyLevel().render();
 		glColor4f(0f, 0f, 0f,0.5f);
 		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());
-		Mouse.setGrabbed(false);
+		if(Mouse.isGrabbed())Mouse.setGrabbed(false);
 		myFrame.render();
 		for (Button b:myButtons)
 			DrawObject.draw(b);
