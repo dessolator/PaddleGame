@@ -32,23 +32,6 @@ public class Engine {
 	 */
 	public static void init() {
 		try {			
-//			DisplayMode[] modes = Display.getAvailableDisplayModes();
-//			for (int i=0;i<modes.length;i++) {//loop to print out all the possible fullscreen display modes.
-//			    DisplayMode current = modes[i];
-//			    if(modes[i].isFullscreenCapable())
-//			    System.out.println(i+":"+current.getWidth() + "x" + current.getHeight() + "x" +
-//			                        current.getBitsPerPixel() + " " + current.getFrequency() + "Hz");
-//			}
-			
-			/*
-			 * Display initialization.
-			 */
-			//Display.setDisplayMode(modes[75]);//set to my native resolution.
-			
-			
-			
-			
-			
 			
 			Display.setDisplayMode(getDisplayModeFromFile());
 			
@@ -81,7 +64,6 @@ public class Engine {
 			 * Mouse initialization.
 			 */
 			Mouse.create();//init Mouse object.
-			Mouse.setGrabbed(true);//hide mouse pointer.
 			
 		} catch (LWJGLException e) {
 			
@@ -119,12 +101,11 @@ public class Engine {
 		}
 		targetHeight=s.nextInt();
 		s.close();
-		//testing eGitFetch
 		//TODO add if fullscreen check here
 		DisplayMode [] available=Display.getAvailableDisplayModes();
 		for(DisplayMode d:available){
 			if(d.getWidth()==targetWidth && d.getHeight()==targetHeight){//TODO add refreshrate check
-				return d;//some more eGitTesting
+				return d;
 			}
 		}
 		return new DisplayMode(800,600);
