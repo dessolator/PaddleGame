@@ -122,7 +122,7 @@ public class Engine {
 		DisplayMode [] available=Display.getAvailableDisplayModes();
 		for(DisplayMode d:available){
 			if(d.getWidth()==targetWidth && d.getHeight()==targetHeight){//TODO add refreshrate check
-				return d;
+				return d;//tralalalala
 			}
 		}
 		return new DisplayMode(800,600);
