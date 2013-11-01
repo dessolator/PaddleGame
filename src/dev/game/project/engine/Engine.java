@@ -118,6 +118,7 @@ public class Engine {
 			s.next();
 		}
 		targetHeight=s.nextInt();
+		s.close();
 		//testing eGitFetch
 		//TODO add if fullscreen check here
 		DisplayMode [] available=Display.getAvailableDisplayModes();
