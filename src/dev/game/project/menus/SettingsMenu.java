@@ -64,10 +64,10 @@ public class SettingsMenu extends Menu {
 				Display.getHeight()/15)
 		);
 		myCheckBoxes.add(new ColorsBox(
-				0,
-				0,
-				50,
-				50)
+				Display.getWidth()/4,
+				Display.getHeight()/(1.5f),
+				Display.getWidth()/45,
+				Display.getHeight()/30)
 		);
 		myDropDowns.add(new DisplayDropDown(
 				Display.getWidth()/4,

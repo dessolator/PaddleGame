@@ -2,16 +2,12 @@ package dev.game.project.gameMechanics;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
-
 import dev.game.project.engine.Drawable;
 import dev.game.project.engine.Updateable;
 import dev.game.project.menus.MainMenu;

@@ -18,8 +18,8 @@ public abstract class CheckBox extends Button{
 	public CheckBox(float coordX, float coordY, float dimX, float dimY) {
 		super(coordX, coordY, dimX, dimY);
 		try {
-			myTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/exitGameButton.png")));
-			checked=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/exitGameButton.png")));
+			myTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/checkBox.png")));
+			checked=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/checkBoxChecked.png")));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -40,7 +40,6 @@ public abstract class CheckBox extends Button{
 
 	@Override
 	public void pressed() {
-		System.out.println("FLIPPED CHECKBOX");
 		isChecked=!isChecked;
 		
 	}
