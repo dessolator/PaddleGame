@@ -2,8 +2,16 @@ package dev.game.project.gameMechanics;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
+
 import dev.game.project.engine.Drawable;
 import dev.game.project.engine.Updateable;
 import dev.game.project.menus.MainMenu;
@@ -22,7 +30,7 @@ public class PaddleGame {
 	//private static ScoresMenu myScoresMenu;//TODO
 	private static boolean terminate=false;//variable used to check if the user hit ESCAPE
 	private static int currentLevel=1;//variable used to keep track of the current level
-	private static boolean drawTextures=false;//flag used to draw textures/colors
+	private static boolean drawTextures=getTextureDrawFromFile();//flag used to draw textures/colors
 	private static int currentGameState=0;//variable used to keep track of the current game state.
 	static{
 		
@@ -54,6 +62,25 @@ public class PaddleGame {
 	}
 	
 	
+	private static boolean getTextureDrawFromFile() {
+		Scanner s = null;
+		boolean value;
+		try {
+			s = new Scanner(new BufferedReader(new FileReader("Settings.ini")));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while(!s.next().contentEquals("Color="));
+		while(!s.hasNextBoolean()){
+			s.next();
+		}
+		value=s.nextBoolean();
+		s.close();
+		return !value;
+	}
+
+
 	/**
 	 * Function used to determine which game state to draw.
 	 * @return The game state to be drawn.
@@ -157,15 +184,23 @@ public class PaddleGame {
 				currentGameState=1;//go back to Game.
 				break;
 			case 3:
+				
 				currentGameState=0;//go back to main menu.
 				break;
 			case 4:
+				updateInGameSettings();
 				currentGameState=0;//go back to main menu.
 				break;
 			default:
 				currentGameState=0;
 		}	
 	}
+	public static void updateInGameSettings() {
+		drawTextures=getTextureDrawFromFile();
+		
+	}
+
+
 	/**
 	 * Getter for the paddle object.
 	 * @return Player paddle.

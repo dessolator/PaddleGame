@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import dev.game.project.gameMechanics.PaddleGame;
+import dev.game.project.menus.elements.ColorsBox;
 import dev.game.project.menus.elements.ResEntry;
 
 
@@ -22,11 +23,12 @@ public class ApplyButton extends Button {
 			fstreamWrite = new FileWriter("Settings.ini");
 			BufferedWriter out = new BufferedWriter(fstreamWrite);
 			out.write("Resolution= "+ResEntry.getSetRes().getWidth()+" x "+ResEntry.getSetRes().getHeight()+" ;\n");
-			//out.write("Color = "+ColorsBox.value+";\n");
+			out.write("Color= "+ColorsBox.isColorChecked()+" ;\n");
 			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		PaddleGame.updateInGameSettings();
 		PaddleGame.setCurrentGameState(0);
 
 	}
