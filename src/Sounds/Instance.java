@@ -2,6 +2,7 @@ package Sounds;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
+import javazoom.jl.player.advanced.PlaybackListener;
 
 
 public class Instance extends Thread{
@@ -13,6 +14,10 @@ public class Instance extends Thread{
 	
 	public boolean play(){start();return true;}
 	
+	public void Stop(){mySound.stop();}
+	
+	
+	
 	public void run(){
 		try {
 			mySound.play();
@@ -22,7 +27,9 @@ public class Instance extends Thread{
 		if (mySound!=null){
 			mySound.close();
 			mySound=null;
+			
 		}
+		
 	}
 
 

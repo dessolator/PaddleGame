@@ -11,7 +11,7 @@ public class Sound {
 	private FileInputStream myStream;
 	private AdvancedPlayer mp3;
 	private Instance CurrentInstance;
-	private boolean playing=false; // left unimplemented
+	private boolean playing=false;
 	public Sound(String Path){
 		try {
 			myStream=new FileInputStream(Path);
@@ -33,7 +33,13 @@ public class Sound {
 	public void play(){
 		CurrentInstance=new Instance(mp3);
 		playing=CurrentInstance.play();
-		
+	}
+	
+	public void stop(){
+		if(playing!=false) {
+			CurrentInstance.Stop();
+			playing=false;
+		}
 	}
 		
 	
