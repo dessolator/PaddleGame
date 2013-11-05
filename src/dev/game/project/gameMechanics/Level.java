@@ -66,25 +66,25 @@ public class Level implements Drawable, Updateable{
 				Display.getHeight()/6,
 				Display.getHeight()/60)
 		);//create the ball.
-		
-		for (int j = 0; j<4; j++) {//change row to add bricks to.
-			for (int i = 0; i < num; i++) {//add bricks to row.
-				
-				bricks.add(new Brick(
-						coordx,
-						coordy,
-						Display.getWidth()/20,
-						Display.getHeight()/30,
-						(j+1),
-						(Math.random()<0.07?true:false))
-				);
-				
-				coordx+=(int)Display.getWidth()/(18.6f);
+		if(levelNumber>0){
+			for (int j = 0; j<4; j++) {//change row to add bricks to.
+				for (int i = 0; i < num; i++) {//add bricks to row.
+					
+					bricks.add(new Brick(
+							coordx,
+							coordy,
+							Display.getWidth()/20,
+							Display.getHeight()/30,
+							(j+1),
+							(Math.random()<0.07?true:false))
+					);
+					
+					coordx+=(int)Display.getWidth()/(18.6f);
+				}
+				coordy-=(int)Display.getHeight()/(27.27f);//reset brick coordinates.
+				coordx-=num*(int)Display.getWidth()/(18.6f);
 			}
-			coordy-=(int)Display.getHeight()/(27.27f);//reset brick coordinates.
-			coordx-=num*(int)Display.getWidth()/(18.6f);
 		}
-		
 		boundaries.add(new RightBoundary(
 				Display.getWidth()+0.5f,
 				Display.getHeight()/2,
