@@ -48,6 +48,7 @@ public class PaddleGame {
 			getDraw().render();//then render it
 			Display.sync(60);//force the framerate to 60 FPS or thereabouts
 			Display.update();//refresh the display
+			
 		}
 		
 	}

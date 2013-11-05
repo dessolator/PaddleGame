@@ -16,15 +16,14 @@ public class Sound {
 		try {
 			myStream=new FileInputStream(Path);
 			mp3=new AdvancedPlayer(myStream);
-			myStream.close();
 			} catch (Exception e) {e.printStackTrace();}
 	}
 	
 	public void LoadDiffPath(String Path){
 		try{
+		myStream.close();
 		myStream=new FileInputStream(Path);
 		mp3=new AdvancedPlayer(myStream);
-		myStream.close();
 		}
 		catch(Exception e){e.printStackTrace();}
 		
