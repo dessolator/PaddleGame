@@ -34,9 +34,10 @@ public class Sound {
 		playing=CurrentInstance.play();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void stop(){
 		if(playing!=false) {
-			CurrentInstance.Stop();
+			CurrentInstance.stop();
 			playing=false;
 		}
 	}

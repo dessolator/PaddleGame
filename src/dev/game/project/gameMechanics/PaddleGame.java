@@ -34,7 +34,7 @@ public class PaddleGame {
 		myMainMenu=new MainMenu();
 		myPauseMenu=new PauseMenu();
 		mySettingsMenu=new SettingsMenu();
-		music=new Sound("/res/Trololo.mp3");
+		music=new Sound("./res/Trololo.mp3");
 		//myScoresMenu=new ScoresMenu();//TODO probably have menus as static?
 		
 	}

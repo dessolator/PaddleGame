@@ -14,7 +14,6 @@ public class Instance extends Thread{
 	
 	public boolean play(){start();return true;}
 	
-	public void Stop(){mySound.stop();}
 	
 	
 	

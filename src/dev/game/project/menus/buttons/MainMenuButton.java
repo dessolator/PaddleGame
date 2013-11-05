@@ -26,7 +26,7 @@ public class MainMenuButton extends Button {
 	@Override
 	public void pressed() {
 		PaddleGame.setCurrentGameState(0);
-
+		PaddleGame.stopMusic();
 	}
 
 }
