@@ -12,9 +12,10 @@ import Sounds.Sound;
 import dev.game.project.gameMechanics.PaddleGame;
 
 
+
 public class NewGameButton extends Button {
 
-
+	
 	public NewGameButton(float coordX, float coordY, float dimX, float dimY) {
 		super(coordX, coordY, dimX, dimY);
 		try {
@@ -31,18 +32,7 @@ public class NewGameButton extends Button {
 	@Override
 	public void pressed() {
 		PaddleGame.setCurrentGameState(1);
-		new Thread(){
-			public void run()
-			{
-				Sound s=new Sound("/res/Trololo.mp3");
-				s.play();
-		//		try{
-		//		sleep(10000);
-		//		}catch(Exception e){}
-		//		s.stop();
-			}
-		}.start();
-		
+		PaddleGame.playMusic();
 	}
 
 }

@@ -2,8 +2,12 @@ package dev.game.project.gameMechanics;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
+
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
+
+import Sounds.Sound;
 import dev.game.project.engine.Drawable;
 import dev.game.project.engine.Updateable;
 import dev.game.project.menus.MainMenu;
@@ -23,12 +27,14 @@ public class PaddleGame {
 	private static int currentLevel=1;//variable used to keep track of the current level
 	private static boolean drawTextures=false;//flag used to draw textures/colors
 	private static int currentGameState=0;//variable used to keep track of the current game state.
+	private static Sound music;
 	static{
 		
 		myLevel=new Level(currentLevel);
 		myMainMenu=new MainMenu();
 		myPauseMenu=new PauseMenu();
 		mySettingsMenu=new SettingsMenu();
+		music=new Sound("/res/Trololo.mp3");
 		//myScoresMenu=new ScoresMenu();//TODO probably have menus as static?
 		
 	}
@@ -245,4 +251,9 @@ public class PaddleGame {
 		PaddleGame.myLevel = myLevel;
 	}
 	
+	public static void playMusic(){music.play();}
+	
+	public static void stopMusic(){music.stop();}
+	
 }
+

@@ -28,7 +28,6 @@ public class ExitGameButton extends Button {
 	@Override
 	public void pressed() {
 		PaddleGame.setTerminate(true);
-		
 	}
 
 }
