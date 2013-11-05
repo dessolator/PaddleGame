@@ -3,9 +3,15 @@ package dev.game.project.gameMechanics;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.XMLOutputter;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
@@ -129,7 +135,57 @@ public class Level implements Drawable, Updateable{
 		return null;
 	}
 
-
+	void save(File saveFile){
+		Document doc=new Document();
+		Element root=new Element("bricks");
+		doc.setRootElement(root);
+		for(Brick b:bricks){
+			Element brick=new Element("brick");
+			brick.setAttribute("coordX",String.valueOf(b.getCoordX()));
+			brick.setAttribute("coordY",String.valueOf(b.getCoordY()));
+			brick.setAttribute("dimX",String.valueOf(b.getDimX()));
+			brick.setAttribute("dimY",String.valueOf(b.getDimY()));
+			brick.setAttribute("hitPoints",String.valueOf(b.getHitPoints()));
+			brick.setAttribute("droppsBonus",String.valueOf(b.isDroppsBonus()));
+			root.addContent(brick);			
+		}
+		XMLOutputter out=new XMLOutputter();
+		try {
+			out.output(doc, new FileOutputStream(saveFile));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	void load(File loadFile){
+		bricks=new ArrayList<Brick>();//init bricks.
+		SAXBuilder reader=new SAXBuilder();
+		Document doc=null;
+		try {
+			doc = reader.build(loadFile);
+		} catch (JDOMException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Element root=doc.getRootElement();
+		for(Element e:root.getChildren()){
+			float coordX=Float.parseFloat(e.getAttributeValue("coordX"));
+			float coordY=Float.parseFloat(e.getAttributeValue("coordY"));
+			float dimX=Float.parseFloat(e.getAttributeValue("dimX"));
+			float dimY=Float.parseFloat(e.getAttributeValue("dimY"));
+			int hitPoints=Integer.parseInt(e.getAttributeValue("hitPoints"));
+			boolean droppsBonus=Boolean.parseBoolean(e.getAttributeValue("droppsBonus"));
+			bricks.add(new Brick(coordX, coordY, dimX, dimY, hitPoints, droppsBonus));
+			}
+	}
 
 	/**
 	 * Function that adds a bonus to the list of spawned bonuses.
@@ -343,5 +399,7 @@ public class Level implements Drawable, Updateable{
 	public float getDimY() {
 		return Display.getHeight();
 	}
+
+
 
 }

@@ -1,7 +1,6 @@
 package dev.util.levelBuilder;
 
-import java.io.File;
-import org.jdom2.*;
+
 
 public class LevelBuilder {
 
@@ -20,24 +19,10 @@ public class LevelBuilder {
 	}
 	
 	
-	public void save(File saveFile){
-		Document doc=new Document();
-		Element root=new Element("blocks");
-	}
-	//save
-	//create new document(JDOM?)
-	//for each block
-	//save block as xml object
-	//create/open file
-	//write document to file
-
-	//load
-	//open file
-	//read nodes in document
-	//for each xml element, read the brick,
-	//add the brick to the array
+	
+	
 	
 	//display
-	//use level clas from game
+	//use level class from game
 	//just don't call update
 }

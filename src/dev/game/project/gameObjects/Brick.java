@@ -132,6 +132,30 @@ public class Brick extends GameObject implements Collidable {
 	public void setDestroyed(boolean destroyed) {
 		this.destroyed = destroyed;
 	}
+	/**
+	 * @return the hitPoints
+	 */
+	public int getHitPoints() {
+		return hitPoints;
+	}
+	/**
+	 * @param hitPoints the hitPoints to set
+	 */
+	public void setHitPoints(int hitPoints) {
+		this.hitPoints = hitPoints;
+	}
+	/**
+	 * @return the droppsBonus
+	 */
+	public boolean isDroppsBonus() {
+		return droppsBonus;
+	}
+	/**
+	 * @param droppsBonus the droppsBonus to set
+	 */
+	public void setDroppsBonus(boolean droppsBonus) {
+		this.droppsBonus = droppsBonus;
+	}
 
 
 }
