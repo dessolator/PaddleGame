@@ -2,11 +2,12 @@ package dev.game.project.gameMechanics;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
-
-
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
-
 import Sounds.Sound;
 import dev.game.project.engine.Drawable;
 import dev.game.project.engine.Updateable;
@@ -18,6 +19,7 @@ import dev.game.project.menus.SettingsMenu;
 public class PaddleGame {
 	private static boolean voodooMode=false;//@credit Jovan Davidovic\\
 	private static long voodooTriggered=0l;//field used to keep track of when voodooMode was last triggered
+	private static long escTriggered=0l;
 	private static Level myLevel;//Level field containing all the game objects
 	private static MainMenu myMainMenu;
 	private static PauseMenu myPauseMenu; 
@@ -25,7 +27,7 @@ public class PaddleGame {
 	//private static ScoresMenu myScoresMenu;//TODO
 	private static boolean terminate=false;//variable used to check if the user hit ESCAPE
 	private static int currentLevel=1;//variable used to keep track of the current level
-	private static boolean drawTextures=false;//flag used to draw textures/colors
+	private static boolean drawTextures=getTextureDrawFromFile();//flag used to draw textures/colors
 	private static int currentGameState=0;//variable used to keep track of the current game state.
 	private static Sound music;
 	static{
@@ -60,6 +62,25 @@ public class PaddleGame {
 	}
 	
 	
+	private static boolean getTextureDrawFromFile() {
+		Scanner s = null;
+		boolean value;
+		try {
+			s = new Scanner(new BufferedReader(new FileReader("Settings.ini")));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while(!s.next().contentEquals("Color="));
+		while(!s.hasNextBoolean()){
+			s.next();
+		}
+		value=s.nextBoolean();
+		s.close();
+		return !value;
+	}
+
+
 	/**
 	 * Function used to determine which game state to draw.
 	 * @return The game state to be drawn.
@@ -128,7 +149,10 @@ public class PaddleGame {
 			myLevel.movePaddle(1);//move right
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
-			goBack();//set terminate flag
+			if((((long)System.nanoTime()-escTriggered)>250000000)){//if time passed
+				escTriggered=System.nanoTime();
+				goBack();//turn on voodooMode
+			}
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_V)){
 			if(!isVoodooMode()&&(((long)System.nanoTime()-voodooTriggered)>250000000)){//if voodooMode is off and the break time passed
@@ -160,15 +184,23 @@ public class PaddleGame {
 				currentGameState=1;//go back to Game.
 				break;
 			case 3:
+				
 				currentGameState=0;//go back to main menu.
 				break;
 			case 4:
+				updateInGameSettings();
 				currentGameState=0;//go back to main menu.
 				break;
 			default:
 				currentGameState=0;
 		}	
 	}
+	public static void updateInGameSettings() {
+		drawTextures=getTextureDrawFromFile();
+		
+	}
+
+
 	/**
 	 * Getter for the paddle object.
 	 * @return Player paddle.

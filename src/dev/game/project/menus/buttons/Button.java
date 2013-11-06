@@ -13,6 +13,7 @@ public abstract class Button implements Drawable, Updateable{
 	protected Texture myTexture;
 	protected Texture pressedTexture;
 	protected boolean clicked=false;
+	private boolean previousMouseState=false;
 	public Button(float coordX, float coordY, float dimX, float dimY) {
 		this.coordX = coordX;
 		this.coordY = coordY;
@@ -73,15 +74,17 @@ public abstract class Button implements Drawable, Updateable{
 	public abstract void pressed();
 	@Override
 	public void update() {
-		if(isInBounds(Mouse.getX(), Mouse.getY())){
+		if(Mouse.getEventButtonState()&&isInBounds(Mouse.getX(), Mouse.getY())){
 			click();
+			previousMouseState=true;
+			return;
 		}
-		if(isInBounds(Mouse.getX(), Mouse.getY()) && isClicked()){
+		if(previousMouseState&&!Mouse.getEventButtonState()&&isInBounds(Mouse.getX(), Mouse.getY()) && isClicked()){
 			pressed();
+			previousMouseState=false;
+			return;
 		}
-		else{
-			unClick();
-		}
+		unClick();
 		
 	}
 

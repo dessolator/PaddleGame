@@ -3,9 +3,15 @@ package dev.game.project.gameMechanics;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.XMLOutputter;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
@@ -60,25 +66,25 @@ public class Level implements Drawable, Updateable{
 				Display.getHeight()/6,
 				Display.getHeight()/60)
 		);//create the ball.
-		
-		for (int j = 0; j<4; j++) {//change row to add bricks to.
-			for (int i = 0; i < num; i++) {//add bricks to row.
-				
-				bricks.add(new Brick(
-						coordx,
-						coordy,
-						Display.getWidth()/20,
-						Display.getHeight()/30,
-						(j+1),
-						(Math.random()<0.07?true:false))
-				);
-				
-				coordx+=(int)Display.getWidth()/(18.6f);
+		if(levelNumber>0){
+			for (int j = 0; j<4; j++) {//change row to add bricks to.
+				for (int i = 0; i < num; i++) {//add bricks to row.
+					
+					bricks.add(new Brick(
+							coordx,
+							coordy,
+							Display.getWidth()/20,
+							Display.getHeight()/30,
+							(j+1),
+							(Math.random()<0.07?true:false))
+					);
+					
+					coordx+=(int)Display.getWidth()/(18.6f);
+				}
+				coordy-=(int)Display.getHeight()/(27.27f);//reset brick coordinates.
+				coordx-=num*(int)Display.getWidth()/(18.6f);
 			}
-			coordy-=(int)Display.getHeight()/(27.27f);//reset brick coordinates.
-			coordx-=num*(int)Display.getWidth()/(18.6f);
 		}
-		
 		boundaries.add(new RightBoundary(
 				Display.getWidth()+0.5f,
 				Display.getHeight()/2,
@@ -129,7 +135,57 @@ public class Level implements Drawable, Updateable{
 		return null;
 	}
 
-
+	public void save(File saveFile){
+		Document doc=new Document();
+		Element root=new Element("bricks");
+		doc.setRootElement(root);
+		for(Brick b:bricks){
+			Element brick=new Element("brick");
+			brick.setAttribute("coordX",String.valueOf(b.getCoordX()));
+			brick.setAttribute("coordY",String.valueOf(b.getCoordY()));
+			brick.setAttribute("dimX",String.valueOf(b.getDimX()));
+			brick.setAttribute("dimY",String.valueOf(b.getDimY()));
+			brick.setAttribute("hitPoints",String.valueOf(b.getHitPoints()));
+			brick.setAttribute("droppsBonus",String.valueOf(b.isDroppsBonus()));
+			root.addContent(brick);			
+		}
+		XMLOutputter out=new XMLOutputter();
+		try {
+			out.output(doc, new FileOutputStream(saveFile));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void load(File loadFile){
+		bricks=new ArrayList<Brick>();//init bricks.
+		SAXBuilder reader=new SAXBuilder();
+		Document doc=null;
+		try {
+			doc = reader.build(loadFile);
+		} catch (JDOMException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Element root=doc.getRootElement();
+		for(Element e:root.getChildren()){
+			float coordX=Float.parseFloat(e.getAttributeValue("coordX"));
+			float coordY=Float.parseFloat(e.getAttributeValue("coordY"));
+			float dimX=Float.parseFloat(e.getAttributeValue("dimX"));
+			float dimY=Float.parseFloat(e.getAttributeValue("dimY"));
+			int hitPoints=Integer.parseInt(e.getAttributeValue("hitPoints"));
+			boolean droppsBonus=Boolean.parseBoolean(e.getAttributeValue("droppsBonus"));
+			bricks.add(new Brick(coordX, coordY, dimX, dimY, hitPoints, droppsBonus));
+			}
+	}
 
 	/**
 	 * Function that adds a bonus to the list of spawned bonuses.
@@ -188,6 +244,7 @@ public class Level implements Drawable, Updateable{
 	 * Function used to render the level.
 	 */
 	public void render() {
+		if(PaddleGame.getCurrentGameState()==1)
 		Mouse.setGrabbed(true);//hide the mouse
 		if(PaddleGame.isDrawTextures())
 			DrawObject.draw(this);//draw the level background
@@ -299,8 +356,9 @@ public class Level implements Drawable, Updateable{
 			}
 		}
 		for(int j=0;j<myBalls.size();j++){
-			if(GamePhysics.hit(myBalls.get(j), myPaddle)){
-				myPaddle.collided(myBalls.get(j));
+			if(GamePhysics.hit(myBalls.get(j), myPaddle) && myBalls.get(j).getUpdateCount()>10){ //if a collision did occur AND X updates have passed from the last collision
+				myBalls.get(j).setUpdateCount(0); //reset number of updates since last collision with paddle
+				myPaddle.collided(myBalls.get(j)); //trigger collision function
 			}
 		}
 		
@@ -341,5 +399,25 @@ public class Level implements Drawable, Updateable{
 	public float getDimY() {
 		return Display.getHeight();
 	}
+
+
+
+	/**
+	 * @return the bricks
+	 */
+	public ArrayList<Brick> getBricks() {
+		return bricks;
+	}
+
+
+
+	/**
+	 * @param bricks the bricks to set
+	 */
+	public void setBricks(ArrayList<Brick> bricks) {
+		this.bricks = bricks;
+	}
+
+
 
 }

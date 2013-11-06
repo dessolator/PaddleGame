@@ -53,19 +53,8 @@ public abstract class Menu implements Drawable, Updateable{
 		}
 		else{
 			while(Mouse.next()){
-				if(Mouse.getEventButtonState()){
-					if(Mouse.getEventButton()==0){
-						for(Button b:myButtons){
-							b.update();
-						}
-					}
-				}else
-				{
-					if(Mouse.getEventButton()==0){
-						for(Button b:myButtons){
-							b.update();
-						}
-					}
+				for(Button b:myButtons){
+					b.update();
 				}
 			}
 		}

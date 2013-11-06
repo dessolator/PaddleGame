@@ -52,12 +52,14 @@ public class PlayerPaddle extends GameObject implements Movable,Collidable{
 	 * @see dev.game.project.Movable#move(int)
 	 */
 	public void move(int i) {
-		setCoordX(getCoordX() + PADDLE_SPEED*i*getInverted()*getPaddleSpeedUp());//move left or right
-		if(getCoordX()+getDimX()/2>Display.getWidth()){//check if boundary was hit,
-			setCoordX(Display.getWidth()-getDimX()/2);//if it was, stop.
-		}
-		if(getCoordX()-getDimX()/2<0){//check if boundary was hit,
-			setCoordX(getDimX()/2);//if it was, stop.
+		if(PaddleGame.getCurrentGameState()==1){
+			setCoordX(getCoordX() + PADDLE_SPEED*i*getInverted()*getPaddleSpeedUp());//move left or right
+			if(getCoordX()+getDimX()/2>Display.getWidth()){//check if boundary was hit,
+				setCoordX(Display.getWidth()-getDimX()/2);//if it was, stop.
+			}
+			if(getCoordX()-getDimX()/2<0){//check if boundary was hit,
+				setCoordX(getDimX()/2);//if it was, stop.
+			}
 		}
 	}
 	/* (non-Javadoc)
