@@ -41,9 +41,9 @@ public class Brick extends GameObject implements Collidable {
 	 * @param hitPoints The brick's hp.
 	 * @param droppsBonus Field indicating if the brick dropps a bonus or not.
 	 */
-	public Brick(float cordX, float cordY, float dimX, float dimY,int hitPoints,boolean droppsBonus) {
-		this.setCoordX(cordX);//Set the x coordinate to the passed value.
-		this.setCoordY(cordY);//Set the y coordinate to the passed value.
+	public Brick(float coordX, float coordY, float dimX, float dimY,int hitPoints,boolean droppsBonus) {
+		this.setCoordX(coordX);//Set the x coordinate to the passed value.
+		this.setCoordY(coordY);//Set the y coordinate to the passed value.
 		this.setDimX(dimX);//Set the x dimension to the passed value.
 		this.setDimY(dimY);//Set the y dimension to the passed value.
 		this.hitPoints=hitPoints;//Set the hit points to the passed value.

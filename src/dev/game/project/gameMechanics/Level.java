@@ -51,7 +51,7 @@ public class Level implements Drawable, Updateable{
 	public Level(int levelNumber) {
 		myBackground=getLevelBackground(levelNumber);//allows for different level backgrounds for different levels.
 		myBalls=new ArrayList<Ball>();//init balls
-		bricks=new ArrayList<Brick>();//init bricks.
+//		bricks=new ArrayList<Brick>();//init bricks.
 		boundaries=new ArrayList<Boundary>();//init boundaries
 		bonuses=new ArrayList<Bonus>();//init bonuses.
 		
@@ -113,6 +113,7 @@ public class Level implements Drawable, Updateable{
 				1)
 		);//add bottom boundary.
 		
+		load(new File("level1.xml"));
 		
 	}
 
@@ -135,7 +136,7 @@ public class Level implements Drawable, Updateable{
 		return null;
 	}
 
-	void save(File saveFile){
+	public void save(File saveFile){
 		Document doc=new Document();
 		Element root=new Element("bricks");
 		doc.setRootElement(root);
@@ -162,7 +163,7 @@ public class Level implements Drawable, Updateable{
 		
 	}
 	
-	void load(File loadFile){
+	public void load(File loadFile){
 		bricks=new ArrayList<Brick>();//init bricks.
 		SAXBuilder reader=new SAXBuilder();
 		Document doc=null;
@@ -398,6 +399,24 @@ public class Level implements Drawable, Updateable{
 	@Override
 	public float getDimY() {
 		return Display.getHeight();
+	}
+
+
+
+	/**
+	 * @return the bricks
+	 */
+	public ArrayList<Brick> getBricks() {
+		return bricks;
+	}
+
+
+
+	/**
+	 * @param bricks the bricks to set
+	 */
+	public void setBricks(ArrayList<Brick> bricks) {
+		this.bricks = bricks;
 	}
 
 
