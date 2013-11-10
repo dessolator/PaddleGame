@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.TextureLoader;
-
+import dev.game.project.menus.Menu;
 import dev.game.project.menus.buttons.Button;
 import dev.game.project.menus.buttons.ExitGameButton;
 import dev.game.project.menus.buttons.NewGameButton;
