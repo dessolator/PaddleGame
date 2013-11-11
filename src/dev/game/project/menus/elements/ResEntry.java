@@ -2,13 +2,9 @@ package dev.game.project.menus.elements;
 
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
-import org.newdawn.slick.opengl.TextureLoader;
 
 import dev.game.project.engine.DrawObject;
 
@@ -41,16 +37,10 @@ public class ResEntry extends DropDownEntry {
 	}
 
 	public ResEntry(int res1,int res2,float coordX, float coordY, float dimX, float dimY) {
-		super(coordX, coordY, dimX, dimY);
+		super(coordX, coordY, dimX, dimY,(""+res1+"x"+res2));
 		width=res1;
 		height=res2;
-		try {
-			myTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/"+width+'x'+height+".png")));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 		
 	}
 	@Override

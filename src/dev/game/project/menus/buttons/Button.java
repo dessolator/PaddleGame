@@ -1,33 +1,54 @@
 package dev.game.project.menus.buttons;
 
-//import static org.lwjgl.opengl.GL11.glColor3f;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
 
 import dev.game.project.engine.DrawObject;
 import dev.game.project.engine.Drawable;
 import dev.game.project.engine.Updateable;
+import dev.game.project.menus.text.Text;
+import dev.game.project.menus.text.TimesNewRomanText;
+
 
 public abstract class Button implements Drawable, Updateable{
 	protected Texture myTexture;
 	protected Texture pressedTexture;
+	Text myText;
 	protected boolean clicked=false;
 	private boolean previousMouseState=false;
-	public Button(float coordX, float coordY, float dimX, float dimY) {
-		this.coordX = coordX;
-		this.coordY = coordY;
-		this.dimX = dimX;
-		this.dimY = dimY;
-	}
 	private float coordX;
 	private float coordY;
 	private float dimX;
 	private float dimY;
+	
+	
+	public Button(float coordX, float coordY, float dimX, float dimY,String myText) {
+		this.myText=new TimesNewRomanText(coordX,coordY,myText);
+		this.coordX = coordX;
+		this.coordY = coordY;
+		this.dimX = dimX;
+		this.dimY = dimY;
+		try {
+			myTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/Button.png")));
+			pressedTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/pressedButton.png")));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void render(){
-		//glColor3f(0.25f, 0.25f, 0.5f);
-		//DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());
 		DrawObject.draw(this);
+		myText.render();
 	}
 	public void click(){
 		clicked=true;

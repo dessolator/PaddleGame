@@ -9,8 +9,8 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="PaddleGame/lib/windows"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/slick-util.jar"/>
 	<classpathentry kind="lib" path="lib/jl1.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/jdom-2.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/slick.jar" sourcepath="lib/src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

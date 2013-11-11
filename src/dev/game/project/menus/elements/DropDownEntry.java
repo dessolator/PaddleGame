@@ -11,8 +11,8 @@ public abstract class DropDownEntry extends Button {
 		return myTexture;
 	}
 
-	public DropDownEntry(float coordX, float coordY, float dimX, float dimY) {
-		super(coordX, coordY, dimX, dimY);
+	public DropDownEntry(float coordX, float coordY, float dimX, float dimY,String myResolution) {
+		super(coordX, coordY, dimX, dimY,myResolution);
 		// TODO Auto-generated constructor stub
 	}
 
