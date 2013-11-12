@@ -2,9 +2,9 @@ package dev.game.project.menus.text;
 
 import java.awt.Font;
 
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.UnicodeFont;
 
 public abstract class Text{
 	TrueTypeFont myFont;
@@ -15,7 +15,7 @@ public abstract class Text{
 
 	public Text(float coordX, float coordY, String myString, String myFont, Color myColor) {
 		super();
-		this.myFont=new TrueTypeFont(new Font(myFont,Font.PLAIN,15),false);
+		this.myFont=new TrueTypeFont(new Font(myFont,Font.PLAIN,25),true);
 		this.coordX = coordX;
 		this.coordY = coordY;
 		this.myString = myString;
@@ -23,7 +23,11 @@ public abstract class Text{
 	}
 
 	public void render() {
-		myFont.drawString(coordX, coordY, myString, myColor);
+		myFont.drawString(
+				coordX-myFont.getWidth(myString)/2,
+				(Display.getHeight()-coordY)-myFont.getHeight(myString)/2,
+				myString,
+				myColor);
 		
 	}
 	

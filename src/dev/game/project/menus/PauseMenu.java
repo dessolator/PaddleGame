@@ -44,7 +44,7 @@ public class PauseMenu extends Menu {
 		if(Mouse.isGrabbed())Mouse.setGrabbed(false);
 		myFrame.render();
 		for (Button b:myButtons)
-			DrawObject.draw(b);
+			b.render();
 	}
 
 	@Override

@@ -3,9 +3,6 @@ package Sounds;
 
 
 import java.io.FileInputStream;
-
-
-import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
 public class Sound {

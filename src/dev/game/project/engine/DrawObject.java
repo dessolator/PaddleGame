@@ -1,5 +1,8 @@
 package dev.game.project.engine;
 import static org.lwjgl.opengl.GL11.*;
+
+import org.lwjgl.opengl.Display;
+
 import dev.game.project.gameMechanics.PaddleGame;
 
 
@@ -15,24 +18,23 @@ public class DrawObject {
 			g.getTexture().bind();
 
 		glPushMatrix();//create new matrix for manipulation of the given rectangle.
-		glTranslatef(g.getCoordX(),g.getCoordY(),0);//set starting point to the coordinates needed.
+		glTranslatef(g.getCoordX(),Display.getHeight()-g.getCoordY(),0);//set starting point to the coordinates needed.
 		glColor3f(1,1,1);//set drawing color to white to compensate for gamma correction.
 		glEnable(GL_TEXTURE_2D);//enable textures
 		glEnable(GL_BLEND);//enable blending for transparent pngs
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);//set alpha function for transparency
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);//set texture drawing mode
 		/*
 		 * Map texture to object
 		 */
 		glBegin(GL_QUADS);
 		{
-			glTexCoord2f(0f, 1f);
+			glTexCoord2f(0f, 0f);
 			glVertex2f(-g.getDimX()/2, -g.getDimY()/2);
-			glTexCoord2f(1f, 1f);
-			glVertex2f(g.getDimX()/2,-g.getDimY()/2);
 			glTexCoord2f(1f, 0f);
+			glVertex2f(g.getDimX()/2,-g.getDimY()/2);
+			glTexCoord2f(1f, 1f);
 			glVertex2f(g.getDimX()/2, g.getDimY()/2);
-			glTexCoord2f(0, 0f);
+			glTexCoord2f(0, 1f);
 			glVertex2f(-g.getDimX()/2, g.getDimY()/2);			
 		}
 		glEnd();
@@ -48,7 +50,7 @@ public class DrawObject {
 	 */
 	public static void drawColoredRect(float x, float y, float dimX, float dimY){
 		glPushMatrix();//create new matrix for manipulation of the given rectangle.
-		glTranslatef(x,y,0);//set starting point to the coordinates needed.
+		glTranslatef(x,Display.getHeight()-y,0);//set starting point to the coordinates needed.
 		
 		if(PaddleGame.isVoodooMode()){//if voodoMode is on,
 		float r=(float)Math.random();//randomize red component.
@@ -84,7 +86,7 @@ public class DrawObject {
 	 */
 	public static void drawcoloredCirclef(float x, float y, float radius) {
 		glPushMatrix();//create new manipulation matrix.
-		glTranslatef(x,y,0);//set starting point to the coordinates needed.
+		glTranslatef(x,Display.getHeight()-y,0);//set starting point to the coordinates needed.
 		/*
 		 * Draw Circle using GL.
 		 */

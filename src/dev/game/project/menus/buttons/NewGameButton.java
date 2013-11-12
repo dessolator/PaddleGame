@@ -16,6 +16,7 @@ public class NewGameButton extends Button {
 	@Override
 	public void pressed() {
 		PaddleGame.setCurrentGameState(1);
+		PaddleGame.playMusic();
 	}
 
 }

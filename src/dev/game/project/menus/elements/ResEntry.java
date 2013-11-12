@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
-import dev.game.project.engine.DrawObject;
 
 public class ResEntry extends DropDownEntry {
 	private int width;
@@ -47,12 +46,7 @@ public class ResEntry extends DropDownEntry {
 	public void pressed() {
 		setRes=this;
 	}
-	@Override
-	public void render() {
-//		glColor3f(0.25f,0.25f,0.5f);
-//		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());
-		DrawObject.draw(this);
-	}
+
 	/**
 	 * @return the setRes
 	 */
